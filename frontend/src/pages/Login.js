@@ -8,6 +8,8 @@ import ErrorMessage from '../components/ErrorMessage';
 import PasswordVisibilityToggle from '../components/PasswordVisibilityToggle';
 import { sanitizeInput } from '../utils/sanitizeInput';
 
+console.log('尝试导入的文件路径:', path.resolve(__dirname, '../utils/sanitizeInput.js'));
+
 const Login = () => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');

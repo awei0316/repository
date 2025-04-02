@@ -1,33 +1,38 @@
 {
-  "name": "unitrade-international-trade-platform",
+  "name": "unitrade-frontend",
   "version": "1.0.0",
-  "description": "基于大数据的UniTrade国际贸易平台",
+  "description": "基于大数据的 UniTrade 国际贸易平台前端项目",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+      "start": "react-scripts start",
+      "build": "react-scripts build",
+      "test": "react-scripts test",
+      "eject": "react-scripts eject"
   },
   "dependencies": {
-    "axios": "^1.6.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.11.0",
-    "react-router-dom": "^6.30.0",
-    "react-scripts": "5.0.1",
-    "react-virtualized": "^9.22.6",
-    "recharts": "^2.8.0"
+      "axios": "^1.6.2",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-icons": "^4.12.0",
+      "react-router-dom": "^6.20.1",
+      "react-scripts": "5.0.1",
+      "react-virtualized": "^9.22.4",
+      "recharts": "^2.9.0",
+      "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+      "eslint": "^8.56.0",
+      "eslint-plugin-react": "^7.33.2"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+      "production": [
+          ">0.2%",
+          "not dead",
+          "not op_mini all"
+      ],
+      "development": [
+          "last 1 chrome version",
+          "last 1 firefox version",
+          "last 1 safari version"
+      ]
   }
-}
+}    
