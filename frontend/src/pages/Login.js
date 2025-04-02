@@ -1,4 +1,3 @@
-// src/pages/Login.js
 import React, { useState, useRef } from 'react';
 import { FaUserLock } from 'react-icons/fa';
 import axios from 'axios';
@@ -6,9 +5,7 @@ import InputField from '../components/InputField';
 import Button from '../components/Button';
 import ErrorMessage from '../components/ErrorMessage';
 import PasswordVisibilityToggle from '../components/PasswordVisibilityToggle';
-import { sanitizeInput } from '../utils/sanitizeInput';
-
-console.log('尝试导入的文件路径:', path.resolve(__dirname, '../utils/sanitizeInput.js'));
+import { sanitizeInput } from '@utils/sanitizeInput';
 
 const Login = () => {
     const [username, setUsername] = useState('');

@@ -1,16 +1,12 @@
-// src/pages/Register.js
 import React, { useState, useRef } from 'react';
 import { FaUserPlus } from 'react-icons/fa';
 import axios from 'axios';
 import InputField from '../components/InputField';
 import Button from '../components/Button';
 import ErrorMessage from '../components/ErrorMessage';
-import { validateEmail, validatePassword } from '../utils/formValidation';
-import { sanitizeInput } from '../utils/sanitizeInput';
+import { validateEmail, validatePassword } from '@utils/formValidation';
+import { sanitizeInput } from '@utils/sanitizeInput';
 import PasswordVisibilityToggle from '../components/PasswordVisibilityToggle';
-
-console.log('尝试导入的 formValidation 文件路径:', path.resolve(__dirname, '../utils/formValidation.js'));
-console.log('尝试导入的 sanitizeInput 文件路径:', path.resolve(__dirname, '../utils/sanitizeInput.js'));
 
 const Register = () => {
     const [user, setUser] = useState({
@@ -81,13 +77,13 @@ const Register = () => {
                 />
                 <div style={{ position: 'relative' }}>
                     <InputField
-                    type="password"
-                    name="password"
-                    placeholder="请输入密码"
-                    value={user.password}
-                    onChange={handleChange}
-                    required
-                    ref={passwordRef}
+                        type="password"
+                        name="password"
+                        placeholder="请输入密码"
+                        value={user.password}
+                        onChange={handleChange}
+                        required
+                        ref={passwordRef}
                     />
                     <PasswordVisibilityToggle inputRef={passwordRef} />
                 </div>
