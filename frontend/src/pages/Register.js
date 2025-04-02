@@ -1,3 +1,4 @@
+// src/pages/Register.js
 import React, { useState, useRef } from 'react';
 import { FaUserPlus } from 'react-icons/fa';
 import axios from 'axios';
@@ -93,4 +94,4 @@ const Register = () => {
     );
 };
 
-export default Register;    
+export default Register;

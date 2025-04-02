@@ -6,7 +6,7 @@ import InputField from '../components/InputField';
 import Button from '../components/Button';
 import ErrorMessage from '../components/ErrorMessage';
 import PasswordVisibilityToggle from '../components/PasswordVisibilityToggle';
-import { sanitizeInput } from '../utils/sanitizeInput'; // 检查导入路径
+import { sanitizeInput } from '../utils/sanitizeInput';
 
 const Login = () => {
     const [username, setUsername] = useState('');

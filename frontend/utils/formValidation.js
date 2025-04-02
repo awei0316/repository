@@ -1,3 +1,4 @@
+// src/utils/formValidation.js
 export const validateEmail = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(String(email).toLowerCase());
@@ -5,4 +6,4 @@ export const validateEmail = (email) => {
 
 export const validatePassword = (password) => {
     return password.length >= 6;
-};    
+};
