@@ -5,6 +5,11 @@
     --primary-color: #007BFF;
     --secondary-color: #333;
     --light-gray: #f4f4f4;
+    --error-color: red;
+    --input-border-color: #ccc;
+    --input-focus-border-color: var(--primary-color);
+    --button-bg-color: var(--primary-color);
+    --button-hover-bg-color: #0056b3;
 }
 
 body {
@@ -29,16 +34,22 @@ body {
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
+    transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .navbar {
-    background-color: #333;
+    background-color: var(--secondary-color);
     color: white;
     padding: 15px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
+    z-index: 1000;
 }
 
 .navbar ul {
@@ -56,16 +67,35 @@ body {
     color: white;
     text-decoration: none;
     font-size: 16px;
+    transition: color 0.3s ease;
 }
 
 .navbar a:hover {
+    color: var(--primary-color);
     text-decoration: underline;
 }
 
-.main-nav {
+.navbar a.active {
+    color: var(--primary-color);
+    font-weight: bold;
+}
+
+.menu-toggle {
     display: none;
-    opacity: 0;
-    transform: translateY(-10px);
+    cursor: pointer;
+    color: white;
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+.menu-toggle:hover {
+    transform: rotate(90deg);
+}
+
+.main-nav {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
     transition: all 0.3s ease;
 }
 
@@ -75,19 +105,35 @@ body {
     position: absolute;
     top: 60px;
     left: 0;
-    background-color: #333;
+    background-color: var(--secondary-color);
     width: 100%;
     z-index: 100;
     opacity: 1;
     transform: translateY(0);
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .main-nav.show li {
     margin: 10px 0;
 }
 
+.right-nav {
+    display: flex;
+}
+
 .footer {
-    background-color: #333;
+    background-color: var(--secondary-color);
     color: white;
     padding: 20px;
     margin-top: auto;
@@ -117,11 +163,12 @@ body {
 .bottom-left-link,
 .bottom-right-link {
     background-color: rgba(255, 255, 255, 0.8);
-    color: #333;
+    color: var(--secondary-color);
     padding: 8px 15px;
     border-radius: 3px;
     text-decoration: none;
     font-weight: bold;
+    transition: background-color 0.3s ease;
 }
 
 .bottom-left-link:hover,
@@ -131,73 +178,26 @@ body {
 
 .btn {
     display: inline-block;
-    background-color: var(--primary-color);
+    background-color: var(--button-bg-color);
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
     text-decoration: none;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .btn:hover {
-    background-color: #0056b3;
+    background-color: var(--button-hover-bg-color);
+    transform: scale(1.05);
+}
+
+.btn:active {
+    transform: scale(0.95);
 }
 
 .login-container,
 .register-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 30px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    max-width: 4
 }
-
-.input-field {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    transition: border-color 0.3s ease;
-}
-
-.input-field:focus {
-    border-color: var(--primary-color);
-    outline: none;
-}
-
-.login-btn,
-.register-btn {
-    width: 100%;
-    font-size: 16px;
-    font-weight: bold;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.error {
-    color: red;
-    margin-bottom: 20px;
-    text-align: center;
-}
-
-@media (max-width: 768px) {
-    .navbar ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .bottom-links-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .bottom-left-link,
-    .bottom-right-link {
-        margin-bottom: 10px;
-    }
-}    
