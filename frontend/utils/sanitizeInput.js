@@ -1,3 +1,4 @@
+// src/utils/sanitizeInput.js
 export const sanitizeInput = (input) => {
     return input.replace(/[&<>"']/g, function (match) {
         switch (match) {
@@ -13,4 +14,4 @@ export const sanitizeInput = (input) => {
                 return '&#039;';
         }
     });
-};    
+};
