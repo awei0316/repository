@@ -15,7 +15,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url('https://dummyimage.com/1920x1080/cccccc/000000&text=Background+Image');
+    background-image: url('D:\develop\UniTrade\frontend\imag\background.png');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -146,6 +146,23 @@ body {
     justify-content: space-between;
     background: transparent;
     box-shadow: none;
+}
+
+.footer-left {
+    display: flex;
+    flex-direction: column;
+}
+
+.footer-left div {
+    margin-bottom: 10px; /* 调整上下间距 */
+}
+
+.copyright {
+    text-align: right;
+}
+
+.footer-content-adjustment {
+    padding-top: 10px; /* 可根据实际需求调整该值 */
 }
 
 .footer-links {
