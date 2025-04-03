@@ -1,3 +1,4 @@
+// Slider.js
 import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
@@ -16,14 +17,15 @@ const settings = {
 const SliderComponent = () => {
     return (
         <Slider {...settings}>
+            {/* 确保这些链接有效 */}
             <div>
-                <img src="D:\develop\UniTrade\frontend\imag\banner1.png" alt="Slide 1" />
+                <img src="https://picsum.photos/1920/600" alt="Slide 1" />
             </div>
             <div>
-                <img src="D:\develop\UniTrade\frontend\imag\banner2.png" alt="Slide 2" />
+                <img src="https://picsum.photos/1920/700" alt="Slide 2" />
             </div>
             <div>
-                <img src="D:\develop\UniTrade\frontend\imag\banner3.png" alt="Slide 3" />
+                <img src="https://picsum.photos/1920/800" alt="Slide 3" />
             </div>
         </Slider>
     );
