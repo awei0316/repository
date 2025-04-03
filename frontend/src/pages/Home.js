@@ -2,27 +2,16 @@ import React from 'react';
 import { FaGlobe, FaChartPie } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Card from '../components/Card';
+import SliderComponent from '../components/Slider';
 
 const Home = () => {
     return (
         <div className="container">
             <h1>欢迎来到 UniTrade 国际贸易平台</h1>
             <p>利用大数据和人工智能技术，提供全面的国际贸易解决方案</p>
-            
-            <div className="banner">
-                <div className="flexslider">
-                    <ul className="slides">
-                        <li style={{ backgroundImage: 'url(https://dummyimage.com/800x300/00aaff/ffffff&text=Anime+Image+1)' }}></li>
-                        <li style={{ backgroundImage: 'url(https://dummyimage.com/800x300/ff00aa/ffffff&text=Anime+Image+2)' }}></li>
-                        <li style={{ backgroundImage: 'url(https://dummyimage.com/800x300/00ffaa/ffffff&text=Anime+Image+3)' }}></li>
-                    </ul>
-                    <ol className="flex-control-nav flex-control-paging">
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                    </ol>
-                </div>
-            </div>
+
+            {/* 使用 SliderComponent 替换原来的 flexslider */}
+            <SliderComponent />
 
             <div className="dashboard">
                 <Card>
@@ -40,4 +29,4 @@ const Home = () => {
     );
 };
 
-export default Home;    
+export default Home;
