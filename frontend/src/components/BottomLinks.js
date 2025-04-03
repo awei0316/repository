@@ -14,4 +14,4 @@ const BottomLinks = () => {
     );
 };
 
-export default BottomLinks;    
+export default BottomLinks;

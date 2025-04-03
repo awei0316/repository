@@ -2,7 +2,7 @@
 @import url('https://file.jmgm-supplychain.com/res/cms/www/default/css/style.css');
 :root {
     --primary-color: #007BFF;
-    --secondary-color: #333;
+    --secondary-color: #ADD8E6; /* 浅蓝色 */
     --light-gray: #f4f4f4;
     --error-color: red;
     --input-border-color: #ccc;
@@ -22,8 +22,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    /* 添加 padding-bottom 以避免内容被页脚遮挡 */
-    padding-bottom: 80px; /* 根据页脚高度调整 */
+    padding-bottom: 120px; /* 避免内容被页脚遮挡 */
 }
 
 .container {
@@ -43,7 +42,7 @@ body {
 }
 
 .navbar {
-    background-color: var(--secondary-color);
+    background-color: #000; /* 修改导航栏背景为黑色 */
     color: white;
     padding: 15px;
     display: flex;
@@ -106,7 +105,7 @@ body {
     position: absolute;
     top: 60px;
     left: 0;
-    background-color: var(--secondary-color);
+    background-color: #000; /* 修改展开菜单背景为黑色 */
     width: 100%;
     z-index: 100;
     opacity: 1;
@@ -134,11 +133,9 @@ body {
 }
 
 .footer {
-    background-color: var(--secondary-color);
+    background-color: var(--secondary-color); /* 保持页脚为浅蓝色 */
     color: white;
     padding: 20px;
-    margin-top: auto;
-    /* 固定页脚位置 */
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -157,8 +154,9 @@ body {
 }
 
 .bottom-links-container {
-    position: static;
-    margin-top: 10px;
+    position: fixed;
+    bottom: 80px; /* 根据页脚高度调整 */
+    width: 100%;
     padding: 10px;
     display: flex;
     justify-content: space-between;
