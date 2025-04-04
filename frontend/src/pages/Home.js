@@ -4,12 +4,10 @@ import { FaGlobe, FaChartPie, FaDatabase, FaChartBar, FaChartLine, FaUsers, FaRo
 import { Link } from 'react-router-dom';
 import Card from '../components/Card';
 import SliderComponent from '../components/Slider';
-import Clock from '../components/Clock';
 
 const Home = () => {
     return (
-        <div className="container">
-            <Clock />
+        <div className="container">       
             <h1>欢迎来到 UniTrade 国际贸易平台</h1>
             <p>利用大数据和人工智能技术，提供全面的国际贸易解决方案</p>
 
