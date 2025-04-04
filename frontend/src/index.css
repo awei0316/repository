@@ -1,18 +1,22 @@
 @import url('https://file.jmgm-supplychain.com/res/cms/www/default/css/common.css');
 @import url('https://file.jmgm-supplychain.com/res/cms/www/default/css/style.css');
+
 :root {
     --primary-color: #007BFF;
-    --secondary-color: #ADD8E6; /* 浅蓝色 */
+    --secondary-color: transparent; /* 浅蓝色 */
     --light-gray: #f4f4f4;
     --error-color: red;
     --input-border-color: #ccc;
     --input-focus-border-color: var(--primary-color);
     --button-bg-color: var(--primary-color);
     --button-hover-bg-color: #0056b3;
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    --box-shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: var(--font-family);
     margin: 0;
     padding: 0;
     background-image: url('D:\develop\UniTrade\frontend\public\images\background.png');
@@ -28,28 +32,29 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.95);
     min-height: auto;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 20px;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 30px;
     transition: box-shadow 0.3s ease;
 }
 
 .container:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow-hover);
 }
 
 .navbar {
-    background-color: #000; /* 修改导航栏背景为黑色 */
+    background-color: #000;
     color: white;
-    padding: 15px;
+    padding: 20px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: relative;
     z-index: 1000;
+    box-shadow: var(--box-shadow);
 }
 
 .navbar ul {
@@ -60,13 +65,13 @@ body {
 }
 
 .navbar ul li {
-    margin: 0 15px;
+    margin: 0 20px;
 }
 
 .navbar a {
     color: white;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 18px;
     transition: color 0.3s ease;
 }
 
@@ -103,38 +108,39 @@ body {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 60px;
+    top: 70px;
     left: 0;
-    background-color: #000; /* 修改展开菜单背景为黑色 */
+    background-color: #000;
     width: 100%;
     z-index: 100;
     opacity: 1;
     transform: translateY(0);
     animation: slideDown 0.3s ease;
+    box-shadow: var(--box-shadow);
 }
 
 .main-nav.show li {
-    margin: 10px 0;
+    margin: 15px 0;
 }
-
 
 .right-nav {
     display: flex;
     align-items: center;
 }
 
-.right-nav > span { /* 针对时钟组件 */
-    margin-right: 20px; /* 调整时钟和登录按钮之间的间距 */
+.right-nav > span {
+    margin-right: 25px;
     color: white;
 }
 
 .footer {
-    background-color: var(--secondary-color); /* 保持页脚为浅蓝色 */
+    background-color: var(--secondary-color);
     color: white;
-    padding: 0;
+    padding: 20px 0;
     position: fixed;
     bottom: 0;
     width: 100%;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .footer .container {
@@ -142,9 +148,9 @@ body {
     justify-content: space-between;
     background: transparent;
     box-shadow: none;
-    align-items: flex-end; /* 让元素靠下对齐 */
-    padding-bottom: 0; /* 增大底部内边距 */
-    border: none; /* 新增，去除边框 */
+    align-items: flex-end;
+    padding-bottom: 0;
+    border: none;
 }
 
 .footer-left {
@@ -153,62 +159,65 @@ body {
 }
 
 .footer-left div {
-    margin-bottom: 10px; /* 调整上下间距 */
+    margin-bottom: 15px;
 }
 
 .footer-content-adjustment {
-    padding-top: 0; /* 可根据实际需求调整该值 */
+    padding-top: 0;
 }
 
 .footer-links {
     display: flex;
-    gap: 2px;
-    margin-bottom: 15px; /* 增大底部外边距，增加间距 */
+    gap: 15px;
+    margin-bottom: 20px;
 }
+
 .copyright {
     text-align: right;
-    margin-bottom:0; /* 增大底部外边距，增加间距 */
+    margin-bottom: 0;
 }
 
 .slider-container {
-    width: 80%; /* 增加容器宽度，可根据需求调整 */
-    margin: 0 auto; /* 使容器水平居中 */
-    text-align: center; /* 让图片在容器内居中 */
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-/* 调整图片的样式，确保图片适应容器 */
 .slick-slide img {
-    width: 100%; /* 让图片宽度占满容器 */
+    width: 100%;
     height: auto;
     object-fit: cover;
-    display: inline-block; /* 让图片在容器内居中 */
+    display: inline-block;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
 }
 
 .dashboard {
     display: flex;
     justify-content: space-between;
-    gap: 40px; /* 增加卡片之间的间距 */
-    margin-top: 40px; /* 增加与轮播图的间距 */
+    gap: 50px;
+    margin-top: 50px;
 }
 
 .dashboard .card {
-    flex: 1; /* 让卡片平均分配宽度 */
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    flex: 1;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
     transition: box-shadow 0.3s ease;
 }
 
 .dashboard .card:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--box-shadow-hover);
 }
 
 .bottom-links-container {
     position: fixed;
-    bottom: 0px; /* 减少底部间距，可根据实际情况调整 */
+    bottom: 10px;
     width: 100%;
-    padding: 2px;
+    padding: 10px;
     display: flex;
     justify-content: space-between;
     z-index: 10;
@@ -216,30 +225,34 @@ body {
 
 .bottom-left-link,
 .bottom-right-link {
-    background-color: rgba(255, 255, 255, 0.8);
-    color: var(--secondary-color);
-    padding: 8px 15px;
-    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--primary-color);
+    padding: 12px 20px;
+    border-radius: 8px;
     text-decoration: none;
     font-weight: bold;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: var(--box-shadow);
 }
 
 .bottom-left-link:hover,
 .bottom-right-link:hover {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 1);
+    transform: scale(1.05);
 }
 
 .btn {
     display: inline-block;
     background-color: var(--button-bg-color);
     color: white;
-    padding: 10px 20px;
+    padding: 12px 25px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     text-decoration: none;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    font-size: 16px;
+    box-shadow: var(--box-shadow);
 }
 
 .btn:hover {
@@ -253,22 +266,24 @@ body {
 
 .login-container,
 .register-container {
-    max-width: 4
+    max-width: 500px;
+    margin-top: 50px;
 }
-/* 在 index.css 文件中添加以下样式 */
+
 .card ul {
     list-style: none;
     padding: 0;
 }
 
 .card ul li {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
 }
 
 .card ul li a {
     color: var(--primary-color);
     text-decoration: none;
     font-weight: bold;
+    font-size: 18px;
 }
 
 .card ul li a:hover {
@@ -276,8 +291,9 @@ body {
 }
 
 .card ul li p {
-    margin-top: 5px;
+    margin-top: 10px;
     color: #666;
+    font-size: 16px;
 }
 
 @keyframes slideDown {
@@ -289,4 +305,24 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+.bottom-links-container {
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
+    padding: 2px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 10;
+    opacity: 0; /* 默认隐藏 */
+    transition: opacity 0.3s ease;
+}
+
+.bottom-links-container.show {
+    opacity: 1; /* 显示 */
+}
+
+.bottom-links-container.hide {
+    opacity: 0; /* 隐藏 */
 }
