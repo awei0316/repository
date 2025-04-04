@@ -113,17 +113,6 @@ body {
     animation: slideDown 0.3s ease;
 }
 
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .main-nav.show li {
     margin: 10px 0;
 }
@@ -148,7 +137,6 @@ body {
     width: 100%;
 }
 
-
 .footer .container {
     display: flex;
     justify-content: space-between;
@@ -168,6 +156,20 @@ body {
     margin-bottom: 10px; /* 调整上下间距 */
 }
 
+.footer-content-adjustment {
+    padding-top: 0; /* 可根据实际需求调整该值 */
+}
+
+.footer-links {
+    display: flex;
+    gap: 2px;
+    margin-bottom: 15px; /* 增大底部外边距，增加间距 */
+}
+.copyright {
+    text-align: right;
+    margin-bottom:0; /* 增大底部外边距，增加间距 */
+}
+
 .slider-container {
     width: 80%; /* 增加容器宽度，可根据需求调整 */
     margin: 0 auto; /* 使容器水平居中 */
@@ -180,22 +182,6 @@ body {
     height: auto;
     object-fit: cover;
     display: inline-block; /* 让图片在容器内居中 */
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px; /* 增加内边距，填充空白区域 */
-    background: rgba(255, 255, 255, 0.9);
-    min-height: auto;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-bottom: 40px; /* 增加底部间距 */
-    transition: box-shadow 0.3s ease;
-}
-
-.container:hover {
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }
 
 .dashboard {
@@ -216,19 +202,6 @@ body {
 
 .dashboard .card:hover {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-}
-.copyright {
-    text-align: right;
-    margin-bottom:0; /* 增大底部外边距，增加间距 */
-}
-.footer-content-adjustment {
-    padding-top: 0; /* 可根据实际需求调整该值 */
-}
-
-.footer-links {
-    display: flex;
-    gap: 2px;
-    margin-bottom: 15px; /* 增大底部外边距，增加间距 */
 }
 
 .bottom-links-container {
@@ -305,4 +278,15 @@ body {
 .card ul li p {
     margin-top: 5px;
     color: #666;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
