@@ -158,17 +158,52 @@ body {
 }
 
 .slider-container {
-    width: 60%; /* 可根据需要调整宽度百分比 */
+    width: 40%; /* 可根据需要调整宽度百分比 */
     margin: 0 auto; /* 使容器水平居中 */
 }
 
 /* 调整图片的样式，确保图片适应容器 */
 .slick-slide img {
-    width: 80%;
+    width: 60%;
     height: auto;
     object-fit: cover;
 }
 
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px; /* 增加内边距，填充空白区域 */
+    background: rgba(255, 255, 255, 0.9);
+    min-height: auto;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px; /* 增加底部间距 */
+    transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.dashboard {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px; /* 增加卡片之间的间距 */
+    margin-top: 40px; /* 增加与轮播图的间距 */
+}
+
+.dashboard .card {
+    flex: 1; /* 让卡片平均分配宽度 */
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+.dashboard .card:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
 .copyright {
     text-align: right;
 }
