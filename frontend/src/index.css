@@ -156,6 +156,7 @@ body {
     box-shadow: none;
     align-items: flex-end; /* 让元素靠下对齐 */
     padding-bottom: 0; /* 增大底部内边距 */
+    border: none; /* 新增，去除边框 */
 }
 
 .footer-left {
@@ -280,4 +281,28 @@ body {
 .login-container,
 .register-container {
     max-width: 4
+}
+/* 在 index.css 文件中添加以下样式 */
+.card ul {
+    list-style: none;
+    padding: 0;
+}
+
+.card ul li {
+    margin-bottom: 20px;
+}
+
+.card ul li a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card ul li a:hover {
+    text-decoration: underline;
+}
+
+.card ul li p {
+    margin-top: 5px;
+    color: #666;
 }
