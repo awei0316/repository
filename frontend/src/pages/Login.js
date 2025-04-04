@@ -20,6 +20,11 @@ const Login = () => {
         try {
             const sanitizedUsername = sanitizeInput(username);
             const sanitizedPassword = sanitizeInput(password);
+            if (!sanitizedUsername || !sanitizedPassword) {
+                setError('用户名和密码不能为空');
+                setLoading(false);
+                return;
+            }
             const response = await axios.post('/api/login', { username: sanitizedUsername, password: sanitizedPassword });
             localStorage.setItem('token', response.data.token);
             window.location.href = '/';

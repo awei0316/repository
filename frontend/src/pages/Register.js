@@ -26,21 +26,32 @@ const Register = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         setLoading(true);
-        if (!validateEmail(user.email)) {
+        const { username, email, password } = user;
+        const sanitizedUsername = sanitizeInput(username);
+        const sanitizedEmail = sanitizeInput(email);
+        const sanitizedPassword = sanitizeInput(password);
+
+        if (!sanitizedUsername || !sanitizedEmail || !sanitizedPassword) {
+            setError('所有字段均为必填项');
+            setLoading(false);
+            return;
+        }
+
+        if (!validateEmail(sanitizedEmail)) {
             setError('请输入有效的邮箱地址');
             setLoading(false);
             return;
         }
-        if (!validatePassword(user.password)) {
+        if (!validatePassword(sanitizedPassword)) {
             setError('密码长度至少为 6 位');
             setLoading(false);
             return;
         }
         try {
             const sanitizedUser = {
-                username: sanitizeInput(user.username),
-                email: sanitizeInput(user.email),
-                password: sanitizeInput(user.password)
+                username: sanitizedUsername,
+                email: sanitizedEmail,
+                password: sanitizedPassword
             };
             await axios.post('/api/register', sanitizedUser);
             window.location.href = '/login';
