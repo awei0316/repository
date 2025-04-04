@@ -1,105 +1,80 @@
-import React, { useState, useRef } from 'react';
-import { FaUserPlus } from 'react-icons/fa';
-import axios from 'axios';
+import React, { useState, useEffect, useRef } from 'react';
 import InputField from '../components/InputField';
 import Button from '../components/Button';
-import ErrorMessage from '../components/ErrorMessage';
-import { validateEmail, validatePassword } from '@utils/formValidation';
-import { sanitizeInput } from '@utils/sanitizeInput';
 import PasswordVisibilityToggle from '../components/PasswordVisibilityToggle';
 
 const Register = () => {
-    const [user, setUser] = useState({
-        username: '',
-        email: '',
-        password: ''
-    });
+    const [phone, setPhone] = useState('');
+    const [code, setCode] = useState('');
+    const [password, setPassword] = useState('');
+    const [countdown, setCountdown] = useState(0);
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
     const passwordRef = useRef(null);
 
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setUser(prev => ({ ...prev, [name]: value }));
+    const handleSendCode = () => {
+        if (!phone) {
+            setError('请输入手机号码');
+            return;
+        }
+        setCountdown(60);
+        const timer = setInterval(() => {
+            setCountdown(prev => prev - 1);
+            if (prev === 0) {
+                clearInterval(timer);
+            }
+        }, 1000);
+        // 模拟发送验证码成功
+        setError('');
     };
 
-    const handleRegister = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        const { username, email, password } = user;
-        const sanitizedUsername = sanitizeInput(username);
-        const sanitizedEmail = sanitizeInput(email);
-        const sanitizedPassword = sanitizeInput(password);
-
-        if (!sanitizedUsername || !sanitizedEmail || !sanitizedPassword) {
-            setError('所有字段均为必填项');
-            setLoading(false);
+    const handleRegister = () => {
+        if (!phone || !code || !password) {
+            setError('请输入手机号码、验证码和密码');
             return;
         }
-
-        if (!validateEmail(sanitizedEmail)) {
-            setError('请输入有效的邮箱地址');
-            setLoading(false);
-            return;
-        }
-        if (!validatePassword(sanitizedPassword)) {
-            setError('密码长度至少为 6 位');
-            setLoading(false);
-            return;
-        }
-        try {
-            const sanitizedUser = {
-                username: sanitizedUsername,
-                email: sanitizedEmail,
-                password: sanitizedPassword
-            };
-            await axios.post('/api/register', sanitizedUser);
-            window.location.href = '/login';
-        } catch (error) {
-            setError('注册失败，请检查输入信息');
-        } finally {
-            setLoading(false);
-            setTimeout(() => {
-                setError('');
-            }, 3000);
+        // 模拟验证码验证成功
+        if (code === '123456') {
+            setError('');
+            // 这里可添加注册成功后的跳转逻辑
+            alert('注册成功');
+        } else {
+            setError('验证码错误');
         }
     };
 
     return (
         <div className="container register-container">
-            <h1><FaUserPlus /> 注册</h1>
-            {error && <ErrorMessage message={error} />}
-            <form onSubmit={handleRegister}>
+            <h1>注册</h1>
+            {error && <p className="error-message">{error}</p>}
+            <InputField
+                type="text"
+                placeholder="请输入手机号码"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+                required
+            />
+            <Button onClick={handleSendCode} disabled={countdown > 0}>
+                {countdown > 0 ? `${countdown}s后重试` : '获取验证码'}
+            </Button>
+            <InputField
+                type="text"
+                placeholder="请输入验证码"
+                value={code}
+                onChange={(e) => setCode(e.target.value)}
+                required
+            />
+            <div style={{ position: 'relative' }}>
                 <InputField
-                    type="text"
-                    name="username"
-                    placeholder="请输入用户名"
-                    value={user.username}
-                    onChange={handleChange}
+                    type="password"
+                    placeholder="请输入密码"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                     required
+                    ref={passwordRef}
                 />
-                <InputField
-                    type="email"
-                    name="email"
-                    placeholder="请输入邮箱"
-                    value={user.email}
-                    onChange={handleChange}
-                    required
-                />
-                <div style={{ position: 'relative' }}>
-                    <InputField
-                        type="password"
-                        name="password"
-                        placeholder="请输入密码"
-                        value={user.password}
-                        onChange={handleChange}
-                        required
-                        ref={passwordRef}
-                    />
-                    <PasswordVisibilityToggle inputRef={passwordRef} />
-                </div>
-                <Button type="submit" className="register-btn" loading={loading}>注册</Button>
-            </form>
+                <PasswordVisibilityToggle inputRef={passwordRef} />
+            </div>
+            <Button onClick={handleRegister}>注册</Button>
         </div>
     );
 };

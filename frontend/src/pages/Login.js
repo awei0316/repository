@@ -1,68 +1,118 @@
-import React, { useState, useRef } from 'react';
-import { FaUserLock } from 'react-icons/fa';
-import axios from 'axios';
-import InputField from '../components/InputField';
-import Button from '../components/Button';
-import ErrorMessage from '../components/ErrorMessage';
-import PasswordVisibilityToggle from '../components/PasswordVisibilityToggle';
-import { sanitizeInput } from '@utils/sanitizeInput';
+import React, { useState, useEffect } from 'react';
 
 const Login = () => {
-    const [username, setUsername] = useState('');
+    const [phone, setPhone] = useState('');
+    const [code, setCode] = useState('');
     const [password, setPassword] = useState('');
+    const [countdown, setCountdown] = useState(0);
     const [error, setError] = useState('');
-    const [loading, setLoading] = useState(false);
-    const passwordRef = useRef(null);
+    const [isCodeLogin, setIsCodeLogin] = useState(true);
 
-    const handleLogin = async (e) => {
-        e.preventDefault();
-        setLoading(true);
-        try {
-            const sanitizedUsername = sanitizeInput(username);
-            const sanitizedPassword = sanitizeInput(password);
-            if (!sanitizedUsername || !sanitizedPassword) {
-                setError('用户名和密码不能为空');
-                setLoading(false);
+    const handleSendCode = () => {
+        if (!phone) {
+            setError('请输入手机号码');
+            return;
+        }
+        setCountdown(60);
+        const timer = setInterval(() => {
+            setCountdown(prev => prev - 1);
+            if (prev === 0) {
+                clearInterval(timer);
+            }
+        }, 1000);
+        setError('');
+    };
+
+    const handleLogin = () => {
+        if (isCodeLogin) {
+            if (!phone || !code) {
+                setError('请输入手机号码和验证码');
                 return;
             }
-            const response = await axios.post('/api/login', { username: sanitizedUsername, password: sanitizedPassword });
-            localStorage.setItem('token', response.data.token);
-            window.location.href = '/';
-        } catch (error) {
-            setError('登录失败，请检查用户名和密码');
-            setTimeout(() => {
+            if (code === '123456') {
                 setError('');
-            }, 3000);
-        } finally {
-            setLoading(false);
+                alert('登录成功');
+            } else {
+                setError('验证码错误');
+            }
+        } else {
+            if (!phone || !password) {
+                setError('请输入手机号码和密码');
+                return;
+            }
+            if (password === '123456') {
+                setError('');
+                alert('登录成功');
+            } else {
+                setError('密码错误');
+            }
         }
+    };
+
+    const toggleLoginMethod = () => {
+        setIsCodeLogin(!isCodeLogin);
+        setError('');
     };
 
     return (
         <div className="container login-container">
-            <h1><FaUserLock /> 登录</h1>
-            {error && <ErrorMessage message={error} />}
-            <form onSubmit={handleLogin}>
-                <InputField
+            <h1>登录</h1>
+            {error && <p style={{ color: 'red' }}>{error}</p>}
+            <div className="phone-input-group">
+                <input
                     type="text"
-                    placeholder="请输入用户名"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    required
+                    placeholder="请输入手机号码"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="input-field"
                 />
-                <div style={{ position: 'relative' }}>
-                    <InputField
+                <button
+                    onClick={handleSendCode}
+                    disabled={countdown > 0}
+                    className="btn"
+                >
+                    {countdown > 0 ? `${countdown}s后重试` : '获取验证码'}
+                </button>
+            </div>
+            {isCodeLogin && (
+                <div className="code-login">
+                    <input
+                        type="text"
+                        placeholder="请输入验证码"
+                        value={code}
+                        onChange={(e) => setCode(e.target.value)}
+                        className="input-field"
+                    />
+                    <button onClick={handleLogin} className="btn login-btn">
+                        登录
+                    </button>
+                </div>
+            )}
+            {!isCodeLogin && (
+                <div className="password-login">
+                    <input
                         type="password"
                         placeholder="请输入密码"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        required
-                        ref={passwordRef}
+                        className="input-field"
                     />
-                    <PasswordVisibilityToggle inputRef={passwordRef} />
+                    <button onClick={handleLogin} className="btn login-btn">
+                        登录
+                    </button>
                 </div>
-                <Button type="submit" className="login-btn" loading={loading}>登录</Button>
-            </form>
+            )}
+            <div className="login-method-switch">
+                <span
+                    className={isCodeLogin ? 'active' : ''}
+                    onClick={toggleLoginMethod}
+                >
+                    {isCodeLogin ? '使用密码登录' : '使用验证码登录'}
+                </span>
+            </div>
+            <p>
+                <a href="/forgotPassword">忘记密码?</a>
+            </p>
         </div>
     );
 };

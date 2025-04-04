@@ -3,7 +3,7 @@
 
 :root {
     --primary-color: #007BFF;
-    --secondary-color: transparent; /* 浅蓝色 */
+    --secondary-color: transparent;
     --light-gray: #f4f4f4;
     --error-color: red;
     --input-border-color: #ccc;
@@ -11,8 +11,8 @@
     --button-bg-color: var(--primary-color);
     --button-hover-bg-color: #0056b3;
     --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    --box-shadow-hover: 0 8px 16px rgba(0, 0, 0, 0.2);
+    --box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --box-shadow-hover: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 body {
@@ -26,7 +26,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-bottom: 120px; /* 避免内容被页脚遮挡 */
+    padding-bottom: 120px;
 }
 
 .container {
@@ -221,6 +221,8 @@ body {
     display: flex;
     justify-content: space-between;
     z-index: 10;
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
 
 .bottom-left-link,
@@ -245,13 +247,13 @@ body {
     display: inline-block;
     background-color: var(--button-bg-color);
     color: white;
-    padding: 12px 25px;
+    padding: 8px 16px;
     border: none;
-    border-radius: 8px;
+    border-radius: 6px;
     text-decoration: none;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
-    font-size: 16px;
+    font-size: 14px;
     box-shadow: var(--box-shadow);
 }
 
@@ -266,34 +268,141 @@ body {
 
 .login-container,
 .register-container {
-    max-width: 500px;
-    margin-top: 50px;
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+    position: relative;
 }
 
-.card ul {
-    list-style: none;
-    padding: 0;
+.login-container:hover,
+.register-container:hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
 }
 
-.card ul li {
-    margin-bottom: 25px;
-}
-
-.card ul li a {
+.login-container h1,
+.register-container h1 {
+    text-align: center;
     color: var(--primary-color);
-    text-decoration: none;
+    margin-bottom: 20px;
+    font-size: 24px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.login-container form,
+.register-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-container .input-field,
+.register-container .input-field {
+    margin-bottom: 20px;
+    padding: 12px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: relative;
+    width: calc(100% - 26px); /* 减去边框和内边距 */
+}
+
+.login-container .input-field:focus,
+.register-container .input-field:focus {
+    border-color: var(--input-focus-border-color);
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.login-container .error-message,
+.register-container .error-message {
+    color: var(--error-color);
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: center;
+}
+
+.login-container .btn {
+    margin-top: 15px;
     font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* 登录方式切换样式 */
+.login-method-switch {
+    text-align: right;
+    margin-top: 10px;
+    font-size: 12px;
+}
+
+.login-method-switch span {
+    cursor: pointer;
+    color: var(--primary-color);
+    border-bottom: 2px solid transparent;
+    transition: border-bottom-color 0.3s ease;
+}
+
+.login-method-switch span:hover {
+    border-bottom-color: var(--primary-color);
+}
+
+.login-method-switch span.active {
+    border-bottom-color: var(--primary-color);
+}
+
+/* 验证码登录时登录按钮位置调整 */
+.login-container .code-login .btn.login-btn {
+    margin-top: 10px;
+    display: block;
+}
+
+/* 密码登录时输入框垂直排列 */
+.login-container .password-login {
+    display: flex;
+    flex-direction: column;
+}
+
+/* 手机号码输入框和获取验证码按钮布局 */
+.login-container .phone-input-group {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.login-container .phone-input-group .input-field {
+    flex: 1;
+}
+
+.login-container .phone-input-group .btn {
+    white-space: nowrap;
+}
+
+/* 给获取验证码按钮添加外边距 */
+.login-container button[type="button"] {
+    margin-top: 0;
+}
+
+/* 密码可见性切换按钮样式 */
+.password-toggle {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #999;
+    transition: color 0.3s ease;
     font-size: 18px;
 }
 
-.card ul li a:hover {
-    text-decoration: underline;
-}
-
-.card ul li p {
-    margin-top: 10px;
-    color: #666;
-    font-size: 16px;
+.password-toggle:hover {
+    color: #333;
 }
 
 @keyframes slideDown {
@@ -315,14 +424,14 @@ body {
     display: flex;
     justify-content: space-between;
     z-index: 10;
-    opacity: 0; /* 默认隐藏 */
+    opacity: 0;
     transition: opacity 0.3s ease;
 }
 
 .bottom-links-container.show {
-    opacity: 1; /* 显示 */
+    opacity: 1;
 }
 
 .bottom-links-container.hide {
-    opacity: 0; /* 隐藏 */
+    opacity: 0;
 }
