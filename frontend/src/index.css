@@ -230,7 +230,7 @@ body {
 
 .bottom-links-container {
     position: fixed;
-    bottom: 80px; /* 根据页脚高度调整 */
+    bottom: 0px; /* 减少底部间距，可根据实际情况调整 */
     width: 100%;
     padding: 10px;
     display: flex;
