@@ -142,19 +142,20 @@ body {
 .footer {
     background-color: var(--secondary-color); /* 保持页脚为浅蓝色 */
     color: white;
-    padding: 1px;
+    padding: 0;
     position: fixed;
     bottom: 0;
     width: 100%;
 }
+
 
 .footer .container {
     display: flex;
     justify-content: space-between;
     background: transparent;
     box-shadow: none;
-    max-width: 1000px; /* 设置最大宽度，可根据需求调整 */
-    margin: 0 auto; /* 使页脚在页面中水平居中 */
+    align-items: flex-end; /* 让元素靠下对齐 */
+    padding-bottom: 0; /* 增大底部内边距 */
 }
 
 .footer-left {
@@ -217,22 +218,23 @@ body {
 }
 .copyright {
     text-align: right;
+    margin-bottom:0; /* 增大底部外边距，增加间距 */
 }
-
 .footer-content-adjustment {
-    padding-top: 10px; /* 可根据实际需求调整该值 */
+    padding-top: 0; /* 可根据实际需求调整该值 */
 }
 
 .footer-links {
     display: flex;
-    gap: 20px;
+    gap: 2px;
+    margin-bottom: 15px; /* 增大底部外边距，增加间距 */
 }
 
 .bottom-links-container {
     position: fixed;
     bottom: 0px; /* 减少底部间距，可根据实际情况调整 */
     width: 100%;
-    padding: 10px;
+    padding: 2px;
     display: flex;
     justify-content: space-between;
     z-index: 10;
