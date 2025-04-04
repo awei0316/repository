@@ -128,14 +128,21 @@ body {
     margin: 10px 0;
 }
 
+
 .right-nav {
     display: flex;
+    align-items: center;
+}
+
+.right-nav > span { /* 针对时钟组件 */
+    margin-right: 20px; /* 调整时钟和登录按钮之间的间距 */
+    color: white;
 }
 
 .footer {
     background-color: var(--secondary-color); /* 保持页脚为浅蓝色 */
     color: white;
-    padding: 20px;
+    padding: 1px;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -146,6 +153,8 @@ body {
     justify-content: space-between;
     background: transparent;
     box-shadow: none;
+    max-width: 1000px; /* 设置最大宽度，可根据需求调整 */
+    margin: 0 auto; /* 使页脚在页面中水平居中 */
 }
 
 .footer-left {

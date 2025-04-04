@@ -1,8 +1,10 @@
+// repository/frontend/src/components/Navbar.js
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
 import DebounceClick from './DebounceClick';
 import navbarMenuItems from '../constants/navbarMenuItems';
+import Clock from './Clock';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -36,6 +38,7 @@ const Navbar = () => {
                 ))}
             </ul>
             <ul className="right-nav">
+                <Clock /> {/* 将时钟组件放在右侧导航栏 */}
                 <li><Link to="/login">登录</Link></li>
                 <li><Link to="/register">注册</Link></li>
             </ul>
@@ -43,4 +46,4 @@ const Navbar = () => {
     );
 };
 
-export default Navbar;    
+export default Navbar;
