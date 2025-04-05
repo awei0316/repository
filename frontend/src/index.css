@@ -448,3 +448,47 @@ body {
 .ai-chat-box .chat-messages::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
+
+/* 用户社区容器样式 */
+.user-community-container {
+    padding: 1220px; /* 增加内边距，扩大白边 */
+}
+
+/* 帖子卡片样式 */
+.posts .card {
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 帖子操作按钮样式 */
+.post-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.post-actions span {
+    cursor: pointer;
+    color: #007BFF;
+}
+
+/* 评论区域样式 */
+.post-comments {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+    max-height: 200px; /* 设置最大高度 */
+    overflow-y: auto; /* 超出高度显示滚动条 */
+}
+
+/* 评论输入表单样式 */
+.posts .card form {
+    margin-top: 10px;
+}
+
+.posts .card form .input-field {
+    margin-bottom: 10px;
+}
