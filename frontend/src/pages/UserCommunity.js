@@ -4,7 +4,6 @@ import { FaComments, FaThumbsUp, FaComment } from 'react-icons/fa';
 import Card from '../components/Card';
 import InputField from '../components/InputField';
 import Button from '../components/Button';
-import { List } from 'react-virtualized';
 
 const UserCommunity = () => {
     const [posts, setPosts] = useState([]);
@@ -16,9 +15,10 @@ const UserCommunity = () => {
     const fetchPosts = () => {
         // 这里可以替换为实际的 API 请求
         setTimeout(() => {
+            const startIndex = (page - 1) * 10;
             const newPosts = Array.from({ length: 10 }, (_, i) => ({
-                id: i + (page - 1) * 10,
-                content: `这是第 ${i + (page - 1) * 10 + 1} 条帖子内容`,
+                id: startIndex + i,
+                content: `这是第 ${startIndex + i + 1} 条帖子内容`,
                 date: new Date().toLocaleDateString(),
                 likes: 0,
                 comments: []
@@ -31,6 +31,10 @@ const UserCommunity = () => {
     };
 
     useEffect(() => {
+        if (page === 1) {
+            // 首次加载时清空原有帖子
+            setPosts([]);
+        }
         fetchPosts();
     }, [page]);
 
@@ -67,33 +71,6 @@ const UserCommunity = () => {
         );
     };
 
-    const rowRenderer = ({ index, key, style }) => {
-        const post = posts[index];
-        return (
-            <div key={key} style={style}>
-                <Card>
-                    <p>{post.content}</p>
-                    <small>{post.date}</small>
-                    <div className="post-actions">
-                        <span onClick={() => handleLike(post.id)}>
-                            <FaThumbsUp /> {post.likes}
-                        </span>
-                        <span onClick={() => handleComment(post.id, '示例评论')}>
-                            <FaComment /> {post.comments.length}
-                        </span>
-                    </div>
-                    {post.comments.length > 0 && (
-                        <div className="post-comments">
-                            {post.comments.map((comment, commentIndex) => (
-                                <p key={commentIndex}>{comment}</p>
-                            ))}
-                        </div>
-                    )}
-                </Card>
-            </div>
-        );
-    };
-
     const handleLoadMore = () => {
         if (hasMore) {
             setPage(prevPage => prevPage + 1);
@@ -101,7 +78,7 @@ const UserCommunity = () => {
     };
 
     return (
-        <div className="container">
+        <div className="container user-community-container">
             <h1><FaComments /> 用户社区</h1>
             <form onSubmit={handleSubmit}>
                 <InputField
@@ -114,13 +91,29 @@ const UserCommunity = () => {
             </form>
 
             <div className="posts">
-                <List
-                    width={1200}
-                    height={400}
-                    rowCount={posts.length}
-                    rowHeight={150}
-                    rowRenderer={rowRenderer}
-                />
+                {posts.map(post => (
+                    <div key={post.id}>
+                        <Card>
+                            <p>{post.content}</p>
+                            <small>{post.date}</small>
+                            <div className="post-actions">
+                                <span onClick={() => handleLike(post.id)}>
+                                    <FaThumbsUp /> {post.likes}
+                                </span>
+                                <span onClick={() => handleComment(post.id, '示例评论')}>
+                                    <FaComment /> {post.comments.length}
+                                </span>
+                            </div>
+                            {post.comments.length > 0 && (
+                                <div className="post-comments">
+                                    {post.comments.map((comment, commentIndex) => (
+                                        <p key={commentIndex}>{comment}</p>
+                                    ))}
+                                </div>
+                            )}
+                        </Card>
+                    </div>
+                ))}
             </div>
             {hasMore && (
                 <Button onClick={handleLoadMore}>加载更多</Button>

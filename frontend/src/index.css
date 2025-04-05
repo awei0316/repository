@@ -449,10 +449,12 @@ body {
     background: #555;
 }
 
-
 /* 用户社区容器样式 */
 .user-community-container {
-    padding: 1220px; /* 增加内边距，扩大白边 */
+    padding: 20px;
+    background-color: #f4f4f4; /* 浅灰色背景 */
+    width: 100%;
+    box-sizing: border-box;
 }
 
 /* 帖子卡片样式 */
