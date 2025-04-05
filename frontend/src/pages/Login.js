@@ -1,4 +1,6 @@
+// src/pages/Login.js
 import React, { useState, useEffect } from 'react';
+import Button from '../components/Button';
 
 const Login = () => {
     const [phone, setPhone] = useState('');
@@ -66,13 +68,9 @@ const Login = () => {
                     onChange={(e) => setPhone(e.target.value)}
                     className="input-field"
                 />
-                <button
-                    onClick={handleSendCode}
-                    disabled={countdown > 0}
-                    className="btn"
-                >
+                <Button onClick={handleSendCode} disabled={countdown > 0} isCodeButton>
                     {countdown > 0 ? `${countdown}s后重试` : '获取验证码'}
-                </button>
+                </Button>
             </div>
             {isCodeLogin && (
                 <div className="code-login">
@@ -83,9 +81,9 @@ const Login = () => {
                         onChange={(e) => setCode(e.target.value)}
                         className="input-field"
                     />
-                    <button onClick={handleLogin} className="btn login-btn">
+                    <Button onClick={handleLogin} className="login-btn">
                         登录
-                    </button>
+                    </Button>
                 </div>
             )}
             {!isCodeLogin && (
@@ -97,9 +95,9 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         className="input-field"
                     />
-                    <button onClick={handleLogin} className="btn login-btn">
+                    <Button onClick={handleLogin} className="login-btn">
                         登录
-                    </button>
+                    </Button>
                 </div>
             )}
             <div className="login-method-switch">

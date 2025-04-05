@@ -1,4 +1,6 @@
+// src/pages/ForgotPassword.js
 import React, { useState, useEffect } from 'react';
+import Button from '../components/Button';
 
 const ForgotPassword = () => {
     const [phone, setPhone] = useState('');
@@ -48,12 +50,9 @@ const ForgotPassword = () => {
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
             />
-            <button
-                onClick={handleSendCode}
-                disabled={countdown > 0}
-            >
+            <Button onClick={handleSendCode} disabled={countdown > 0} isCodeButton>
                 {countdown > 0 ? `${countdown}s后重试` : '获取验证码'}
-            </button>
+            </Button>
             <input
                 type="text"
                 placeholder="请输入验证码"
@@ -66,9 +65,9 @@ const ForgotPassword = () => {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
             />
-            <button onClick={handleResetPassword}>重置密码</button>
+            <Button onClick={handleResetPassword}>重置密码</Button>
         </div>
     );
 };
 
-export default ForgotPassword;    
+export default ForgotPassword;

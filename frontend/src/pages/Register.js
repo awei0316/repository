@@ -1,3 +1,4 @@
+// src/pages/Register.js
 import React, { useState, useEffect, useRef } from 'react';
 import InputField from '../components/InputField';
 import Button from '../components/Button';
@@ -53,7 +54,7 @@ const Register = () => {
                 onChange={(e) => setPhone(e.target.value)}
                 required
             />
-            <Button onClick={handleSendCode} disabled={countdown > 0}>
+            <Button onClick={handleSendCode} disabled={countdown > 0} isCodeButton>
                 {countdown > 0 ? `${countdown}s后重试` : '获取验证码'}
             </Button>
             <InputField

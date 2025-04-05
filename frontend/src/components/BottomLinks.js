@@ -9,8 +9,12 @@ const BottomLinks = () => {
             const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
             if (scrollTop + clientHeight >= scrollHeight - 50) {
                 setIsVisible(true);
+                // 当滚动到底部时，给页脚添加 show 类
+                document.querySelector('.footer').classList.add('show'); 
             } else {
                 setIsVisible(false);
+                // 当离开底部时，移除页脚的 show 类
+                document.querySelector('.footer').classList.remove('show'); 
             }
         };
 
