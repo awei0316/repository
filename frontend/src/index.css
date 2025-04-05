@@ -429,3 +429,22 @@ body {
 .bottom-links-container.hide {
     opacity: 0;
 }
+
+/* 滚动条样式 */
+.ai-chat-box .chat-messages::-webkit-scrollbar {
+    width: 8px;
+}
+
+.ai-chat-box .chat-messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 8px;
+}
+
+.ai-chat-box .chat-messages::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 8px;
+}
+
+.ai-chat-box .chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
