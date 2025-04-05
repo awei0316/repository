@@ -7,7 +7,12 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    Legend
+    Legend,
+    BarChart,
+    Bar,
+    PieChart, // 新增导入
+    Pie, // 新增导入
+    Cell // 新增导入
 } from 'recharts';
 import { memo } from 'react';
 import HeatMapGrid from 'react-heatmap-grid';
