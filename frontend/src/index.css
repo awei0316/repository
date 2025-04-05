@@ -550,3 +550,56 @@ body {
 .news-container ul li {
     margin-bottom: 20px;
 }
+
+/* 数据可视化页面样式 */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.95);
+    min-height: auto;
+    border-radius: 12px;
+    box-shadow: var(--box-shadow);
+    margin-bottom: 30px;
+    transition: box-shadow 0.3s ease;
+  }
+  
+  .container:hover {
+    box-shadow: var(--box-shadow-hover);
+  }
+  
+  select {
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    background-color: rgba(255, 255, 255, 0.8);
+  }
+  
+  select:focus {
+    border-color: var(--input-focus-border-color);
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+
+  .gauge-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.stock-suggestions {
+    margin-top: 20px;
+}
+
+.stock-suggestions ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.stock-suggestions li {
+    margin-bottom: 5px;
+}
