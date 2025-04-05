@@ -16,18 +16,20 @@ const settings = {
 
 const SliderComponent = () => {
     return (
-        <Slider {...settings}>
-            {/* 使用相同尺寸的图片 */}
-            <div>
-                <img src="https://picsum.photos/1200/600" alt="Slide 1" />
-            </div>
-            <div>
-                <img src="https://picsum.photos/1200/600" alt="Slide 2" />
-            </div>
-            <div>
-                <img src="https://picsum.photos/1200/600" alt="Slide 3" />
-            </div>
-        </Slider>
+        <div className="small-slider">
+            <Slider {...settings}>
+                {/* 使用相同尺寸的图片 */}
+                <div>
+                    <img src="https://picsum.photos/1200/600" alt="Slide 1" />
+                </div>
+                <div>
+                    <img src="https://picsum.photos/1200/600" alt="Slide 2" />
+                </div>
+                <div>
+                    <img src="https://picsum.photos/1200/600" alt="Slide 3" />
+                </div>
+            </Slider>
+        </div>
     );
 };
 

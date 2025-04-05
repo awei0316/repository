@@ -14,7 +14,7 @@ const Home = () => {
             <SliderComponent />
 
             {/* 新的新闻模块 */}
-            <Card>
+            <Card className="news-container">
                 <h3>国际贸易新闻</h3>
                 <ul>
                     <li>
@@ -25,9 +25,15 @@ const Home = () => {
                         <Link to="#">新闻标题 2：新兴市场贸易增长潜力</Link>
                         <p>新兴市场国家在国际贸易中的地位逐渐提升，其贸易增长潜力备受关注...</p>
                     </li>
+                </ul>
+                <ul>
                     <li>
                         <Link to="#">新闻标题 3：贸易协定对企业的影响</Link>
                         <p>新的贸易协定签署后，企业在进出口业务中面临着新的机遇和挑战...</p>
+                    </li>
+                    <li>
+                        <Link to="#">新闻标题 4：其他新闻标题</Link>
+                        <p>这里可以是其他新闻的具体内容...</p>
                     </li>
                 </ul>
             </Card>

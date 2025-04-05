@@ -494,3 +494,59 @@ body {
 .posts .card form .input-field {
     margin-bottom: 10px;
 }
+
+/* 调整轮播图容器大小 */
+/* 装饰轮播图，添加左右渐变阴影效果 */
+.small-slider {
+    width: 70%;
+    margin: 0 auto;
+    text-align: center;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.small-slider::before,
+.small-slider::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 10%; /* 阴影宽度 */
+    height: 100%;
+    z-index: 1;
+}
+
+.small-slider::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
+}
+
+.small-slider::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
+}
+
+.small-slider .slick-slide img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    display: inline-block;
+    border-radius: 8px;
+    box-shadow: var(--box-shadow);
+}
+
+/* 重新排版新闻 */
+.news-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.news-container ul {
+    width: 48%; /* 左右各占 48% 的宽度 */
+    list-style: none;
+    padding: 0;
+}
+
+.news-container ul li {
+    margin-bottom: 20px;
+}
