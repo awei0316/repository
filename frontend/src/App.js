@@ -15,6 +15,7 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Footer from './components/Footer';
 import BottomLinks from './components/BottomLinks';
+import AIServiceIcon from './components/AIServiceIcon';
 
 function App() {
     return (
@@ -33,9 +34,11 @@ function App() {
                 <Route path="/market-analysis" element={<MarketAnalysis />} />
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
+                <Route path="/" element={<Home />} />
             </Routes>
             <BottomLinks />
             <Footer />
+            <AIServiceIcon />
         </Router>
     );
 }
