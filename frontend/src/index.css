@@ -272,100 +272,106 @@ body {
     transform: scale(0.95);
 }
 
+/* 登录和注册容器样式 */
 .login-container,
 .register-container {
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 30px;
-    background: rgba(255, 255, 255, 0.95);
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s ease;
+    max-width: 450px; /* 适当增加容器宽度 */
+    margin: 80px auto; /* 调整垂直间距 */
+    padding: 40px; /* 增加内边距 */
+    background: linear-gradient(135deg, #f9f9f9, #e9e9e9); /* 添加渐变背景 */
+    border-radius: 20px; /* 增加圆角 */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* 增强阴影效果 */
+    transition: all 0.3s ease; /* 过渡效果 */
     position: relative;
+    overflow: hidden; /* 隐藏溢出内容 */
 }
 
 .login-container:hover,
 .register-container:hover {
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2); /* 悬停时增强阴影 */
+    transform: translateY(-5px); /* 悬停时向上移动 */
 }
 
+/* 标题样式 */
 .login-container h1,
 .register-container h1 {
     text-align: center;
-    color: var(--primary-color);
-    margin-bottom: 20px;
-    font-size: 24px;
+    color: #007BFF; /* 标题颜色 */
+    margin-bottom: 30px; /* 增加底部间距 */
+    font-size: 28px; /* 增大字体大小 */
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: 3px; /* 增加字母间距 */
 }
 
-.login-container form,
-.register-container form {
-    display: flex;
-    flex-direction: column;
-}
-
+/* 输入框样式 */
 .login-container .input-field,
 .register-container .input-field {
-    margin-bottom: 20px;
-    padding: 12px;
-    border: 1px solid var(--input-border-color);
-    border-radius: 5px;
+    margin-bottom: 25px; /* 增加底部间距 */
+    padding: 15px; /* 增加内边距 */
+    border: 1px solid #ccc;
+    border-radius: 10px; /* 增加圆角 */
     font-size: 16px;
-    transition: border-color 0.3s ease;
-    background-color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease; /* 过渡效果 */
+    background-color: rgba(255, 255, 255, 0.9); /* 输入框背景颜色 */
     position: relative;
-    width: calc(100% - 26px); /* 减去边框和内边距 */
+    width: calc(100% - 30px); /* 减去边框和内边距 */
 }
 
 .login-container .input-field:focus,
 .register-container .input-field:focus {
-    border-color: var(--input-focus-border-color);
+    border-color: #007BFF; /* 聚焦时边框颜色 */
     outline: none;
     background-color: #fff;
-    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3); /* 聚焦时阴影效果 */
 }
 
-.login-container .error-message,
-.register-container .error-message {
-    color: var(--error-color);
-    font-size: 14px;
-    margin-top: 5px;
-    text-align: center;
-}
-
-.login-container .btn {
-    margin-top: 15px;
+/* 按钮样式 */
+.login-container .btn,
+.register-container .btn {
+    margin-top: 20px; /* 增加顶部间距 */
+    padding: 15px; /* 增加内边距 */
     font-weight: bold;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 2px; /* 增加字母间距 */
+    background-color: #007BFF; /* 按钮背景颜色 */
+    color: white;
+    border: none;
+    border-radius: 10px; /* 增加圆角 */
+    cursor: pointer;
+    transition: all 0.3s ease; /* 过渡效果 */
+}
+
+.login-container .btn:hover,
+.register-container .btn:hover {
+    background-color: #0056b3; /* 悬停时按钮背景颜色 */
+    transform: scale(1.05); /* 悬停时放大 */
 }
 
 /* 登录方式切换样式 */
 .login-method-switch {
     text-align: right;
-    margin-top: 10px;
-    font-size: 12px;
+    margin-top: 15px; /* 增加顶部间距 */
+    font-size: 14px; /* 增大字体大小 */
 }
 
 .login-method-switch span {
     cursor: pointer;
-    color: var(--primary-color);
+    color: #007BFF;
     border-bottom: 2px solid transparent;
     transition: border-bottom-color 0.3s ease;
 }
 
 .login-method-switch span:hover {
-    border-bottom-color: var(--primary-color);
+    border-bottom-color: #007BFF;
 }
 
 .login-method-switch span.active {
-    border-bottom-color: var(--primary-color);
+    border-bottom-color: #007BFF;
 }
 
 /* 验证码登录时登录按钮位置调整 */
 .login-container .code-login .btn.login-btn {
-    margin-top: 10px;
+    margin-top: 15px; /* 增加顶部间距 */
     display: block;
 }
 
@@ -378,7 +384,7 @@ body {
 /* 手机号码输入框和获取验证码按钮布局 */
 .login-container .phone-input-group {
     display: flex;
-    gap: 10px;
+    gap: 15px; /* 增加间距 */
     align-items: center;
 }
 
@@ -398,13 +404,13 @@ body {
 /* 密码可见性切换按钮样式 */
 .password-toggle {
     position: absolute;
-    right: 20px;
+    right: 25px; /* 调整位置 */
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;
     color: #999;
     transition: color 0.3s ease;
-    font-size: 18px;
+    font-size: 20px; /* 增大字体大小 */
 }
 
 .password-toggle:hover {
