@@ -19,7 +19,7 @@ const Home = () => {
                     return;
                 }
                 const response = await axios.get(
-                    `https://content.guardianapis.com/search?api-key=${apiKey}&section=business&show-fields=headline,trailText`
+                    `https://content.guardianapis.com/search?api-key=${apiKey}&section=business&show-fields=headline,trailText,thumbnail`
                 );
                 console.log('返回的数据:', response.data); 
                 const data = response.data.response;
@@ -28,7 +28,8 @@ const Home = () => {
                     const formattedNews = data.results.map(result => ({
                         title: result.fields.headline,
                         description: result.fields.trailText,
-                        url: result.webUrl
+                        url: result.webUrl,
+                        image: result.fields.thumbnail
                     }));
                     setNews(formattedNews);
                     setErrorMessage('');
@@ -66,38 +67,22 @@ const Home = () => {
             <SliderComponent />
 
             <Card className="news-container">
-                <h3>国际贸易新闻</h3>
-                {errorMessage ? (
-                    <p>{errorMessage}</p>
-                ) : news.length === 0 ? (
-                    <p>暂无新闻数据</p>
-                ) : (
-                    <>
-                        <ul>
-                            {news.slice(0, 2).map((article, index) => (
-                                <li key={index}>
-                                    <Link to={article.url} target="_blank" rel="noopener noreferrer">
-                                        {article.title}
-                                    </Link>
-                                    <p>{article.description}</p>
-                                </li>
-                            ))}
-                        </ul>
-                        <ul>
-                            {news.slice(2, 4).map((article, index) => (
-                                <li key={index + 2}>
-                                    <Link to={article.url} target="_blank" rel="noopener noreferrer">
-                                        {article.title}
-                                    </Link>
-                                    <p>{article.description}</p>
-                                </li>
-                            ))}
-                        </ul>
-                    </>
-                )}
+                <h3 className="news-title">国际贸易新闻</h3>
+                <div className="news-divider"></div>
+                <div className="news-grid">
+                    {news.slice(0, 4).map((article, index) => (
+                        <div className="news-item" key={index}>
+                            <Link to={article.url} target="_blank" rel="noopener noreferrer">
+                                {article.image && <img src={article.image} alt={article.title} />}
+                                <h4>{article.title}</h4>
+                            </Link>
+                            <p>{article.description}</p>
+                        </div>
+                    ))}
+                </div>
             </Card>
         </div>
     );
 };
 
-export default Home;    
+export default Home;

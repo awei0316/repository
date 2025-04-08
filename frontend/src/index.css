@@ -652,3 +652,51 @@ body {
 .stock-suggestions li {
     margin-bottom: 5px;
 }
+
+/* 新增新闻标题样式 */
+.news-title {
+    color: lightblue;
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+/* 新增分割线样式 */
+.news-divider {
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 20px;
+}
+
+/* 新增新闻网格布局样式 */
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* 新增新闻项样式 */
+.news-item {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.news-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.news-item h4 {
+    margin: 0;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.news-item p {
+    margin: 0;
+    font-size: 14px;
+}
