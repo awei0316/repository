@@ -12,8 +12,8 @@ import TradeStatistics from './pages/TradeStatistics';
 import MarketAnalysis from './pages/MarketAnalysis';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import Footer from './components/Footer';
-import BottomLinks from './components/BottomLinks';
+import NewButtonComponent from './components/NewButtonComponent';
+import BottomInfo from './components/BottomInfo';
 import AIServiceIcon from './components/AIServiceIcon';
 
 function App() {
@@ -32,8 +32,8 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
             </Routes>
-            <BottomLinks />
-            <Footer />
+            <NewButtonComponent />
+            <BottomInfo />
             <AIServiceIcon />
         </Router>
     );
