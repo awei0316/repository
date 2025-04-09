@@ -37,6 +37,6 @@ function App() {
             <AIServiceIcon />
         </Router>
     );
-}
+} 
 
 export default App;
