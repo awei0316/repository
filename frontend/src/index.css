@@ -26,7 +26,7 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    padding-bottom: 100px; /* 增加底部内边距，确保页脚不会覆盖内容 */
+    padding-bottom: 45px; 
 }
 
 .container {
@@ -764,3 +764,42 @@ body {
     transform: translateY(-50%);
     cursor: pointer;
 }
+
+/* 新增固定底部样式 */
+.fixed-bottom {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9); /* 可根据需要调整背景颜色 */
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1); /* 可根据需要调整阴影 */
+}
+
+
+/* 底部信息容器样式 */
+.bottom-info-container,
+.new-button-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 10;
+    pointer-events: none; /* 隐藏时禁止鼠标交互 */
+}
+
+/* 显示底部信息 */
+.bottom-info-container.show,
+.new-button-container.show {
+    opacity: 1;
+    pointer-events: auto; /* 显示时允许鼠标交互 */
+}
+
+/* 隐藏底部信息 */
+.bottom-info-container.hide,
+.new-button-container.hide {
+    opacity: 0;
+    pointer-events: none; /* 隐藏时禁止鼠标交互 */
+}
+

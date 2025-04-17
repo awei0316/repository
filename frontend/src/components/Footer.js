@@ -1,9 +1,9 @@
-// repository/frontend/src/components/Footer.js
+// src/components/Footer.js
 import React from 'react';
 
 const Footer = () => {
     return (
-        <footer className="footer">
+        <footer className="footer fixed-bottom">
             <div className="container">
                 <div className="footer-left">
                     <div>

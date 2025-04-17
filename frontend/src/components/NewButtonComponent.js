@@ -1,4 +1,4 @@
-// repository/frontend/src/components/NewButtonComponent.js
+// src/components/NewButtonComponent.js
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ const NewButtonComponent = () => {
     useEffect(() => {
         const handleScroll = () => {
             const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-            if (scrollTop + clientHeight >= scrollHeight - 50) {
+            if (scrollTop + clientHeight >= scrollHeight - 20) {
                 setIsVisible(true);
             } else {
                 setIsVisible(false);

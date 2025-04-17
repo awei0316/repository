@@ -1,4 +1,4 @@
-// repository/frontend/src/components/BottomInfo.js
+// src/components/BottomInfo.js
 import React, { useState, useEffect } from 'react';
 
 const BottomInfo = () => {
@@ -7,14 +7,10 @@ const BottomInfo = () => {
     useEffect(() => {
         const handleScroll = () => {
             const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
-            if (scrollTop + clientHeight >= scrollHeight - 50) {
+            if (scrollTop + clientHeight >= scrollHeight - 20) {
                 setIsVisible(true);
-                // 当滚动到底部时，给底部信息添加 show 类
-                document.querySelector('.bottom-info-container').classList.add('show'); 
             } else {
                 setIsVisible(false);
-                // 当离开底部时，移除底部信息的 show 类
-                document.querySelector('.bottom-info-container').classList.remove('show'); 
             }
         };
 
@@ -26,7 +22,7 @@ const BottomInfo = () => {
     }, []);
 
     return (
-        <div className={`bottom-info-container ${isVisible ? 'show' : ''}`}>
+        <div className={`bottom-info-container ${isVisible ? 'show' : 'hide'}`}>
             <div className="bottom-info-left">
                 <div>
                     <h3>客户服务</h3>
