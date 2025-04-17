@@ -133,60 +133,6 @@ body {
     color: white;
 }
 
-/* 移除或注释掉 footer 相关样式 */
-/*
-.footer {
-    background-color: var(--secondary-color);
-    color: white;
-    padding: 20px 0;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
-    opacity: 0; 
-    transition: opacity 0.3s ease; 
-}
-
-.footer.show {
-    opacity: 1; 
-}
-
-.footer .container {
-    display: flex;
-    justify-content: space-between;
-    background: transparent;
-    box-shadow: none;
-    align-items: flex-end;
-    padding-bottom: 0;
-    border: none;
-}
-
-.footer-left {
-    display: flex;
-    flex-direction: column;
-}
-
-.footer-left div {
-    margin-bottom: 15px;
-}
-
-.footer-content-adjustment {
-    padding-top: 0;
-}
-
-.footer-links {
-    display: flex;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.copyright {
-    text-align: right;
-    margin-bottom: 0;
-}
-*/
-
-/* 添加新按钮组件的样式 */
 .new-button-container {
     position: fixed;
     bottom: 0px;
@@ -809,4 +755,12 @@ body {
 .news-item p {
     margin: 0;
     font-size: 14px;
+}
+
+.translation-sidebar {
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
 }
