@@ -133,26 +133,26 @@ body {
     color: white;
 }
 
+/* 新按钮容器样式 */
 .new-button-container {
     position: fixed;
-    bottom: 0px;
-    width: 100%;
-    padding: 2px;
-    display: flex;
-    justify-content: space-between;
-    z-index: 10;
+    bottom: 0;
+    right: 0; /* 将按钮容器放在页面最右边 */
+    width: auto; /* 调整宽度为自动适应内容 */
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     opacity: 0;
     transition: opacity 0.3s ease;
+    z-index: 11; /* 增加 z-index 值，使其显示在底部信息之上 */
+    pointer-events: none; /* 隐藏时禁止鼠标交互 */
+    display: flex;
+    flex-direction: column; /* 垂直排列 */
+    align-items: center; /* 居中对齐 */
+    gap: 10px; /* 按钮之间的间距 */
+    padding: 10px; /* 内边距 */
 }
 
-.new-button-container.show {
-    opacity: 1;
-}
-
-.new-button-container.hide {
-    opacity: 0;
-}
-
+/* 底部左右链接样式 */
 .bottom-left-link,
 .bottom-right-link {
     background-color: rgba(255, 255, 255, 0.9);
@@ -163,12 +163,23 @@ body {
     font-weight: bold;
     transition: background-color 0.3s ease, transform 0.3s ease;
     box-shadow: var(--box-shadow);
+    width: fit-content; /* 按钮宽度自适应内容 */
+    min-width: 120px; /* 设置最小宽度，确保按钮大小一致 */
+    text-align: center; /* 文本居中 */
 }
 
 .bottom-left-link:hover,
 .bottom-right-link:hover {
     background-color: rgba(255, 255, 255, 1);
     transform: scale(1.05);
+}
+
+.new-button-container.show {
+    opacity: 1;
+}
+
+.new-button-container.hide {
+    opacity: 0;
 }
 
 
@@ -244,23 +255,6 @@ body {
     transition: opacity 0.3s ease;
 }
 
-.bottom-left-link,
-.bottom-right-link {
-    background-color: rgba(255, 255, 255, 0.9);
-    color: var(--primary-color);
-    padding: 12px 20px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    box-shadow: var(--box-shadow);
-}
-
-.bottom-left-link:hover,
-.bottom-right-link:hover {
-    background-color: rgba(255, 255, 255, 1);
-    transform: scale(1.05);
-}
 
 .btn {
     display: inline-block;
@@ -776,8 +770,7 @@ body {
 
 
 /* 底部信息容器样式 */
-.bottom-info-container,
-.new-button-container {
+.bottom-info-container {
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -785,9 +778,11 @@ body {
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     opacity: 0;
     transition: opacity 0.3s ease;
-    z-index: 10;
+    z-index: 9; /* 降低 z-index 值 */
     pointer-events: none; /* 隐藏时禁止鼠标交互 */
 }
+
+
 
 /* 显示底部信息 */
 .bottom-info-container.show,
