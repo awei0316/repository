@@ -10,7 +10,9 @@ const SliderComponent = ({ news }) => {
         infinite: true,
         speed: 500,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        autoplay: true, // 开启自动播放
+        autoplaySpeed: 2500, // 设置自动播放间隔时间，单位为毫秒
     };
 
     // 过滤掉来自 https://post.smzdm.com/ 和 https://www.huxiu.com/ 的新闻
