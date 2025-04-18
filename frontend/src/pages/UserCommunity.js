@@ -76,20 +76,20 @@ const UserCommunity = () => {
     };
 
     return (
-        <div className="container mx-auto p-8 bg-gray-100 min-h-screen">
-            <h1 className="text-4xl font-bold text-center text-blue-700 mb-6">
+        <div className="container mx-auto p-8 bg-gradient-to-br from-teal-50 to-cyan-100 min-h-screen">
+            <h1 className="text-4xl font-bold text-center text-transparent bg-clip-text bg-gradient-to-r from-teal-700 to-cyan-700 mb-6">
                 <FaComments className="inline-block mr-3" /> 用户社区
             </h1>
-            <form onSubmit={handleSubmit} className="bg-white p-8 rounded-xl shadow-2xl mb-8 transition-transform hover:scale-105">
+            <form onSubmit={handleSubmit} className="bg-white p-8 rounded-3xl shadow-2xl mb-8 transition-transform hover:scale-105 duration-300">
                 <textarea
-                    className="w-full border border-gray-300 rounded-md p-3 mb-5 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full border border-gray-300 rounded-lg p-3 mb-5 focus:ring-teal-500 focus:border-teal-500"
                     placeholder="分享您的贸易经验..."
                     value={newPost}
                     onChange={(e) => setNewPost(e.target.value)}
                 />
                 <button
                     type="submit"
-                    className="bg-blue-700 text-white py-3 px-6 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    className="bg-gradient-to-r from-teal-700 to-cyan-700 text-white py-3 px-6 rounded-lg hover:from-teal-800 hover:to-cyan-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
                 >
                     发布
                 </button>
@@ -99,22 +99,22 @@ const UserCommunity = () => {
                 {posts.map(post => (
                     <div
                         key={post.id}
-                        className="bg-white p-8 rounded-xl shadow-2xl hover:shadow-4xl transition-shadow"
+                        className="bg-white p-8 rounded-3xl shadow-2xl hover:shadow-4xl transition-shadow duration-300 animate__animated animate__fadeIn"
                     >
                         <p className="text-gray-800 mb-3 text-lg leading-relaxed">{post.content}</p>
                         <small className="text-gray-600">{post.date}</small>
                         <div className="post-actions flex items-center mt-5">
                             <span
                                 onClick={() => handleLike(post.id)}
-                                className="flex items-center text-gray-600 hover:text-blue-700 cursor-pointer mr-6"
+                                className="flex items-center text-gray-600 hover:text-teal-700 cursor-pointer mr-6"
                             >
-                                <FaThumbsUp className="mr-2" /> {post.likes}
+                                <FaThumbsUp className="mr-2 text-teal-500" /> {post.likes}
                             </span>
                             <span
                                 onClick={() => handleComment(post.id, '示例评论')}
-                                className="flex items-center text-gray-600 hover:text-blue-700 cursor-pointer"
+                                className="flex items-center text-gray-600 hover:text-teal-700 cursor-pointer"
                             >
-                                <FaComment className="mr-2" /> {post.comments.length}
+                                <FaComment className="mr-2 text-teal-500" /> {post.comments.length}
                             </span>
                         </div>
                         {post.comments.length > 0 && (
@@ -132,16 +132,16 @@ const UserCommunity = () => {
                     </div>
                 ))}
                 {isLoading && (
-                    <p className="text-center text-gray-600">正在加载更多帖子...</p>
+                    <p className="text-center text-gray-600 animate__animated animate__fadeIn">正在加载更多帖子...</p>
                 )}
                 {error && (
-                    <p className="text-center text-red-600">{error}</p>
+                    <p className="text-center text-red-600 animate__animated animate__fadeIn">{error}</p>
                 )}
             </div>
             {hasMore && (
                 <button
                     onClick={handleLoadMore}
-                    className="block mx-auto bg-blue-700 text-white py-3 px-6 rounded-md hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mt-8"
+                    className="block mx-auto bg-gradient-to-r from-teal-700 to-cyan-700 text-white py-3 px-6 rounded-lg hover:from-teal-800 hover:to-cyan-800 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2 mt-8 animate__animated animate__fadeIn"
                 >
                     加载更多
                 </button>

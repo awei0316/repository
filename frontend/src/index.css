@@ -531,14 +531,22 @@ body {
     background-color: #f4f4f4; /* 浅灰色背景 */
     width: 100%;
     box-sizing: border-box;
+    border-radius: 20px; /* 增加圆角 */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); /* 增加阴影 */
 }
 
 /* 帖子卡片样式 */
 .posts .card {
     padding: 20px;
     margin-bottom: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 16px; /* 增加圆角 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 增加阴影 */
+    transition: all 0.3s ease; /* 增加过渡效果 */
+}
+
+.posts .card:hover {
+    transform: translateY(-5px); /* 悬停时向上移动 */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15); /* 悬停时增强阴影 */
 }
 
 /* 帖子操作按钮样式 */
@@ -551,6 +559,10 @@ body {
 .post-actions span {
     cursor: pointer;
     color: #007BFF;
+}
+
+.post-actions span:hover {
+    color: #007BFF; /* 悬停时改变颜色 */
 }
 
 /* 评论区域样式 */
