@@ -24,19 +24,21 @@ const BottomInfo = () => {
 
     return (
         <div className={`bottom-info-container ${isVisible ? 'show' : 'hide'}`}>
-            <div className="bottom-info-left">
+            <div className="bottom-info-left adjusted">
                 <div>
                     <h3>客户服务</h3>
                     <p>客服热线：0351-7021781</p>
                 </div>
             </div>
-            <div className="bottom-info-links">
+            <div className="bottom-info-links-left">
                 <Link to="/about">关于我们</Link>
-                <Link to="/contact">联系我们</Link>
             </div>
             <div className="bottom-info-copyright">
                 <p>版权所有©️ 河北工程大学</p>
                 <p>冀公网安备 3415535123525号 | 工信部备案号：冀ICP备312314115号-5</p>
+            </div>
+            <div className="bottom-info-links-right">
+                <Link to="/contact">联系我们</Link>
             </div>
         </div>
     );
