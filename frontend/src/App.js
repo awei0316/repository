@@ -34,7 +34,7 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/forgotPassword" element={<ForgotPassword />} />
-                <Route path="/profile" element={<ProfileDisplay />} />
+                <Route path="/profile/:userId" element={<ProfileDisplay />} />
                 <Route path="/profile/edit" element={<ProfileEdit />} />
             </Routes>
             <BottomInfo />
