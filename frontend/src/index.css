@@ -884,3 +884,190 @@ body {
     background-color: rgba(255, 255, 255, 1);
     transform: scale(1.05);
 }
+/* 个人信息容器样式 */
+.profile-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 40px;
+    background: linear-gradient(135deg, #f9f9f9, #e9e9e9); /* 渐变背景 */
+    border-radius: 20px; /* 增加圆角 */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden; /* 隐藏溢出内容 */
+}
+
+.profile-container:hover {
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-5px);
+}
+
+.profile-container h1 {
+    color: #007BFF;
+    margin-bottom: 30px;
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: -webkit-linear-gradient(45deg, #007BFF, #0056b3);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent; /* 渐变文字 */
+}
+
+.profile-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    align-items: center;
+    margin-bottom: 30px;
+    transition: all 0.3s ease;
+}
+
+/* 小屏幕设备调整布局 */
+@media (max-width: 768px) {
+    .profile-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.avatar-section {
+    text-align: center;
+}
+
+.avatar-img {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 5px solid #fff;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.avatar-img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.2); /* 悬停时增强阴影 */
+}
+
+.avatar-input {
+    display: block;
+    margin: 15px auto 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.9);
+    transition: all 0.3s ease;
+}
+
+.avatar-input:hover {
+    border-color: #007BFF;
+}
+
+.info-section {
+    text-align: left;
+}
+
+.input-group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #007BFF;
+    font-size: 18px;
+    z-index: 1;
+    transition: all 0.3s ease;
+}
+
+.input-group input {
+    padding: 15px 15px 15px 40px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.input-group input:focus {
+    border-color: #007BFF;
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.3);
+}
+
+.input-group input:focus + .input-icon {
+    color: #0056b3; /* 输入框聚焦时图标颜色变化 */
+}
+
+.error-message {
+    color: red;
+    margin-bottom: 20px;
+    font-size: 14px;
+    animation: fadeIn 0.3s ease; /* 错误信息淡入动画 */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.profile-container .btn {
+    margin-top: 20px;
+    padding: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* 按钮阴影 */
+}
+
+.profile-container .btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2); /* 悬停时增强阴影 */
+}
+
+.profile-container .btn:active {
+    transform: scale(0.95);
+}
+
+/* 个人信息显示页面样式 */
+.profile-container .info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    transition: all 0.3s ease;
+}
+
+.profile-container .info-item:hover {
+    transform: translateX(5px); /* 悬停时向右移动 */
+}
+
+.profile-container .info-icon {
+    margin-right: 10px;
+    color: #007BFF;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.profile-container .info-item:hover .info-icon {
+    color: #0056b3; /* 悬停时图标颜色变化 */
+}

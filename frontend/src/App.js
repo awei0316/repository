@@ -15,7 +15,8 @@ import Contact from './pages/Contact';
 import BottomInfo from './components/BottomInfo';
 import AIServiceIcon from './components/AIServiceIcon';
 import ForgotPassword from './pages/ForgotPassword';
-import Profile from './pages/Profile'; // 引入 Profile 组件
+import ProfileDisplay from './pages/ProfileDisplay';
+import ProfileEdit from './pages/ProfileEdit';
 
 function App() {
     return (
@@ -33,7 +34,8 @@ function App() {
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/forgotPassword" element={<ForgotPassword />} />
-                <Route path="/profile" element={<Profile />} /> {/* 添加 Profile 页面的路由 */}
+                <Route path="/profile" element={<ProfileDisplay />} />
+                <Route path="/profile/edit" element={<ProfileEdit />} />
             </Routes>
             <BottomInfo />
             <AIServiceIcon />
