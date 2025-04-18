@@ -1,5 +1,6 @@
 // src/components/BottomInfo.js
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const BottomInfo = () => {
     const [isVisible, setIsVisible] = useState(false);
@@ -28,6 +29,10 @@ const BottomInfo = () => {
                     <h3>客户服务</h3>
                     <p>客服热线：0351-7021781</p>
                 </div>
+            </div>
+            <div className="bottom-info-links">
+                <Link to="/about">关于我们</Link>
+                <Link to="/contact">联系我们</Link>
             </div>
             <div className="bottom-info-copyright">
                 <p>版权所有©️ 河北工程大学</p>

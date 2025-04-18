@@ -12,7 +12,6 @@ import TradeStatistics from './pages/TradeStatistics';
 import MarketAnalysis from './pages/MarketAnalysis';
 import About from './pages/About';
 import Contact from './pages/Contact';
-import NewButtonComponent from './components/NewButtonComponent';
 import BottomInfo from './components/BottomInfo';
 import AIServiceIcon from './components/AIServiceIcon';
 import ForgotPassword from './pages/ForgotPassword'; // 引入 ForgotPassword 组件
@@ -34,7 +33,6 @@ function App() {
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/forgotPassword" element={<ForgotPassword />} /> {/* 添加忘记密码页面的路由 */}
             </Routes>
-            <NewButtonComponent />
             <BottomInfo />
             <AIServiceIcon />
         </Router>

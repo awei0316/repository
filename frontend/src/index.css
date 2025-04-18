@@ -133,24 +133,6 @@ body {
     color: white;
 }
 
-/* 新按钮容器样式 */
-.new-button-container {
-    position: fixed;
-    bottom: 0;
-    right: 0; /* 将按钮容器放在页面最右边 */
-    width: auto; /* 调整宽度为自动适应内容 */
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: 11; /* 增加 z-index 值，使其显示在底部信息之上 */
-    pointer-events: none; /* 隐藏时禁止鼠标交互 */
-    display: flex;
-    flex-direction: column; /* 垂直排列 */
-    align-items: center; /* 居中对齐 */
-    gap: 10px; /* 按钮之间的间距 */
-    padding: 10px; /* 内边距 */
-}
 
 /* 底部左右链接样式 */
 .bottom-left-link,
@@ -174,13 +156,7 @@ body {
     transform: scale(1.05);
 }
 
-.new-button-container.show {
-    opacity: 1;
-}
 
-.new-button-container.hide {
-    opacity: 0;
-}
 
 
 .slider-container {
@@ -778,11 +754,58 @@ body {
     box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
     opacity: 0;
     transition: opacity 0.3s ease;
-    z-index: 9; /* 降低 z-index 值 */
-    pointer-events: none; /* 隐藏时禁止鼠标交互 */
+    z-index: 9;
+    pointer-events: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
 }
 
 
+/* 新按钮容器样式 */
+.new-button-container {
+    position: fixed;
+    bottom: 0;
+    right: 0; /* 将按钮容器放在页面最右边 */
+    width: auto; /* 调整宽度为自动适应内容 */
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 11; /* 增加 z-index 值，使其显示在底部信息之上 */
+    pointer-events: none; /* 隐藏时禁止鼠标交互 */
+    display: flex;
+    flex-direction: column; /* 垂直排列 */
+    align-items: center; /* 居中对齐 */
+    gap: 10px; /* 按钮之间的间距 */
+    padding: 10px; /* 内边距 */
+}
+
+.bottom-info-left {
+    flex: 1;
+}
+
+.bottom-info-links {
+    display: flex;
+    gap: 20px;
+}
+
+.bottom-info-links a {
+    color: #007BFF;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.bottom-info-links a:hover {
+    color: #0056b3;
+}
+
+.bottom-info-copyright {
+    text-align: right;
+    flex: 1;
+}
 
 /* 显示底部信息 */
 .bottom-info-container.show,
@@ -798,3 +821,30 @@ body {
     pointer-events: none; /* 隐藏时禁止鼠标交互 */
 }
 
+/* 新增样式，用于调整按钮大小和布局 */
+.new-buttons-inside {
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* 按钮之间的间距 */
+    margin-top: 10px; /* 与客服信息的间距 */
+}
+
+.small-button {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: var(--primary-color);
+    padding: 6px 10px; /* 减小内边距，使按钮变小 */
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: var(--box-shadow);
+    width: fit-content; /* 按钮宽度自适应内容 */
+    min-width: 80px; /* 设置最小宽度，确保按钮大小一致 */
+    text-align: center; /* 文本居中 */
+    font-size: 12px; /* 减小字体大小 */
+}
+
+.small-button:hover {
+    background-color: rgba(255, 255, 255, 1);
+    transform: scale(1.05);
+}
