@@ -1,5 +1,6 @@
 // src/pages/Login.js
 import React, { useState, useEffect, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import { validatePhone } from '../utils/formValidation';
 import PasswordVisibilityToggle from '../components/PasswordVisibilityToggle';
@@ -13,6 +14,7 @@ const Login = () => {
     const [isCodeLogin, setIsCodeLogin] = useState(true);
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
     const passwordRef = useRef(null);
+    const navigate = useNavigate();
 
     const handleSendCode = () => {
         if (!validatePhone(phone)) {
@@ -36,8 +38,11 @@ const Login = () => {
                 return;
             }
             if (code === '123456') {
-                setError('');
-                alert('登录成功');
+                // 模拟用户头像
+                const userAvatar = 'https://example.com/avatar.jpg'; 
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userAvatar', userAvatar);
+                navigate('/'); // 直接跳转到首页
             } else {
                 setError('验证码错误');
             }
@@ -47,8 +52,11 @@ const Login = () => {
                 return;
             }
             if (password === '123456') {
-                setError('');
-                alert('登录成功');
+                // 模拟用户头像
+                const userAvatar = 'https://example.com/avatar.jpg'; 
+                localStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('userAvatar', userAvatar);
+                navigate('/'); // 直接跳转到首页
             } else {
                 setError('密码错误');
             }
