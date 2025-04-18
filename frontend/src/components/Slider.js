@@ -1,33 +1,33 @@
-// Slider.js
+// src/components/Slider.js
 import React from 'react';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 3000
-};
+const SliderComponent = ({ news }) => {
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1
+    };
 
-const SliderComponent = () => {
+    // 截取前 8 条新闻
+    const slicedNews = news.slice(0, 8);
+
     return (
-        <div className="small-slider">
+        <div className="slider-container">
             <Slider {...settings}>
-                {/* 使用相同尺寸的图片 */}
-                <div>
-                    <img src="https://picsum.photos/1200/600" alt="Slide 1" />
-                </div>
-                <div>
-                    <img src="https://picsum.photos/1200/600" alt="Slide 2" />
-                </div>
-                <div>
-                    <img src="https://picsum.photos/1200/600" alt="Slide 3" />
-                </div>
+                {slicedNews.map((article, index) => (
+                    <div key={index}>
+                        <a href={article.url} target="_blank" rel="noopener noreferrer">
+                            {article.image && <img src={article.image} alt={article.title} />}
+                            <h4>{article.title}</h4>
+                            <p>{article.description}</p>
+                        </a>
+                    </div>
+                ))}
             </Slider>
         </div>
     );
