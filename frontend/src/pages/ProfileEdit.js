@@ -1,6 +1,6 @@
 // src/pages/ProfileEdit.js
 import React, { useState, useEffect } from 'react';
-import { FaUser, FaPhone, FaEnvelope, FaMapMarkerAlt, FaBirthdayCake, FaUserCircle, FaInfoCircle } from 'react-icons/fa';
+import { FaUser, FaPhone, FaEnvelope, FaMapMarkerAlt, FaBirthdayCake, FaUserCircle, FaInfoCircle, FaHeart, FaGlobe } from 'react-icons/fa';
 import InputField from '../components/InputField';
 import Button from '../components/Button';
 import { validatePhone, validateEmail } from '../utils/formValidation';
@@ -15,7 +15,9 @@ const ProfileEdit = () => {
         occupation: '',
         gender: '',
         birthday: '',
-        bio: ''
+        bio: '',
+        hobbies: '',
+        socialMedia: ''
     });
     const [errors, setErrors] = useState({});
 
@@ -97,7 +99,7 @@ const ProfileEdit = () => {
 
     return (
         <div className="container profile-container">
-            <h1><FaUser /> 个人信息</h1>
+            <h1><FaUser /> 编辑个人信息</h1>
             <div className="avatar-container">
                 <img
                     src={userInfo.avatar || 'https://via.placeholder.com/150'}
@@ -192,6 +194,26 @@ const ProfileEdit = () => {
                         placeholder="请输入您的个人简介"
                         name="bio"
                         value={userInfo.bio}
+                        onChange={handleInputChange}
+                    />
+                </div>
+                <div className="input-group">
+                    <FaHeart className="input-icon" />
+                    <InputField
+                        type="text"
+                        placeholder="请输入您的兴趣爱好"
+                        name="hobbies"
+                        value={userInfo.hobbies}
+                        onChange={handleInputChange}
+                    />
+                </div>
+                <div className="input-group">
+                    <FaGlobe className="input-icon" />
+                    <InputField
+                        type="text"
+                        placeholder="请输入您的社交账号"
+                        name="socialMedia"
+                        value={userInfo.socialMedia}
                         onChange={handleInputChange}
                     />
                 </div>
