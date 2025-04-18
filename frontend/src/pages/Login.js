@@ -1,6 +1,7 @@
 // src/pages/Login.js
 import React, { useState, useEffect } from 'react';
 import Button from '../components/Button';
+import { validatePhone } from '../utils/formValidation';
 
 const Login = () => {
     const [phone, setPhone] = useState('');
@@ -11,8 +12,8 @@ const Login = () => {
     const [isCodeLogin, setIsCodeLogin] = useState(true);
 
     const handleSendCode = () => {
-        if (!phone) {
-            setError('请输入手机号码');
+        if (!validatePhone(phone)) {
+            setError('请输入有效的手机号码');
             return;
         }
         setCountdown(60);

@@ -411,6 +411,13 @@ body {
     }
 }
 
+/* 新增密码强度提示样式 */
+.password-strength {
+    margin-top: 5px;
+    font-size: 12px;
+    color: #999;
+}
+
 /* 忘记密码容器样式 */
 .forgot-password-container {
     max-width: 450px;

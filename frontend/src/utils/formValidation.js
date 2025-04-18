@@ -7,3 +7,8 @@ export const validateEmail = (email) => {
 export const validatePassword = (password) => {
     return password.length >= 6;
 };
+
+export const validatePhone = (phone) => {
+    const re = /^1[3-9]\d{9}$/;
+    return re.test(phone);
+};
