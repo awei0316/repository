@@ -1,6 +1,7 @@
 // src/pages/ForgotPassword.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Button from '../components/Button';
+import PasswordVisibilityToggle from '../components/PasswordVisibilityToggle';
 
 const ForgotPassword = () => {
     const [phone, setPhone] = useState('');
@@ -8,6 +9,8 @@ const ForgotPassword = () => {
     const [newPassword, setNewPassword] = useState('');
     const [countdown, setCountdown] = useState(0);
     const [error, setError] = useState('');
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const passwordRef = useRef(null);
 
     const handleSendCode = () => {
         if (!phone) {
@@ -40,6 +43,10 @@ const ForgotPassword = () => {
         }
     };
 
+    const handlePasswordVisibilityToggle = (visible) => {
+        setIsPasswordVisible(visible);
+    };
+
     return (
         <div className="container forgot-password-container">
             <h1>忘记密码</h1>
@@ -59,12 +66,19 @@ const ForgotPassword = () => {
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
             />
-            <input
-                type="password"
-                placeholder="请输入新密码"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-            />
+            <div style={{ position: 'relative' }}>
+                <input
+                    type={isPasswordVisible ? 'text' : 'password'}
+                    placeholder="请输入新密码"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    ref={passwordRef}
+                />
+                <PasswordVisibilityToggle
+                    inputRef={passwordRef}
+                    onToggleVisibility={handlePasswordVisibilityToggle}
+                />
+            </div>
             <Button onClick={handleResetPassword}>重置密码</Button>
         </div>
     );

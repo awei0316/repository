@@ -387,7 +387,7 @@ body {
 /* 密码可见性切换按钮样式 */
 .password-toggle {
     position: absolute;
-    right: 25px; /* 调整位置 */
+    right: 40px; /* 增大 right 值，避免与输入框重叠 */
     top: 50%;
     transform: translateY(-50%);
     cursor: pointer;

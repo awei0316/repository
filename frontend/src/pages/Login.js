@@ -1,7 +1,8 @@
 // src/pages/Login.js
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Button from '../components/Button';
 import { validatePhone } from '../utils/formValidation';
+import PasswordVisibilityToggle from '../components/PasswordVisibilityToggle';
 
 const Login = () => {
     const [phone, setPhone] = useState('');
@@ -10,6 +11,8 @@ const Login = () => {
     const [countdown, setCountdown] = useState(0);
     const [error, setError] = useState('');
     const [isCodeLogin, setIsCodeLogin] = useState(true);
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const passwordRef = useRef(null);
 
     const handleSendCode = () => {
         if (!validatePhone(phone)) {
@@ -57,6 +60,10 @@ const Login = () => {
         setError('');
     };
 
+    const handlePasswordVisibilityToggle = (visible) => {
+        setIsPasswordVisible(visible);
+    };
+
     return (
         <div className="container login-container">
             <h1>登录</h1>
@@ -89,13 +96,20 @@ const Login = () => {
             )}
             {!isCodeLogin && (
                 <div className="password-login">
-                    <input
-                        type="password"
-                        placeholder="请输入密码"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="input-field"
-                    />
+                    <div style={{ position: 'relative' }}>
+                        <input
+                            type={isPasswordVisible ? 'text' : 'password'}
+                            placeholder="请输入密码"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            className="input-field"
+                            ref={passwordRef}
+                        />
+                        <PasswordVisibilityToggle
+                            inputRef={passwordRef}
+                            onToggleVisibility={handlePasswordVisibilityToggle}
+                        />
+                    </div>
                     <Button onClick={handleLogin} className="login-btn">
                         登录
                     </Button>

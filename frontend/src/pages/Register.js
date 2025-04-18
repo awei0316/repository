@@ -3,6 +3,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import InputField from '../components/InputField';
 import Button from '../components/Button';
 import PasswordVisibilityToggle from '../components/PasswordVisibilityToggle';
+import { validatePhone, validatePassword } from '../utils/formValidation';
 
 const Register = () => {
     const [phone, setPhone] = useState('');
@@ -10,11 +11,13 @@ const Register = () => {
     const [password, setPassword] = useState('');
     const [countdown, setCountdown] = useState(0);
     const [error, setError] = useState('');
+    const [passwordStrength, setPasswordStrength] = useState('');
     const passwordRef = useRef(null);
+    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
 
     const handleSendCode = () => {
-        if (!phone) {
-            setError('请输入手机号码');
+        if (!validatePhone(phone)) {
+            setError('请输入有效的手机号码');
             return;
         }
         setCountdown(60);
@@ -28,9 +31,33 @@ const Register = () => {
         setError('');
     };
 
+    const handlePasswordChange = (e) => {
+        const newPassword = e.target.value;
+        setPassword(newPassword);
+        if (validatePassword(newPassword)) {
+            if (newPassword.length >= 12) {
+                setPasswordStrength('强');
+            } else if (newPassword.length >= 8) {
+                setPasswordStrength('中');
+            } else {
+                setPasswordStrength('弱');
+            }
+        } else {
+            setPasswordStrength('');
+        }
+    };
+
     const handleRegister = () => {
         if (!phone || !code || !password) {
             setError('请输入手机号码、验证码和密码');
+            return;
+        }
+        if (!validatePhone(phone)) {
+            setError('请输入有效的手机号码');
+            return;
+        }
+        if (!validatePassword(password)) {
+            setError('密码长度至少为6位');
             return;
         }
         // 模拟验证码验证成功
@@ -41,6 +68,10 @@ const Register = () => {
         } else {
             setError('验证码错误');
         }
+    };
+
+    const handlePasswordVisibilityToggle = (visible) => {
+        setIsPasswordVisible(visible);
     };
 
     return (
@@ -66,14 +97,18 @@ const Register = () => {
             />
             <div style={{ position: 'relative' }}>
                 <InputField
-                    type="password"
+                    type={isPasswordVisible ? 'text' : 'password'}
                     placeholder="请输入密码"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={handlePasswordChange}
                     required
                     ref={passwordRef}
                 />
-                <PasswordVisibilityToggle inputRef={passwordRef} />
+                <PasswordVisibilityToggle
+                    inputRef={passwordRef}
+                    onToggleVisibility={handlePasswordVisibilityToggle}
+                />
+                {passwordStrength && <p className="password-strength">{`密码强度: ${passwordStrength}`}</p>}
             </div>
             <Button onClick={handleRegister}>注册</Button>
         </div>

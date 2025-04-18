@@ -1,11 +1,15 @@
+// src/components/PasswordVisibilityToggle.js
 import React, { useState } from 'react';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
-const PasswordVisibilityToggle = ({ inputRef }) => {
+const PasswordVisibilityToggle = ({ inputRef, onToggleVisibility }) => {
     const [isVisible, setIsVisible] = useState(false);
 
     const toggleVisibility = () => {
         setIsVisible(!isVisible);
+        if (onToggleVisibility) {
+            onToggleVisibility(!isVisible);
+        }
     };
 
     return (
@@ -15,4 +19,4 @@ const PasswordVisibilityToggle = ({ inputRef }) => {
     );
 };
 
-export default PasswordVisibilityToggle;    
+export default PasswordVisibilityToggle;
