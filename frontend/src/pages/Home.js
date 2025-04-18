@@ -23,17 +23,18 @@ const Home = () => {
                     return;
                 }
                 const response = await axios.get(
-                    `https://newsapi.org/v2/everything?q=中国 外贸&apiKey=${apiKey}`
+                    `https://newsapi.org/v2/everything?q=中国 贸易&apiKey=${apiKey}`
                 );
                 console.log('轮播图新闻返回的数据:', response.data); 
                 const data = response.data;
 
                 if (data && Array.isArray(data.articles)) {
-                    // 筛选包含关键词的新闻
+                    // 筛选包含关键词且来自 https://www.dw.com/zh 的新闻
                     const filteredNews = data.articles.filter(article => {
                         const title = article.title || '';
                         const description = article.description || '';
-                        return tradeKeywords.some(keyword => title.includes(keyword) || description.includes(keyword));
+                        return tradeKeywords.some(keyword => title.includes(keyword) || description.includes(keyword)) &&
+                               article.url.startsWith('https://www.dw.com/zh');
                     });
 
                     const formattedNews = filteredNews.map(result => ({
