@@ -22,7 +22,15 @@ const ProfileDisplay = () => {
     useEffect(() => {
         const storedUserInfo = localStorage.getItem('userInfo');
         if (storedUserInfo) {
-            setUserInfo(JSON.parse(storedUserInfo));
+            try {
+                const parsedUserInfo = JSON.parse(storedUserInfo);
+                console.log('Parsed user info:', parsedUserInfo);
+                setUserInfo(parsedUserInfo);
+            } catch (error) {
+                console.error('Error parsing user info:', error);
+            }
+        } else {
+            console.log('No user info found in localStorage');
         }
     }, []);
 

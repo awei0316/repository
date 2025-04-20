@@ -874,6 +874,7 @@ select:focus {
     transform: scale(1.05);
 }
 
+/* src/index.css */
 /* 个人信息容器样式 */
 .profile-container {
     max-width: 800px;
