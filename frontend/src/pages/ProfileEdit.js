@@ -1,4 +1,3 @@
-// src/pages/ProfileEdit.js
 import React, { useState, useEffect } from 'react';
 import { FaUser, FaPhone, FaEnvelope, FaMapMarkerAlt, FaBirthdayCake, FaUserCircle, FaInfoCircle, FaHeart, FaGlobe } from 'react-icons/fa';
 import InputField from '../components/InputField';

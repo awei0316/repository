@@ -1,4 +1,3 @@
-// src/pages/ProfileDisplay.js
 import React, { useEffect, useState } from 'react';
 import { FaUser, FaPhone, FaEnvelope, FaMapMarkerAlt, FaUserCircle, FaBirthdayCake, FaInfoCircle, FaHeart, FaGlobe } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
@@ -24,13 +23,10 @@ const ProfileDisplay = () => {
         if (storedUserInfo) {
             try {
                 const parsedUserInfo = JSON.parse(storedUserInfo);
-                console.log('Parsed user info:', parsedUserInfo);
                 setUserInfo(parsedUserInfo);
             } catch (error) {
                 console.error('Error parsing user info:', error);
             }
-        } else {
-            console.log('No user info found in localStorage');
         }
     }, []);
 

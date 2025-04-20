@@ -874,19 +874,19 @@ select:focus {
     transform: scale(1.05);
 }
 
-/* src/index.css */
+
 /* 个人信息容器样式 */
 .profile-container {
     max-width: 800px;
     margin: 50px auto;
     padding: 40px;
-    background: linear-gradient(135deg, #f9f9f9, #e9e9e9); /* 渐变背景 */
-    border-radius: 20px; /* 增加圆角 */
+    background: linear-gradient(135deg, #f9f9f9, #e9e9e9);
+    border-radius: 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: all 0.3s ease;
     position: relative;
-    overflow: hidden; /* 隐藏溢出内容 */
+    overflow: hidden;
 }
 
 .profile-container:hover {
