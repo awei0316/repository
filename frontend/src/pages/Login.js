@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '../components/Button';
 import { validatePhone } from '../utils/formValidation';
 import PasswordVisibilityToggle from '../components/PasswordVisibilityToggle';
+import CustomAlert from '../components/CustomAlert';
 
 const Login = () => {
     const [phone, setPhone] = useState('');
@@ -13,6 +14,7 @@ const Login = () => {
     const [error, setError] = useState('');
     const [isCodeLogin, setIsCodeLogin] = useState(true);
     const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
     const passwordRef = useRef(null);
     const navigate = useNavigate();
 
@@ -38,11 +40,14 @@ const Login = () => {
                 return;
             }
             if (code === '123456') {
-                // 模拟用户头像
-                const userAvatar = 'https://example.com/avatar.jpg'; 
+                const userAvatar = 'https://example.com/avatar.jpg';
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('userAvatar', userAvatar);
-                navigate('/'); // 直接跳转到首页
+                setShowAlert(true);
+                setTimeout(() => {
+                    setShowAlert(false);
+                    navigate('/');
+                }, 2000);
             } else {
                 setError('验证码错误');
             }
@@ -52,11 +57,14 @@ const Login = () => {
                 return;
             }
             if (password === '123456') {
-                // 模拟用户头像
-                const userAvatar = 'https://example.com/avatar.jpg'; 
+                const userAvatar = 'https://example.com/avatar.jpg';
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('userAvatar', userAvatar);
-                navigate('/'); // 直接跳转到首页
+                setShowAlert(true);
+                setTimeout(() => {
+                    setShowAlert(false);
+                    navigate('/');
+                }, 2000);
             } else {
                 setError('密码错误');
             }
@@ -70,6 +78,11 @@ const Login = () => {
 
     const handlePasswordVisibilityToggle = (visible) => {
         setIsPasswordVisible(visible);
+    };
+
+    const handleCloseAlert = () => {
+        setShowAlert(false);
+        navigate('/');
     };
 
     return (
@@ -134,6 +147,11 @@ const Login = () => {
             <p>
                 <a href="/forgotPassword">忘记密码?</a>
             </p>
+            <CustomAlert
+                message="登录成功"
+                isVisible={showAlert}
+                onClose={handleCloseAlert}
+            />
         </div>
     );
 };

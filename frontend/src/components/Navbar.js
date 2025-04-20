@@ -1,4 +1,3 @@
-// src/components/Navbar.js
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
@@ -36,6 +35,11 @@ const Navbar = () => {
             document.removeEventListener('mousedown', handleClickOutside);
         };
     }, []);
+
+    // 添加日志确认路由变化
+    useEffect(() => {
+        console.log('当前路由:', location.pathname);
+    }, [location]);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
