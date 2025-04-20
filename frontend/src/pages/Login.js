@@ -6,7 +6,7 @@ import { validatePhone } from '../utils/formValidation';
 import PasswordVisibilityToggle from '../components/PasswordVisibilityToggle';
 import CustomAlert from '../components/CustomAlert';
 
-const Login = () => {
+const Login = ({ setIsLoggedIn, setUserAvatar }) => {
     const [phone, setPhone] = useState('');
     const [code, setCode] = useState('');
     const [password, setPassword] = useState('');
@@ -43,6 +43,8 @@ const Login = () => {
                 const userAvatar = 'https://example.com/avatar.jpg';
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('userAvatar', userAvatar);
+                setIsLoggedIn(true);
+                setUserAvatar(userAvatar);
                 setShowAlert(true);
                 setTimeout(() => {
                     setShowAlert(false);
@@ -60,6 +62,8 @@ const Login = () => {
                 const userAvatar = 'https://example.com/avatar.jpg';
                 localStorage.setItem('isLoggedIn', 'true');
                 localStorage.setItem('userAvatar', userAvatar);
+                setIsLoggedIn(true);
+                setUserAvatar(userAvatar);
                 setShowAlert(true);
                 setTimeout(() => {
                     setShowAlert(false);

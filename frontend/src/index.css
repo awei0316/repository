@@ -903,7 +903,8 @@ select:focus {
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     background: -webkit-linear-gradient(45deg, #007BFF, #0056b3);
     -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent; /* 渐变文字 */
+    background-clip: text; /* 添加标准属性以实现兼容性 */
+    -webkit-text-fill-color: transparent;
 }
 
 .profile-grid {

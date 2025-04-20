@@ -1,3 +1,4 @@
+// src/components/Navbar.js
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa';
@@ -5,23 +6,12 @@ import DebounceClick from './DebounceClick';
 import navbarMenuItems from '../constants/navbarMenuItems';
 import Clock from './Clock';
 
-const Navbar = () => {
+const Navbar = ({ isLoggedIn, userAvatar, onLogout }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const location = useLocation();
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [userAvatar, setUserAvatar] = useState('');
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const dropdownRef = useRef(null);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
-        const storedUserAvatar = localStorage.getItem('userAvatar');
-        if (storedIsLoggedIn === 'true') {
-            setIsLoggedIn(true);
-            setUserAvatar(storedUserAvatar);
-        }
-    }, []);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -52,8 +42,8 @@ const Navbar = () => {
     const handleLogout = () => {
         localStorage.removeItem('isLoggedIn');
         localStorage.removeItem('userAvatar');
-        setIsLoggedIn(false);
-        setUserAvatar('');
+        // 通知父组件更新登录状态和头像
+        onLogout();
         setIsDropdownOpen(false);
     };
 

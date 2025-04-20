@@ -1,5 +1,5 @@
 // src/App.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
@@ -19,15 +19,32 @@ import ProfileDisplay from './pages/ProfileDisplay';
 import ProfileEdit from './pages/ProfileEdit';
 
 function App() {
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [userAvatar, setUserAvatar] = useState('');
+
+    useEffect(() => {
+        const storedIsLoggedIn = localStorage.getItem('isLoggedIn');
+        const storedUserAvatar = localStorage.getItem('userAvatar');
+        if (storedIsLoggedIn === 'true') {
+            setIsLoggedIn(true);
+            setUserAvatar(storedUserAvatar);
+        }
+    }, []);
+
+    const handleLogout = () => {
+        setIsLoggedIn(false);
+        setUserAvatar('');
+    };
+
     return (
         <Router>
-            <Navbar />
+            <Navbar isLoggedIn={isLoggedIn} userAvatar={userAvatar} onLogout={handleLogout} />
             <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/data-visualization" element={<DataVisualization />} />
                 <Route path="/sales-prediction" element={<SalesPrediction />} />
                 <Route path="/user-community" element={<UserCommunity />} />
-                <Route path="/login" element={<Login />} />
+                <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} setUserAvatar={setUserAvatar} />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/trade-statistics" element={<TradeStatistics />} />
                 <Route path="/market-analysis" element={<MarketAnalysis />} />
