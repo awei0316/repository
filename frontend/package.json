@@ -3,47 +3,47 @@
   "version": "1.0.0",
   "description": "基于大数据的 UniTrade 国际贸易平台前端项目",
   "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test"
+      "start": "craco start",
+      "build": "craco build",
+      "test": "craco test"
   },
   "dependencies": {
-    "animate.css": "^4.1.1",
-    "apexcharts": "^4.5.0",
-    "axios": "^1.8.4",
-    "framer-motion": "^12.7.3",
-    "react": "^18.2.0",
-    "react-apexcharts": "^1.7.0",
-    "react-dom": "^18.2.0",
-    "react-gauge-chart": "^0.5.1",
-    "react-heatmap-grid": "^0.9.1",
-    "react-icons": "^4.12.0",
-    "react-lazyload": "^3.2.1",
-    "react-router-dom": "^6.30.0",
-    "react-scripts": "5.0.1",
-    "react-slick": "^0.30.3",
-    "react-virtualized": "^9.22.6",
-    "recharts": "^2.15.2",
-    "slick-carousel": "^1.8.1",
-    "web-vitals": "^2.1.4"
+      "animate.css": "^4.1.1",
+      "apexcharts": "^4.5.0",
+      "axios": "^1.8.4",
+      "framer-motion": "^12.7.3",
+      "react": "^18.2.0",
+      "react-apexcharts": "^1.7.0",
+      "react-dom": "^18.2.0",
+      "react-gauge-chart": "^0.5.1",
+      "react-heatmap-grid": "^0.9.1",
+      "react-icons": "^4.12.0",
+      "react-lazyload": "^3.2.1",
+      "react-router-dom": "^6.30.0",
+      "react-scripts": "5.0.1",
+      "react-slick": "^0.30.3",
+      "react-virtualized": "^9.22.6",
+      "recharts": "^2.15.2",
+      "slick-carousel": "^1.8.1",
+      "web-vitals": "^2.1.4",
+      "http-proxy-middleware": "^2.0.6"
   },
   "devDependencies": {
-    "@craco/craco": "^7.1.0",
-    "eslint": "^8.56.0",
-    "eslint-plugin-react": "^7.33.2",
-    "webpack-dev-server": "^5.2.1"
+      "@craco/craco": "^7.1.0",
+      "eslint": "^8.56.0",
+      "eslint-plugin-react": "^7.33.2",
+      "webpack-dev-server": "^5.2.1"
   },
   "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "proxy": "https://newsapi.org"
+      "production": [
+          ">0.2%",
+          "not dead",
+          "not op_mini all"
+      ],
+      "development": [
+          "last 1 chrome version",
+          "last 1 firefox version",
+          "last 1 safari version"
+      ]
+  }
 }

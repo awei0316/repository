@@ -1,22 +1,14 @@
+// AIServiceIcon.js
 import React, { useState } from 'react';
 
 const AIServiceIcon = () => {
     const [isChatOpen, setIsChatOpen] = useState(false);
-    const [isTooltipVisible, setIsTooltipVisible] = useState(false);
     const [messages, setMessages] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const [partialResponse, setPartialResponse] = useState('');
 
     const toggleChat = () => {
         setIsChatOpen(!isChatOpen);
-    };
-
-    const showTooltip = () => {
-        setIsTooltipVisible(true);
-    };
-
-    const hideTooltip = () => {
-        setIsTooltipVisible(false);
     };
 
     const handleInputChange = (e) => {
@@ -29,61 +21,42 @@ const AIServiceIcon = () => {
         setMessages([...messages, newMessage]);
         setInputValue('');
         setPartialResponse('');
-
-        const apiKey = 'sk-178df34490514887affdec38e40a54d8'; // 替换为你的实际 API Key
-
+    
+        const apiKey = process.env.REACT_APP_DEEPSEEK_API_KEY; // 使用环境变量
+        console.log('API Key:', apiKey);
+    
         try {
             console.log('开始发送请求');
-            const response = await fetch('https://api.deepseek.com/generate', {
+            const requestBody = {
+                "model": "deepseek-chat",
+                "messages": [
+                    ...messages.map((msg) => ({
+                        role: msg.sender === 'user' ? 'user' : 'assistant',
+                        content: msg.text
+                    })),
+                    { role: 'user', content: inputValue }
+                ],
+                "stream": false
+            };
+            console.log('请求体:', requestBody);
+    
+            const response = await fetch('http://localhost:3000/chat/completions', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'X-API-Key': apiKey
+                    'Authorization': `Bearer ${apiKey}`
                 },
-                body: JSON.stringify({
-                    model: 'deepseek-r1:7b',
-                    prompt: inputValue
-                })
+                body: JSON.stringify(requestBody)
             });
-
+    
             if (!response.ok) {
                 throw new Error(`请求失败，状态码: ${response.status}`);
             }
-
-            const reader = response.body.getReader();
-            let fullResponse = '';
-            while (true) {
-                const { done, value } = await reader.read();
-                if (done) break;
-
-                const chunk = new TextDecoder('utf-8').decode(value);
-                console.log('接收到数据块:', chunk);
-                const lines = chunk.split('\n').filter(line => line.trim()!== '');
-                lines.forEach(line => {
-                    try {
-                        const data = JSON.parse(line);
-                        console.log('解析后的数据:', data);
-                        if (!data.done) {
-                            // 去掉 <think> 和 </think> 标签
-                            let cleanResponse = data.response.replace(/<think>|<\/think>/g, '');
-                            fullResponse += cleanResponse;
-                            setPartialResponse(prev => prev + cleanResponse);
-                        }
-                    } catch (error) {
-                        console.error('解析流式响应数据时出错:', error, '错误行:', line);
-                    }
-                });
-
-                // 更新 UI 显示部分响应
-                const partialMessage = { text: partialResponse, sender: 'ai' };
-                const updatedMessages = [...messages, newMessage, partialMessage];
-                setMessages(updatedMessages);
-            }
-
-            console.log('请求成功，完整响应数据:', fullResponse);
-            const aiResponse = { text: fullResponse, sender: 'ai' };
-            const finalMessages = [...messages, newMessage, aiResponse];
-            setMessages(finalMessages);
+    
+            const data = await response.json();
+            const aiResponse = data.choices[0].message.content;
+            const aiMessage = { text: aiResponse, sender: 'ai' };
+            setMessages([...messages, newMessage, aiMessage]);
         } catch (error) {
             console.error('Error fetching AI response:', error);
             const errorMessage = { text: '抱歉，出现错误，请稍后再试。', sender: 'ai' };
@@ -94,7 +67,7 @@ const AIServiceIcon = () => {
     const styles = {
         aiServiceIconContainer: {
             position: 'fixed',
-            bottom: '80px',
+            bottom: '20px',
             right: '20px',
             zIndex: 1000
         },
@@ -118,20 +91,6 @@ const AIServiceIcon = () => {
             height: '80%',
             objectFit: 'cover',
             borderRadius: '50%'
-        },
-        tooltip: {
-            position: 'absolute',
-            bottom: '70px',
-            right: '0',
-            backgroundColor: '#333',
-            color: 'white',
-            padding: '8px 12px',
-            borderRadius: '6px',
-            fontSize: '12px',
-            opacity: isTooltipVisible ? 1 : 0,
-            visibility: isTooltipVisible ? 'visible' : 'hidden',
-            transition: 'opacity 0.3s ease, visibility 0.3s ease',
-            whiteSpace: 'nowrap'
         },
         aiChatBox: {
             position: 'absolute',
@@ -237,18 +196,15 @@ const AIServiceIcon = () => {
             <div
                 style={{ ...styles.aiServiceIcon, ...(isChatOpen && styles.aiServiceIconHover) }}
                 onMouseEnter={(e) => {
-                    showTooltip();
                     e.currentTarget.style.transform = 'scale(1.1)';
                 }}
                 onMouseLeave={(e) => {
-                    hideTooltip();
                     e.currentTarget.style.transform = 'scale(1)';
                 }}
                 onClick={toggleChat}
             >
                 <img style={styles.aiServiceIconImg} src="/images/robot.jpg" alt="AI Service" />
             </div>
-            {isTooltipVisible && <div style={styles.tooltip}>点击我，向我提问哦！</div>}
             {isChatOpen && (
                 <div style={styles.aiChatBox}>
                     <div style={styles.chatHeader}>
@@ -300,4 +256,4 @@ const AIServiceIcon = () => {
     );
 };
 
-export default AIServiceIcon;    
+export default AIServiceIcon;
