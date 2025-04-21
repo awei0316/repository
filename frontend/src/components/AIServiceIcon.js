@@ -74,6 +74,9 @@ const AIServiceIcon = () => {
         }
     };
 
+    const userAvatar = localStorage.getItem('userAvatar') || 'https://via.placeholder.com/50';
+    const robotAvatar = '/images/robot.jpg'; // 机器人头像地址
+
     const styles = {
         aiServiceIconContainer: {
             position: 'fixed',
@@ -184,20 +187,61 @@ const AIServiceIcon = () => {
         chatInputButtonHover: {
             backgroundColor: '#5a32a3'
         },
+        messageContainer: {
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: '10px'
+        },
+        userAvatarStyle: {
+            width: '30px',
+            height: '30px',
+            borderRadius: '50%',
+            objectFit: 'cover',
+            marginLeft: '10px'
+        },
+        robotAvatarStyle: {
+            width: '30px',
+            height: '30px',
+            borderRadius: '50%',
+            objectFit: 'cover',
+            marginRight: '10px'
+        },
         userMessage: {
+            position: 'relative',
             alignSelf: 'flex-end',
-            backgroundColor: '#6f42c1',
-            color: 'white',
+            backgroundColor: '#FFF6CC',
+            color: '#333',
             padding: '8px 12px',
             borderRadius: '8px',
-            marginBottom: '8px'
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+        },
+        userMessageArrow: {
+            position: 'absolute',
+            top: '50%',
+            right: '-8px',
+            width: 0,
+            height: 0,
+            borderTop: '8px solid transparent',
+            borderBottom: '8px solid transparent',
+            borderLeft: '8px solid #FFF6CC'
         },
         aiMessage: {
+            position: 'relative',
             alignSelf: 'flex-start',
-            backgroundColor: '#e0e0e0',
+            backgroundColor: '#E5F6FF',
             padding: '8px 12px',
             borderRadius: '8px',
-            marginBottom: '8px'
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+        },
+        aiMessageArrow: {
+            position: 'absolute',
+            top: '50%',
+            left: '-8px',
+            width: 0,
+            height: 0,
+            borderTop: '8px solid transparent',
+            borderBottom: '8px solid transparent',
+            borderRight: '8px solid #E5F6FF'
         }
     };
 
@@ -231,11 +275,24 @@ const AIServiceIcon = () => {
                     </div>
                     <div style={styles.chatMessages}>
                         {messages.map((message, index) => (
-                            <div
-                                key={index}
-                                style={message.sender === 'user' ? styles.userMessage : styles.aiMessage}
-                            >
-                                {message.text}
+                            <div style={styles.messageContainer} key={index}>
+                                {message.sender === 'user' ? (
+                                    <>
+                                        <div style={styles.userMessage}>
+                                            {message.text}
+                                            <div style={styles.userMessageArrow} />
+                                        </div>
+                                        <img src={userAvatar} alt="User Avatar" style={styles.userAvatarStyle} />
+                                    </>
+                                ) : (
+                                    <>
+                                        <img src={robotAvatar} alt="Robot Avatar" style={styles.robotAvatarStyle} />
+                                        <div style={styles.aiMessage}>
+                                            {message.text}
+                                            <div style={styles.aiMessageArrow} />
+                                        </div>
+                                    </>
+                                )}
                             </div>
                         ))}
                     </div>
