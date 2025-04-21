@@ -7,6 +7,16 @@ const AIServiceIcon = () => {
     const [inputValue, setInputValue] = useState('');
     const [partialResponse, setPartialResponse] = useState('');
     const chatBoxRef = useRef(null);
+    const iconRef = useRef(null);
+
+    // 拖动相关状态
+    const [isDragging, setIsDragging] = useState(false);
+    const [initialX, setInitialX] = useState(0);
+    const [initialY, setInitialY] = useState(0);
+    const [offsetX, setOffsetX] = useState(0);
+    const [offsetY, setOffsetY] = useState(0);
+    const [chatBoxOffsetX, setChatBoxOffsetX] = useState(0);
+    const [chatBoxOffsetY, setChatBoxOffsetY] = useState(0);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -82,14 +92,16 @@ const AIServiceIcon = () => {
             position: 'fixed',
             bottom: '20px',
             right: '20px',
-            zIndex: 1000
+            zIndex: 1000,
+            transform: `translate(${offsetX}px, ${offsetY}px)`,
+            cursor: 'grab' // 添加鼠标样式
         },
         aiServiceIcon: {
             width: '60px',
             height: '60px',
             borderRadius: '50%',
             boxShadow: '0 0 5px rgba(0, 0, 0, 0.3)',
-            cursor: 'pointer',
+            cursor: 'grab', // 添加鼠标样式
             transition: 'transform 0.3s ease',
             backgroundColor: '#ffffff',
             display: 'flex',
@@ -103,7 +115,8 @@ const AIServiceIcon = () => {
             width: '80%',
             height: '80%',
             objectFit: 'cover',
-            borderRadius: '50%'
+            borderRadius: '50%',
+            pointerEvents: 'none' // 禁止图片的鼠标事件
         },
         aiChatBox: {
             position: 'absolute',
@@ -116,7 +129,7 @@ const AIServiceIcon = () => {
             overflow: 'hidden',
             display: 'flex',
             flexDirection: 'column',
-            transform: isChatOpen ? 'scale(1)' : 'scale(0.9)',
+            transform: `scale(1) translate(${chatBoxOffsetX + offsetX}px, ${chatBoxOffsetY + offsetY}px)`,
             opacity: isChatOpen ? 1 : 0,
             visibility: isChatOpen ? 'visible' : 'hidden',
             transition: 'transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease'
@@ -131,7 +144,8 @@ const AIServiceIcon = () => {
             fontSize: '16px',
             fontWeight: 'bold',
             borderTopLeftRadius: '12px',
-            borderTopRightRadius: '12px'
+            borderTopRightRadius: '12px',
+            cursor: 'move'
         },
         chatHeaderH3: {
             margin: 0
@@ -245,8 +259,45 @@ const AIServiceIcon = () => {
         }
     };
 
+    const handleMouseDown = (e) => {
+        setIsDragging(true);
+        setInitialX(e.clientX);
+        setInitialY(e.clientY);
+        e.preventDefault(); // 阻止默认的拖动行为
+    };
+
+    const handleMouseMove = (e) => {
+        if (isDragging) {
+            const dx = e.clientX - initialX;
+            const dy = e.clientY - initialY;
+            setOffsetX(offsetX + dx);
+            setOffsetY(offsetY + dy);
+            setInitialX(e.clientX);
+            setInitialY(e.clientY);
+        }
+    };
+
+    const handleMouseUp = () => {
+        setIsDragging(false);
+    };
+
+    useEffect(() => {
+        if (isDragging) {
+            document.addEventListener('mousemove', handleMouseMove);
+            document.addEventListener('mouseup', handleMouseUp);
+        } else {
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+        }
+
+        return () => {
+            document.removeEventListener('mousemove', handleMouseMove);
+            document.removeEventListener('mouseup', handleMouseUp);
+        };
+    }, [isDragging]);
+
     return (
-        <div style={styles.aiServiceIconContainer}>
+        <div style={styles.aiServiceIconContainer} ref={iconRef} onMouseDown={handleMouseDown}>
             <div
                 style={{ ...styles.aiServiceIcon, ...(isChatOpen && styles.aiServiceIconHover) }}
                 onMouseEnter={(e) => {
@@ -260,7 +311,7 @@ const AIServiceIcon = () => {
                 <img style={styles.aiServiceIconImg} src="/images/robot.jpg" alt="AI Service" />
             </div>
             {isChatOpen && (
-                <div style={styles.aiChatBox} ref={chatBoxRef}>
+                <div style={styles.aiChatBox} ref={chatBoxRef} onMouseDown={handleMouseDown}>
                     <div style={styles.chatHeader}>
                         <h3 style={styles.chatHeaderH3}>AI 服务聊天</h3>
                         <button
