@@ -21,38 +21,34 @@ const AIServiceIcon = () => {
         setMessages([...messages, newMessage]);
         setInputValue('');
         setPartialResponse('');
-    
+
         const apiKey = process.env.REACT_APP_DEEPSEEK_API_KEY; // 使用环境变量
-        console.log('API Key:', apiKey);
-    
+
         try {
             console.log('开始发送请求');
-            const requestBody = {
-                "model": "deepseek-chat",
-                "messages": [
-                    ...messages.map((msg) => ({
-                        role: msg.sender === 'user' ? 'user' : 'assistant',
-                        content: msg.text
-                    })),
-                    { role: 'user', content: inputValue }
-                ],
-                "stream": false
-            };
-            console.log('请求体:', requestBody);
-    
-            const response = await fetch('http://localhost:3000/chat/completions', {
+            const response = await fetch('https://api.deepseek.com/chat/completions', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${apiKey}`
                 },
-                body: JSON.stringify(requestBody)
+                body: JSON.stringify({
+                    "model": "deepseek-chat",
+                    "messages": [
+                        ...messages.map((msg) => ({
+                            role: msg.sender === 'user' ? 'user' : 'assistant',
+                            content: msg.text
+                        })),
+                        { role: 'user', content: inputValue }
+                    ],
+                    "stream": false
+                })
             });
-    
+
             if (!response.ok) {
                 throw new Error(`请求失败，状态码: ${response.status}`);
             }
-    
+
             const data = await response.json();
             const aiResponse = data.choices[0].message.content;
             const aiMessage = { text: aiResponse, sender: 'ai' };
