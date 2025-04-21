@@ -1,11 +1,25 @@
 // AIServiceIcon.js
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const AIServiceIcon = () => {
     const [isChatOpen, setIsChatOpen] = useState(false);
     const [messages, setMessages] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const [partialResponse, setPartialResponse] = useState('');
+    const chatBoxRef = useRef(null);
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (chatBoxRef.current && !chatBoxRef.current.contains(event.target)) {
+                setIsChatOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, []);
 
     const toggleChat = () => {
         setIsChatOpen(!isChatOpen);
@@ -202,7 +216,7 @@ const AIServiceIcon = () => {
                 <img style={styles.aiServiceIconImg} src="/images/robot.jpg" alt="AI Service" />
             </div>
             {isChatOpen && (
-                <div style={styles.aiChatBox}>
+                <div style={styles.aiChatBox} ref={chatBoxRef}>
                     <div style={styles.chatHeader}>
                         <h3 style={styles.chatHeaderH3}>AI 服务聊天</h3>
                         <button
