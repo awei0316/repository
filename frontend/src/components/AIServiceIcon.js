@@ -6,8 +6,8 @@ const AIServiceIcon = () => {
     const [messages, setMessages] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const [partialResponse, setPartialResponse] = useState('');
-    const chatBoxRef = useRef(null);
-    const iconRef = useRef(null);
+    const containerRef = useRef(null);
+    const chatHeaderRef = useRef(null);
 
     // 拖动相关状态
     const [isDragging, setIsDragging] = useState(false);
@@ -15,12 +15,18 @@ const AIServiceIcon = () => {
     const [initialY, setInitialY] = useState(0);
     const [offsetX, setOffsetX] = useState(0);
     const [offsetY, setOffsetY] = useState(0);
-    const [chatBoxOffsetX, setChatBoxOffsetX] = useState(0);
-    const [chatBoxOffsetY, setChatBoxOffsetY] = useState(0);
+    // 新增标志位，用于判断是否是拖动后触发的点击
+    const [isDragEndClick, setIsDragEndClick] = useState(false);
+    // 记录鼠标按下和抬起时的位置，用于判断是否有移动
+    const [startX, setStartX] = useState(0);
+    const [startY, setStartY] = useState(0);
+    const MOVE_THRESHOLD = 5; // 移动阈值，判断是否为拖动操作
+    // 新增最小化状态
+    const [isMinimized, setIsMinimized] = useState(false);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
-            if (chatBoxRef.current && !chatBoxRef.current.contains(event.target)) {
+            if (containerRef.current && !containerRef.current.contains(event.target)) {
                 setIsChatOpen(false);
             }
         };
@@ -32,6 +38,11 @@ const AIServiceIcon = () => {
     }, []);
 
     const toggleChat = () => {
+        // 如果是拖动后触发的点击，不执行切换聊天框操作
+        if (isDragEndClick) {
+            setIsDragEndClick(false);
+            return;
+        }
         setIsChatOpen(!isChatOpen);
     };
 
@@ -88,7 +99,7 @@ const AIServiceIcon = () => {
     const robotAvatar = '/images/robot.jpg'; // 机器人头像地址
 
     const styles = {
-        aiServiceIconContainer: {
+        aiServiceContainer: {
             position: 'fixed',
             bottom: '20px',
             right: '20px',
@@ -129,10 +140,11 @@ const AIServiceIcon = () => {
             overflow: 'hidden',
             display: 'flex',
             flexDirection: 'column',
-            transform: `scale(1) translate(${chatBoxOffsetX + offsetX}px, ${chatBoxOffsetY + offsetY}px)`,
             opacity: isChatOpen ? 1 : 0,
             visibility: isChatOpen ? 'visible' : 'hidden',
-            transition: 'transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease'
+            transition: 'opacity 0.3s ease, visibility 0.3s ease',
+            // 根据最小化状态设置高度
+            height: isMinimized ? '40px' : 'auto'
         },
         chatHeader: {
             display: 'flex',
@@ -156,10 +168,29 @@ const AIServiceIcon = () => {
             cursor: 'pointer',
             fontSize: '18px',
             color: 'white',
-            transition: 'color 0.3s ease'
+            transition: 'color 0.3s ease',
+            marginLeft: '10px',
+            width: '20px',
+            height: '20px',
+            borderRadius: '50%',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
         },
         chatHeaderButtonHover: {
             color: '#e0e0e0'
+        },
+        minimizeButton: {
+            backgroundColor: '#ffbd2e',
+            '&:hover': {
+                backgroundColor: '#ffc851'
+            }
+        },
+        closeButton: {
+            backgroundColor: '#ff605c',
+            '&:hover': {
+                backgroundColor: '#ff7d79'
+            }
         },
         chatMessages: {
             padding: '15px',
@@ -167,14 +198,20 @@ const AIServiceIcon = () => {
             overflowY: 'auto',
             display: 'flex',
             flexDirection: 'column',
-            backgroundColor: '#f9f9f9'
+            backgroundColor: '#f9f9f9',
+            cursor: 'default',
+            // 根据最小化状态设置显示或隐藏
+            display: isMinimized ? 'none' : 'flex'
         },
         chatInput: {
             display: 'flex',
             padding: '15px',
             borderTop: '1px solid #e0e0e0',
             flexDirection: 'row',
-            alignItems: 'center'
+            alignItems: 'center',
+            cursor: 'default',
+            // 根据最小化状态设置显示或隐藏
+            display: isMinimized ? 'none' : 'flex'
         },
         chatInputInput: {
             flex: 1,
@@ -183,7 +220,8 @@ const AIServiceIcon = () => {
             borderRadius: '8px',
             outline: 'none',
             fontSize: '14px',
-            transition: 'border-color 0.3s ease'
+            transition: 'border-color 0.3s ease',
+            cursor: 'text' // 输入框内鼠标样式为文本输入样式
         },
         chatInputInputFocus: {
             borderColor: '#6f42c1'
@@ -260,10 +298,22 @@ const AIServiceIcon = () => {
     };
 
     const handleMouseDown = (e) => {
-        setIsDragging(true);
-        setInitialX(e.clientX);
-        setInitialY(e.clientY);
-        e.preventDefault(); // 阻止默认的拖动行为
+        if (chatHeaderRef.current && chatHeaderRef.current.contains(e.target)) {
+            setIsDragging(true);
+            setInitialX(e.clientX);
+            setInitialY(e.clientY);
+            setStartX(e.clientX);
+            setStartY(e.clientY);
+            e.preventDefault(); // 阻止默认的拖动行为
+        } else if (e.target.closest('.ai-service-icon')) {
+            // 允许拖动小机器人图标
+            setIsDragging(true);
+            setInitialX(e.clientX);
+            setInitialY(e.clientY);
+            setStartX(e.clientX);
+            setStartY(e.clientY);
+            e.preventDefault();
+        }
     };
 
     const handleMouseMove = (e) => {
@@ -277,8 +327,23 @@ const AIServiceIcon = () => {
         }
     };
 
-    const handleMouseUp = () => {
+    const handleMouseUp = (e) => {
+        const endX = e.clientX;
+        const endY = e.clientY;
+        const movedX = Math.abs(endX - startX);
+        const movedY = Math.abs(endY - startY);
+
+        if (movedX > MOVE_THRESHOLD || movedY > MOVE_THRESHOLD) {
+            setIsDragEndClick(true);
+        } else {
+            setIsDragEndClick(false);
+        }
+
         setIsDragging(false);
+    };
+
+    const toggleMinimize = () => {
+        setIsMinimized(!isMinimized);
     };
 
     useEffect(() => {
@@ -297,8 +362,9 @@ const AIServiceIcon = () => {
     }, [isDragging]);
 
     return (
-        <div style={styles.aiServiceIconContainer} ref={iconRef} onMouseDown={handleMouseDown}>
+        <div style={styles.aiServiceContainer} ref={containerRef} onMouseDown={handleMouseDown}>
             <div
+                className="ai-service-icon"
                 style={{ ...styles.aiServiceIcon, ...(isChatOpen && styles.aiServiceIconHover) }}
                 onMouseEnter={(e) => {
                     e.currentTarget.style.transform = 'scale(1.1)';
@@ -311,18 +377,29 @@ const AIServiceIcon = () => {
                 <img style={styles.aiServiceIconImg} src="/images/robot.jpg" alt="AI Service" />
             </div>
             {isChatOpen && (
-                <div style={styles.aiChatBox} ref={chatBoxRef} onMouseDown={handleMouseDown}>
-                    <div style={styles.chatHeader}>
+                <div style={styles.aiChatBox}>
+                    <div style={styles.chatHeader} ref={chatHeaderRef} onMouseDown={handleMouseDown}>
                         <h3 style={styles.chatHeaderH3}>AI 服务聊天</h3>
-                        <button
-                            style={{
-                                ...styles.chatHeaderButton,
-                                ...(isChatOpen && styles.chatHeaderButtonHover)
-                            }}
-                            onClick={toggleChat}
-                        >
-                            关闭
-                        </button>
+                        <div>
+                            <button
+                                style={{
+                                    ...styles.chatHeaderButton,
+                                    ...styles.minimizeButton
+                                }}
+                                onClick={toggleMinimize}
+                            >
+                                <span style={{ fontSize: '12px' }}>_</span>
+                            </button>
+                            <button
+                                style={{
+                                    ...styles.chatHeaderButton,
+                                    ...styles.closeButton
+                                }}
+                                onClick={toggleChat}
+                            >
+                                <span style={{ fontSize: '12px' }}>×</span>
+                            </button>
+                        </div>
                     </div>
                     <div style={styles.chatMessages}>
                         {messages.map((message, index) => (
@@ -374,4 +451,4 @@ const AIServiceIcon = () => {
     );
 };
 
-export default AIServiceIcon;
+export default AIServiceIcon;    
