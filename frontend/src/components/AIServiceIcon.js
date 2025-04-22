@@ -1,4 +1,3 @@
-// AIServiceIcon.js
 import React, { useState, useEffect, useRef } from 'react';
 
 const AIServiceIcon = () => {
@@ -21,8 +20,8 @@ const AIServiceIcon = () => {
     const [startX, setStartX] = useState(0);
     const [startY, setStartY] = useState(0);
     const MOVE_THRESHOLD = 5; // 移动阈值，判断是否为拖动操作
-    // 新增最小化状态
-    const [isMinimized, setIsMinimized] = useState(false);
+    // 新增最大化状态
+    const [isMaximized, setIsMaximized] = useState(false);
 
     useEffect(() => {
         const handleClickOutside = (event) => {
@@ -133,7 +132,9 @@ const AIServiceIcon = () => {
             position: 'absolute',
             bottom: '70px',
             right: 0,
-            width: '300px',
+            // 小窗口变矮变胖
+            width: isMaximized ? '70vw' : '500px', 
+            height: isMaximized ? '70vh' : '400px', 
             backgroundColor: '#ffffff',
             borderRadius: '12px',
             boxShadow: '0 0 20px rgba(0, 0, 0, 0.15)',
@@ -143,21 +144,29 @@ const AIServiceIcon = () => {
             opacity: isChatOpen ? 1 : 0,
             visibility: isChatOpen ? 'visible' : 'hidden',
             transition: 'opacity 0.3s ease, visibility 0.3s ease',
-            // 根据最小化状态设置高度
-            height: isMinimized ? '40px' : 'auto'
+            bottom: isMaximized ? '15vh' : '70px',
+            right: isMaximized ? '15vw' : 0,
+            border: isMaximized ? '1px solid #ccc' : 'none', 
+            borderRadius: isMaximized ? '20px' : '12px', 
+            background: isMaximized ? 'linear-gradient(135deg, #f9f9f9, #e9e9e9)' : '#ffffff', 
+            boxShadow: isMaximized ? '0 15px 35px rgba(0, 0, 0, 0.2)' : '0 0 20px rgba(0, 0, 0, 0.15)' 
         },
         chatHeader: {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
-            padding: '15px',
+            flexDirection: 'row', 
+            padding: '10px', 
             backgroundColor: '#6f42c1',
             color: 'white',
-            fontSize: '16px',
+            fontSize: '20px', 
             fontWeight: 'bold',
-            borderTopLeftRadius: '12px',
-            borderTopRightRadius: '12px',
-            cursor: 'move'
+            borderTopLeftRadius: isMaximized ? '20px' : '12px',
+            borderTopRightRadius: isMaximized ? '20px' : '12px',
+            cursor: 'move',
+            textShadow: '0 1px 2px rgba(0, 0, 0, 0.3)',
+            // 美化：添加渐变背景
+            background: 'linear-gradient(90deg, #6f42c1, #8a5ac1)' 
         },
         chatHeaderH3: {
             margin: 0
@@ -166,24 +175,25 @@ const AIServiceIcon = () => {
             background: 'none',
             border: 'none',
             cursor: 'pointer',
-            fontSize: '18px',
+            fontSize: '22px', 
             color: 'white',
             transition: 'color 0.3s ease',
             marginLeft: '10px',
-            width: '20px',
-            height: '20px',
+            width: '30px', 
+            height: '30px', 
             borderRadius: '50%',
             display: 'flex',
             justifyContent: 'center',
-            alignItems: 'center'
+            alignItems: 'center',
+            boxShadow: '0 0 5px rgba(0, 0, 0, 0.2)' 
         },
         chatHeaderButtonHover: {
             color: '#e0e0e0'
         },
-        minimizeButton: {
-            backgroundColor: '#ffbd2e',
+        maximizeButton: {
+            backgroundColor: '#32cd32',
             '&:hover': {
-                backgroundColor: '#ffc851'
+                backgroundColor: '#228b22'
             }
         },
         closeButton: {
@@ -200,8 +210,12 @@ const AIServiceIcon = () => {
             flexDirection: 'column',
             backgroundColor: '#f9f9f9',
             cursor: 'default',
-            // 根据最小化状态设置显示或隐藏
-            display: isMinimized ? 'none' : 'flex'
+            // 根据最大化状态调整高度
+            height: isMaximized ? 'calc(70vh - 110px)' : '280px',
+            fontSize: '16px', 
+            lineHeight: '1.6', 
+            // 美化：添加内阴影
+            boxShadow: 'inset 0 2px 4px rgba(0, 0, 0, 0.1)' 
         },
         chatInput: {
             display: 'flex',
@@ -210,50 +224,59 @@ const AIServiceIcon = () => {
             flexDirection: 'row',
             alignItems: 'center',
             cursor: 'default',
-            // 根据最小化状态设置显示或隐藏
-            display: isMinimized ? 'none' : 'flex'
+            // 根据最大化状态调整样式
+            position: isMaximized ? 'fixed' : 'relative',
+            bottom: isMaximized ? '15vh' : 'auto',
+            width: isMaximized ? '70vw' : 'auto'
         },
         chatInputInput: {
             flex: 1,
-            padding: '10px',
+            padding: '12px', 
             border: '1px solid #ccc',
-            borderRadius: '8px',
+            borderRadius: '10px', 
             outline: 'none',
-            fontSize: '14px',
+            fontSize: '16px', 
             transition: 'border-color 0.3s ease',
-            cursor: 'text' // 输入框内鼠标样式为文本输入样式
-        },
-        chatInputInputFocus: {
-            borderColor: '#6f42c1'
+            cursor: 'text', 
+            boxShadow: 'inset 0 1px 2px rgba(0, 0, 0, 0.1)',
+            // 美化：输入框聚焦时的样式
+            '&:focus': {
+                borderColor: '#6f42c1',
+                boxShadow: '0 0 5px rgba(111, 66, 193, 0.5)'
+            } 
         },
         chatInputButton: {
             marginLeft: '10px',
-            padding: '10px 20px',
+            padding: '12px 25px', 
             backgroundColor: '#6f42c1',
             color: 'white',
             border: 'none',
-            borderRadius: '8px',
+            borderRadius: '10px', 
             cursor: 'pointer',
-            transition: 'background-color 0.3s ease'
-        },
-        chatInputButtonHover: {
-            backgroundColor: '#5a32a3'
+            transition: 'background-color 0.3s ease',
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.2)',
+            whiteSpace: 'nowrap', 
+            // 美化：按钮悬停时的样式
+            '&:hover': {
+                backgroundColor: '#5a32a3',
+                transform: 'scale(1.05)'
+            } 
         },
         messageContainer: {
             display: 'flex',
             alignItems: 'center',
-            marginBottom: '10px'
+            marginBottom: '12px' 
         },
         userAvatarStyle: {
-            width: '30px',
-            height: '30px',
+            width: '40px', 
+            height: '40px', 
             borderRadius: '50%',
             objectFit: 'cover',
             marginLeft: '10px'
         },
         robotAvatarStyle: {
-            width: '30px',
-            height: '30px',
+            width: '40px', 
+            height: '40px', 
             borderRadius: '50%',
             objectFit: 'cover',
             marginRight: '10px'
@@ -263,37 +286,52 @@ const AIServiceIcon = () => {
             alignSelf: 'flex-end',
             backgroundColor: '#FFF6CC',
             color: '#333',
-            padding: '8px 12px',
-            borderRadius: '8px',
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+            padding: '12px 18px', 
+            borderRadius: '12px', 
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+            fontSize: '16px', 
+            // 美化：消息框悬停时的样式
+            '&:hover': {
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
+            } 
         },
         userMessageArrow: {
             position: 'absolute',
             top: '50%',
-            right: '-8px',
+            right: '-12px', 
             width: 0,
             height: 0,
-            borderTop: '8px solid transparent',
-            borderBottom: '8px solid transparent',
-            borderLeft: '8px solid #FFF6CC'
+            borderTop: '12px solid transparent', 
+            borderBottom: '12px solid transparent', 
+            borderLeft: '12px solid #FFF6CC' 
         },
         aiMessage: {
             position: 'relative',
             alignSelf: 'flex-start',
             backgroundColor: '#E5F6FF',
-            padding: '8px 12px',
-            borderRadius: '8px',
-            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)'
+            padding: '12px 18px', 
+            borderRadius: '12px', 
+            boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
+            fontSize: '16px', 
+            // 美化：消息框悬停时的样式
+            '&:hover': {
+                boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)'
+            } 
         },
         aiMessageArrow: {
             position: 'absolute',
             top: '50%',
-            left: '-8px',
+            left: '-12px', 
             width: 0,
             height: 0,
-            borderTop: '8px solid transparent',
-            borderBottom: '8px solid transparent',
-            borderRight: '8px solid #E5F6FF'
+            borderTop: '12px solid transparent', 
+            borderBottom: '12px solid transparent', 
+            borderRight: '12px solid #E5F6FF' 
+        },
+        buttonContainer: {
+            display: 'flex',
+            flexDirection: 'row',
+            alignItems: 'center'
         }
     };
 
@@ -342,8 +380,8 @@ const AIServiceIcon = () => {
         setIsDragging(false);
     };
 
-    const toggleMinimize = () => {
-        setIsMinimized(!isMinimized);
+    const toggleMaximize = () => {
+        setIsMaximized(!isMaximized);
     };
 
     useEffect(() => {
@@ -361,6 +399,12 @@ const AIServiceIcon = () => {
         };
     }, [isDragging]);
 
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            handleSendMessage();
+        }
+    };
+
     return (
         <div style={styles.aiServiceContainer} ref={containerRef} onMouseDown={handleMouseDown}>
             <div
@@ -374,47 +418,41 @@ const AIServiceIcon = () => {
                 }}
                 onClick={toggleChat}
             >
-                <img style={styles.aiServiceIconImg} src="/images/robot.jpg" alt="AI Service" />
+                <img src={robotAvatar} alt="AI Service" style={styles.aiServiceIconImg} />
             </div>
             {isChatOpen && (
                 <div style={styles.aiChatBox}>
-                    <div style={styles.chatHeader} ref={chatHeaderRef} onMouseDown={handleMouseDown}>
-                        <h3 style={styles.chatHeaderH3}>AI 服务聊天</h3>
-                        <div>
+                    <div style={styles.chatHeader} ref={chatHeaderRef}>
+                        <h3 style={styles.chatHeaderH3}>AI助手</h3> 
+                        <div style={styles.buttonContainer}>
                             <button
-                                style={{
-                                    ...styles.chatHeaderButton,
-                                    ...styles.minimizeButton
-                                }}
-                                onClick={toggleMinimize}
+                                style={{ ...styles.chatHeaderButton, ...styles.maximizeButton }}
+                                onClick={toggleMaximize}
                             >
-                                <span style={{ fontSize: '12px' }}>_</span>
+                                {isMaximized ? '🗗' : '🗖'}
                             </button>
                             <button
-                                style={{
-                                    ...styles.chatHeaderButton,
-                                    ...styles.closeButton
-                                }}
-                                onClick={toggleChat}
+                                style={{ ...styles.chatHeaderButton, ...styles.closeButton }}
+                                onClick={() => setIsChatOpen(false)}
                             >
-                                <span style={{ fontSize: '12px' }}>×</span>
+                                ✖
                             </button>
                         </div>
                     </div>
                     <div style={styles.chatMessages}>
                         {messages.map((message, index) => (
-                            <div style={styles.messageContainer} key={index}>
+                            <div key={index} style={styles.messageContainer}>
                                 {message.sender === 'user' ? (
                                     <>
                                         <div style={styles.userMessage}>
                                             {message.text}
                                             <div style={styles.userMessageArrow} />
                                         </div>
-                                        <img src={userAvatar} alt="User Avatar" style={styles.userAvatarStyle} />
+                                        <img src={userAvatar} alt="User" style={styles.userAvatarStyle} />
                                     </>
                                 ) : (
                                     <>
-                                        <img src={robotAvatar} alt="Robot Avatar" style={styles.robotAvatarStyle} />
+                                        <img src={robotAvatar} alt="Robot" style={styles.robotAvatarStyle} />
                                         <div style={styles.aiMessage}>
                                             {message.text}
                                             <div style={styles.aiMessageArrow} />
@@ -434,6 +472,7 @@ const AIServiceIcon = () => {
                             placeholder="输入你的问题"
                             value={inputValue}
                             onChange={handleInputChange}
+                            onKeyDown={handleKeyDown}
                         />
                         <button
                             style={{
@@ -451,4 +490,5 @@ const AIServiceIcon = () => {
     );
 };
 
-export default AIServiceIcon;    
+export default AIServiceIcon;
+    
