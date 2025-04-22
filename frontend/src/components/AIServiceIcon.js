@@ -210,7 +210,15 @@ const AIServiceIcon = () => {
                                     <>
                                         <img src={robotAvatar} alt="Robot" className="robot-avatar" />
                                         <div className="ai-message">
-                                            {message.text}
+                                            {message.text.split('\n').map((paragraph, paraIndex) => {
+                                                // 简单判断小标题，假设以数字加.开头为小标题
+                                                const isHeading = /^\d+\./.test(paragraph);
+                                                return isHeading ? (
+                                                    <p key={paraIndex} style={{ fontWeight: 'bold' }}>{paragraph}</p>
+                                                ) : (
+                                                    <p key={paraIndex}>{paragraph}</p>
+                                                );
+                                            })}
                                             <div className="ai-message-arrow" />
                                         </div>
                                     </>
