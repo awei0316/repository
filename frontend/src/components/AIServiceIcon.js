@@ -6,8 +6,12 @@ const AIServiceIcon = () => {
     const [messages, setMessages] = useState([]);
     const [inputValue, setInputValue] = useState('');
     const [partialResponse, setPartialResponse] = useState('');
+    const [showScrollIndicator, setShowScrollIndicator] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const containerRef = useRef(null);
     const chatHeaderRef = useRef(null);
+    const chatMessagesRef = useRef(null);
+    const abortControllerRef = useRef(null);
 
     // 拖动相关状态
     const [isDragging, setIsDragging] = useState(false);
@@ -56,8 +60,12 @@ const AIServiceIcon = () => {
         setMessages([...messages, newMessage]);
         setInputValue('');
         setPartialResponse('');
+        setIsLoading(true);
+        setShowScrollIndicator(true);
 
         const apiKey = process.env.REACT_APP_DEEPSEEK_API_KEY; // 使用环境变量
+        abortControllerRef.current = new AbortController();
+        const signal = abortControllerRef.current.signal;
 
         try {
             console.log('开始发送请求');
@@ -77,7 +85,8 @@ const AIServiceIcon = () => {
                         { role: 'user', content: inputValue }
                     ],
                     "stream": true // 开启流式响应
-                })
+                }),
+                signal
             });
 
             if (!response.ok) {
@@ -113,9 +122,24 @@ const AIServiceIcon = () => {
             setMessages([...messages, newMessage, aiMessage]);
             setPartialResponse('');
         } catch (error) {
-            console.error('Error fetching AI response:', error);
-            const errorMessage = { text: '抱歉，出现错误，请稍后再试。', sender: 'ai' };
-            setMessages([...messages, newMessage, errorMessage]);
+            if (error.name === 'AbortError') {
+                console.log('请求已停止');
+            } else {
+                console.error('Error fetching AI response:', error);
+                const errorMessage = { text: '抱歉，出现错误，请稍后再试。', sender: 'ai' };
+                setMessages([...messages, newMessage, errorMessage]);
+            }
+        } finally {
+            setIsLoading(false);
+            setShowScrollIndicator(false);
+        }
+    };
+
+    const handleStopRequest = () => {
+        if (abortControllerRef.current) {
+            abortControllerRef.current.abort();
+            setIsLoading(false);
+            setShowScrollIndicator(false);
         }
     };
 
@@ -192,6 +216,12 @@ const AIServiceIcon = () => {
         }
     };
 
+    const handleScrollDown = () => {
+        if (chatMessagesRef.current) {
+            chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+        }
+    };
+
     return (
         <div className={`ai-service-container ${isDragging ? `dragging` : ``}`} ref={containerRef} onMouseDown={handleMouseDown} style={{ "--offset-x": `${offsetX}px`, "--offset-y": `${offsetY}px` }}>
             <div
@@ -219,7 +249,7 @@ const AIServiceIcon = () => {
                             </button>
                         </div>
                     </div>
-                    <div className={`chat-messages ${isMaximized ? 'maximized' : ''}`}>
+                    <div className={`chat-messages ${isMaximized ? 'maximized' : ''}`} ref={chatMessagesRef}>
                         {messages.map((message, index) => (
                             <div key={index} className="message-container">
                                 {message.sender === 'user' ? (
@@ -266,6 +296,13 @@ const AIServiceIcon = () => {
                             </div>
                         )}
                     </div>
+                    {showScrollIndicator && (
+                        <div className="scroll-indicator" onClick={handleScrollDown}>
+                            <div className="circle">
+                                <span className="arrow-down">↓</span>
+                            </div>
+                        </div>
+                    )}
                     <div className={`chat-input ${isMaximized ? 'maximized' : ''}`}>
                         <input
                             className="chat-input-input"
@@ -277,9 +314,9 @@ const AIServiceIcon = () => {
                         />
                         <button
                             className="chat-input-button"
-                            onClick={handleSendMessage}
+                            onClick={isLoading ? handleStopRequest : handleSendMessage}
                         >
-                            发送
+                            {isLoading ? '停止' : '发送'}
                         </button>
                     </div>
                 </div>
