@@ -200,11 +200,11 @@ const AIServiceIcon = () => {
                             <div key={index} className="message-container">
                                 {message.sender === 'user' ? (
                                     <>
+                                        <img src={userAvatar} alt="User" className="user-avatar" />
                                         <div className="user-message">
                                             {message.text}
                                             <div className="user-message-arrow" />
                                         </div>
-                                        <img src={userAvatar} alt="User" className="user-avatar" />
                                     </>
                                 ) : (
                                     <>

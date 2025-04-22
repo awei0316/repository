@@ -224,7 +224,7 @@
 
 .user-message {
     position: relative;
-    align-self: flex-end;
+    align-self: flex-start; /* 让用户消息靠左显示 */
     background-color: #FFF6CC;
     color: #333;
     padding: 12px 18px;
@@ -240,13 +240,14 @@
 .user-message-arrow {
     position: absolute;
     top: 50%;
-    right: -12px;
+    left: -12px; /* 调整箭头位置到左边 */
     width: 0;
     height: 0;
     border-top: 12px solid transparent;
     border-bottom: 12px solid transparent;
-    border-left: 12px solid #FFF6CC;
+    border-right: 12px solid #FFF6CC; /* 调整箭头方向 */
 }
+
 
 .ai-message {
     position: relative;
