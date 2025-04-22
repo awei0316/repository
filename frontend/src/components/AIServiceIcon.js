@@ -76,7 +76,7 @@ const AIServiceIcon = () => {
                         })),
                         { role: 'user', content: inputValue }
                     ],
-                    "stream": false
+                    "stream": true // 开启流式响应
                 })
             });
 
@@ -84,10 +84,34 @@ const AIServiceIcon = () => {
                 throw new Error(`请求失败，状态码: ${response.status}`);
             }
 
-            const data = await response.json();
-            const aiResponse = data.choices[0].message.content;
-            const aiMessage = { text: aiResponse, sender: 'ai' };
+            const reader = response.body.getReader();
+            const decoder = new TextDecoder('utf-8');
+            let fullResponse = '';
+
+            while (true) {
+                const { done, value } = await reader.read();
+                if (done) break;
+                const chunk = decoder.decode(value);
+                const lines = chunk.split('\n').filter(line => line.trim() !== '');
+                for (const line of lines) {
+                    const jsonPart = line.replace(/^data: /, '');
+                    if (jsonPart === '[DONE]') break;
+                    try {
+                        const data = JSON.parse(jsonPart);
+                        const delta = data.choices[0].delta.content;
+                        if (delta) {
+                            fullResponse += delta;
+                            setPartialResponse(fullResponse);
+                        }
+                    } catch (error) {
+                        console.error('解析流式响应出错:', error);
+                    }
+                }
+            }
+
+            const aiMessage = { text: fullResponse, sender: 'ai' };
             setMessages([...messages, newMessage, aiMessage]);
+            setPartialResponse('');
         } catch (error) {
             console.error('Error fetching AI response:', error);
             const errorMessage = { text: '抱歉，出现错误，请稍后再试。', sender: 'ai' };
@@ -225,6 +249,22 @@ const AIServiceIcon = () => {
                                 )}
                             </div>
                         ))}
+                        {partialResponse && (
+                            <div className="message-container">
+                                <img src={robotAvatar} alt="Robot" className="robot-avatar" />
+                                <div className="ai-message">
+                                    {partialResponse.split('\n').map((paragraph, paraIndex) => {
+                                        const isHeading = /^\d+\./.test(paragraph);
+                                        return isHeading ? (
+                                            <p key={paraIndex} style={{ fontWeight: 'bold' }}>{paragraph}</p>
+                                        ) : (
+                                            <p key={paraIndex}>{paragraph}</p>
+                                        );
+                                    })}
+                                    <div className="ai-message-arrow" />
+                                </div>
+                            </div>
+                        )}
                     </div>
                     <div className={`chat-input ${isMaximized ? 'maximized' : ''}`}>
                         <input
