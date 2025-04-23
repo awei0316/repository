@@ -282,24 +282,66 @@
 
 .scroll-indicator {
     position: absolute;
-    bottom: 20px;
+    bottom: 75px;
     left: 50%;
     transform: translateX(-50%);
     cursor: pointer;
     z-index: 1001;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* 添加过渡效果 */
+}
+
+.scroll-indicator.hidden {
+    opacity: 0;
+    visibility: hidden;
 }
 
 .circle {
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
     background-color: rgba(0, 0, 0, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease;
+}
+
+.circle:hover {
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .arrow-down {
-    font-size: 20px;
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+.circle:hover .arrow-down {
+    transform: translateY(3px);
+}
+
+/* 加载动画 */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.circle.loading {
+    position: relative;
+}
+
+.circle.loading .spinner {
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+.circle.loading .arrow-down {
+    display: none;
 }

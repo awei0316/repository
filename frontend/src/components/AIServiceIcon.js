@@ -131,7 +131,13 @@ const AIServiceIcon = () => {
             }
         } finally {
             setIsLoading(false);
-            setShowScrollIndicator(false);
+            // 当请求完成后，检查是否滚动到底部
+            if (chatMessagesRef.current) {
+                const { scrollTop, scrollHeight, clientHeight } = chatMessagesRef.current;
+                if (scrollTop + clientHeight >= scrollHeight) {
+                    setShowScrollIndicator(false);
+                }
+            }
         }
     };
 
@@ -139,7 +145,13 @@ const AIServiceIcon = () => {
         if (abortControllerRef.current) {
             abortControllerRef.current.abort();
             setIsLoading(false);
-            setShowScrollIndicator(false);
+            // 停止请求时，检查是否滚动到底部
+            if (chatMessagesRef.current) {
+                const { scrollTop, scrollHeight, clientHeight } = chatMessagesRef.current;
+                if (scrollTop + clientHeight >= scrollHeight) {
+                    setShowScrollIndicator(false);
+                }
+            }
         }
     };
 
@@ -218,9 +230,50 @@ const AIServiceIcon = () => {
 
     const handleScrollDown = () => {
         if (chatMessagesRef.current) {
-            chatMessagesRef.current.scrollTop = chatMessagesRef.current.scrollHeight;
+            // 平滑滚动到页面底部
+            chatMessagesRef.current.scrollTo({
+                top: chatMessagesRef.current.scrollHeight,
+                behavior: 'smooth'
+            });
         }
     };
+
+    // 优化滚动逻辑和判断向下箭头显示逻辑
+    useEffect(() => {
+        if (chatMessagesRef.current) {
+            const { scrollTop, scrollHeight, clientHeight } = chatMessagesRef.current;
+            // 检查是否滚动到接近底部
+            if (scrollTop + clientHeight < scrollHeight) {
+                setShowScrollIndicator(true);
+            } else {
+                setShowScrollIndicator(false);
+            }
+        }
+    }, [messages, partialResponse]);
+
+    // 监听滚动事件，实时更新向下箭头显示状态
+    useEffect(() => {
+        const handleScroll = () => {
+            if (chatMessagesRef.current) {
+                const { scrollTop, scrollHeight, clientHeight } = chatMessagesRef.current;
+                if (scrollTop + clientHeight < scrollHeight) {
+                    setShowScrollIndicator(true);
+                } else {
+                    setShowScrollIndicator(false);
+                }
+            }
+        };
+
+        if (chatMessagesRef.current) {
+            chatMessagesRef.current.addEventListener('scroll', handleScroll);
+        }
+
+        return () => {
+            if (chatMessagesRef.current) {
+                chatMessagesRef.current.removeEventListener('scroll', handleScroll);
+            }
+        };
+    }, []);
 
     return (
         <div className={`ai-service-container ${isDragging ? `dragging` : ``}`} ref={containerRef} onMouseDown={handleMouseDown} style={{ "--offset-x": `${offsetX}px`, "--offset-y": `${offsetY}px` }}>
@@ -298,8 +351,12 @@ const AIServiceIcon = () => {
                     </div>
                     {showScrollIndicator && (
                         <div className="scroll-indicator" onClick={handleScrollDown}>
-                            <div className="circle">
-                                <span className="arrow-down">↓</span>
+                            <div className={`circle ${isLoading ? 'loading' : ''}`}>
+                                {isLoading ? (
+                                    <span className="spinner"></span>
+                                ) : (
+                                    <span className="arrow-down">↓</span>
+                                )}
                             </div>
                         </div>
                     )}
