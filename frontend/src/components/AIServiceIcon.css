@@ -142,6 +142,7 @@
     font-size: 16px;
     line-height: 1.6;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+    user-select: text; /* 添加这一行，允许文本选择 */
 }
 
 .chat-messages.maximized {
