@@ -1,96 +1,66 @@
-const express = require('express');
-const axios = require('axios');
+// app.js
 const connectDB = require('./src/config/db');
 const Data = require('./src/models/data');
-const dotenv = require('dotenv');
-
-dotenv.config();
-
-const app = express();
-const PORT = process.env.PORT || 5000;
 
 // 连接数据库
 connectDB();
 
-// 获取主要国家 GDP 增长率
-const getGDPGrowthRate = async () => {
+// 模拟数据收集函数，实际使用时需要替换为真实的数据源
+const collectData = async () => {
     try {
-        const response = await axios.get('https://api.worldbank.org/v2/country/all/indicator/NY.GDP.MKTP.KD.ZG?format=json');
-        return response.data;
-    } catch (err) {
-        console.error(err);
-        return {};
-    }
-};
+        // 模拟获取主要国家GDP增长率
+        const gdpGrowthRate = { "2023": 3.5 };
+        // 模拟获取主要国家通货膨胀率
+        const inflationRate = { "2023": 2.0 };
+        // 模拟获取主要国家失业率
+        const unemploymentRate = { "2023": 5.0 };
+        // 模拟获取中国进出口总额及增长速度
+        const importExportVolume = { "2023": 1000000 };
+        // 模拟获取中国商品进口价格
+        const importPrice = { "2023": 100 };
+        // 模拟获取中国商品出口价格
+        const exportPrice = { "2023": 120 };
+        // 模拟获取中国贸易平衡数据
+        const tradeBalance = { "2023": 200000 };
+        // 模拟获取中国市场价格（股票）
+        const stockPrice = { "2023": 50 };
+        // 模拟获取主要国家与人民币汇率
+        const exchangeRate = { "2023": 6.5 };
+        // 模拟获取政策法规通知
+        const policyNotice = ["New policy announced"];
+        // 模拟获取财务报表
+        const financialStatements = ["Statement 1", "Statement 2"];
+        // 模拟获取中国与外国主要港口吞吐量数据
+        const portThroughput = { "2023": 50000 };
 
-// 获取主要国家通货膨胀率
-const getInflationRate = async () => {
-    try {
-        const response = await axios.get('https://api.worldbank.org/v2/country/all/indicator/FP.CPI.TOTL.ZG?format=json');
-        return response.data;
-    } catch (err) {
-        console.error(err);
-        return {};
-    }
-};
+        // 格式化数据
+        const sampleData = {
+            gdpGrowthRate,
+            inflationRate,
+            unemploymentRate,
+            chinaTrade: {
+                importExportVolume,
+                importPrice,
+                exportPrice,
+                tradeBalance,
+                stockPrice,
+                portThroughput
+            },
+            exchangeRate,
+            policyNotice,
+            financialStatements
+        };
 
-// 获取主要国家失业率
-const getUnemploymentRate = async () => {
-    try {
-        const response = await axios.get('https://api.worldbank.org/v2/country/all/indicator/SL.UEM.TOTL.ZS?format=json');
-        return response.data;
-    } catch (err) {
-        console.error(err);
-        return {};
-    }
-};
+        // 创建数据实例
+        const newData = new Data(sampleData);
 
-// 其他获取数据的函数可以根据上述推荐的 API 进行修改
-
-// 定时任务，定期获取数据并存储到数据库
-const fetchAndSaveData = async () => {
-    const gdpGrowthRate = await getGDPGrowthRate();
-    const inflationRate = await getInflationRate();
-    const unemploymentRate = await getUnemploymentRate();
-    const chinaImportExportVolume = await getChinaImportExportVolume();
-    const chinaImportPrice = await getChinaImportPrice();
-    const chinaExportPrice = await getChinaExportPrice();
-    const chinaTradeBalance = await getChinaTradeBalance();
-    const chinaStockPrice = await getChinaStockPrice();
-    const exchangeRate = await getExchangeRate();
-    const policyNotice = await getPolicyNotice();
-    const financialStatements = await getFinancialStatements();
-    const portThroughput = await getPortThroughput();
-
-    const newData = new Data({
-        gdpGrowthRate,
-        inflationRate,
-        unemploymentRate,
-        chinaTrade: {
-            importExportVolume: chinaImportExportVolume,
-            importPrice: chinaImportPrice,
-            exportPrice: chinaExportPrice,
-            tradeBalance: chinaTradeBalance,
-            stockPrice: chinaStockPrice,
-            portThroughput
-        },
-        exchangeRate,
-        policyNotice,
-        financialStatements
-    });
-
-    try {
+        // 保存数据到数据库
         await newData.save();
-        console.log('Data saved successfully');
+        console.log('Data inserted successfully');
     } catch (err) {
-        console.error(err);
+        console.error('Error inserting data:', err);
     }
 };
 
-// 启动定时任务，每隔一段时间执行一次
-setInterval(fetchAndSaveData, 1000 * 60 * 60 * 24); // 每天执行一次
-
-// 启动服务器
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+// 运行数据收集函数
+collectData();
