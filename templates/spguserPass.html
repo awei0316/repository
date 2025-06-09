@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+       <link href="/static/cssadm/css.css" rel="stylesheet" type="text/css" />
+    <link href="/static/cssadm/StyleSheet.css" rel="stylesheet" type="text/css" />
+    <script src="/static/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/static/layer/layer.js" type="text/javascript"></script>
+    <script src="/static/js/RidfBook.js" type="text/javascript"></script>
+    <script src="/static/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/static/js/popup.js"></script>
+
+    <script language="javascript" type="text/javascript">
+
+        function QRidfBookYanNull() {
+            if ($('#txtrdfups').val() == "") {
+                RidfBookAlertMsgForNull("请输入新密码");
+                return false;
+            }
+            if ($('#txtrdfups1').val() == "") {
+                RidfBookAlertMsgForNull("请输入确认密码");
+                return false;
+            }
+             if ($('#txtrdfups').val() !=$('#txtrdfups1').val()) {
+                RidfBookAlertMsgForNull("两次密码输入不一致");
+                return false;
+            }
+
+
+
+
+           document.form1.submit();
+        }
+
+    </script>
+
+</head>
+<body>
+    <form id="form1"  method="post"   name="form1" action="spguserPassAction">
+
+
+         <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bordercolor="#fff"
+        class="tableBorder">
+        <tbody>
+            <tr>
+                <td colspan="6" class="td_biaoti">
+                    密码修改
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" align="left" class="txlrow">
+                    <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" class="RidfBookFormCss">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    新密码：
+                                </th>
+                                <td>
+                                     <input type="password" name="txtrdfups" id="txtrdfups" value="">
+                                </td>
+                                <th>
+                                    确认密码 ：
+                                </th>
+                                <td>
+                                    <input type="password" name="txtrdfups1" id="txtrdfups1" value="">
+                                </td>
+  </tr>
+
+
+
+                            <tr>
+                                <td colspan="4" style="text-align: center">
+                                      <input type="button" value="保存" class="btn_RidfBook"
+									id="btnsave"
+									onclick="QRidfBookYanNull()" />
+
+
+
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    </form>
+</body>
+</html>

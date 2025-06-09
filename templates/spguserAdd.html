@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+       <link href="/static/cssadm/css.css" rel="stylesheet" type="text/css" />
+    <link href="/static/cssadm/StyleSheet.css" rel="stylesheet" type="text/css" />
+    <script src="/static/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/static/layer/layer.js" type="text/javascript"></script>
+    <script src="/static/js/RidfBook.js" type="text/javascript"></script>
+    <script src="/static/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/static/js/popup.js"></script>
+
+    <script language="javascript" type="text/javascript">
+
+        function QRidfBookYanNull() {
+            if ($('#txtrdfuno').val() == "") {
+                RidfBookAlertMsgForNull("请输入账号");
+                return false;
+            }
+           if ($('#txtrdfups').val() == "") {
+                RidfBookAlertMsgForNull("请输入新密码");
+                return false;
+            }
+            if ($('#txtrdfups1').val() == "") {
+                RidfBookAlertMsgForNull("请输入确认密码");
+                return false;
+            }
+             if ($('#txtrdfups').val() !=$('#txtrdfups1').val()) {
+                RidfBookAlertMsgForNull("两次密码输入不一致");
+                return false;
+            }
+            if ($('#txtrdfuxm').val() == "") {
+                RidfBookAlertMsgForNull("请输入昵称");
+                return false;
+            }
+        
+
+             if ($('#txtrdfusex').val() == "") {
+                            RidfBookAlertMsgForNull("请选择性别");
+                            return false;
+                        }
+                 if ($('#txtrdfutel').val() == "") {
+                            RidfBookAlertMsgForNull("请输入电话");
+                            return false;
+                        }
+
+
+             if ($('#txtstfpic').val() == "") {
+                            RidfBookAlertMsgForNull("请上传照片");
+                            return false;
+                        }
+
+
+           document.form1.submit();
+        }
+        function back()
+        {
+           document.location.href = 'spguserList?index=1'
+        }
+         function fileup()
+        {
+
+            var pop=new Popup({ contentType:1,isReloadOnClose:false,width:400,height:200});
+            pop.setContent("contentUrl","upload");
+            pop.setContent("title","图片上传");
+            pop.build();
+            pop.show();
+        }
+    </script>
+
+</head>
+<body>
+    <form id="form1"  method="post"   name="form1" action="spguserAddAction">
+
+
+         <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bordercolor="#fff"
+        class="tableBorder">
+        <tbody>
+            <tr>
+                <td colspan="6" class="td_biaoti">
+                    用户信息增加
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" align="left" class="txlrow">
+                    <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" class="RidfBookFormCss">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    账号：
+                                </th>
+                                <td>
+                                     <input type="text" name="txtrdfuno" id="txtrdfuno" value="">
+                                </td>
+                                  <th>
+                                    密码：
+                                </th>
+                                <td>
+                                     <input type="password" name="txtrdfups" id="txtrdfups" value="">
+                                </td>
+                                  <th>
+                                    确认密码：
+                                </th>
+                                <td>
+                                     <input type="password" name="txtrdfups1" id="txtrdfups1" value="">
+                                </td>
+
+
+                            </tr>
+                               <tr>
+   <th>
+                                    昵称 ：
+                                </th>
+                                <td>
+                                    <input type="text" name="txtrdfuxm" id="txtrdfuxm" value="">
+                                </td>
+                                     <th>
+                                   头像 ：
+                                </th>
+                                <td   >
+                                      <input type="text" name="txtpic" id="txtpic" size="20" readonly="readonly" class="ui_input_txt02"/>
+						        <input type="button" value="选择头像"  class="btn_stufile" onclick="fileup()"/>
+                                </td>
+                                 <th>
+                                    性别：
+                                </th>
+                                <td>
+                                    <select name="txtrdfusex" id="txtrdfusex">
+                                    <option value ="" >--请选择--</option>
+                                    <option value ="男">男</option>
+                                    <option value ="女">女</option>
+                                    </select>
+
+                                </td>
+
+
+                            </tr>
+<tr>
+     <th>
+                                     电话 ：
+                                </th>
+                                <td>
+                                    <input type="text" name="txtrdfutel" id="txtrdfutel" value="">
+                                </td>
+       <th>
+                                   邮箱：
+                                </th>
+                                <td >
+                                    <input type="text" name="txtrdfunj" id="txtrdfunj" value="">
+                                </td>
+
+
+       <th>
+                                    角色：
+                                </th>
+                                <td>
+                                    <select name="txtrdfurole" id="txtrdfurole">
+                                    <option value ="" >--请选择--</option>
+                                    <option value ="用户">用户</option>
+                                    <option value ="管理员">管理员</option>
+                                    </select>
+
+                                </td>
+</tr>
+
+
+                            <tr>
+                                <td colspan="6" style="text-align: center">
+                                      <input type="button" value="保存" class="btn_RidfBook"
+									id="btnsave"
+									onclick="QRidfBookYanNull()" />
+
+                                	<input type="button" value="返回" class="btn_RidfBook"
+									id="btnBack"
+									onclick="back()" />
+
+
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    </form>
+</body>
+</html>

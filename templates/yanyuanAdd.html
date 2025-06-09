@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+       <link href="/static/cssadm/css.css" rel="stylesheet" type="text/css" />
+    <link href="/static/cssadm/StyleSheet.css" rel="stylesheet" type="text/css" />
+    <script src="/static/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/static/layer/layer.js" type="text/javascript"></script>
+    <script src="/static/js/RidfBook.js" type="text/javascript"></script>
+    <script src="/static/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/static/js/popup.js"></script>
+
+    <script language="javascript" type="text/javascript">
+
+        function QRidfBookYanNull() {
+            if ($('#dybt').val() == "") {
+                RidfBookAlertMsgForNull("请输入在线咨询标题");
+                return false;
+            }
+           if ($('#dycon').val() == "") {
+                RidfBookAlertMsgForNull("请输入在线咨询内容");
+                return false;
+            }
+
+        
+
+           document.form1.submit();
+        }
+        function back()
+        {
+           document.location.href = 'yanyuanListMy?index=1'
+        }
+
+    </script>
+
+</head>
+<body>
+    <form id="form1"  method="post"   name="form1" action="yanyuanAddAction">
+
+
+         <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bordercolor="#fff"
+        class="tableBorder">
+        <tbody>
+            <tr>
+                <td colspan="6" class="td_biaoti">
+                    在线咨询
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" align="left" class="txlrow">
+                    <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" class="RidfBookFormCss">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    在线咨询标题：
+                                </th>
+                                <td  >
+                                     <input type="text" name="dybt" id="dybt" value="">
+                                </td>
+
+
+
+                            </tr>
+                               <tr>
+                          <th>
+                                    在线咨询内容 ：
+                                </th>
+                                <td>
+                                     <textarea id="dycon" name="dycon" cols="80" rows="11"
+            ></textarea>
+                                </td>
+
+                            </tr>
+
+
+                            <tr>
+                                <td colspan="2" style="text-align: center">
+                                      <input type="button" value="保存" class="btn_RidfBook"
+									id="btnsave"
+									onclick="QRidfBookYanNull()" />
+
+                                	<input type="button" value="返回" class="btn_RidfBook"
+									id="btnBack"
+									onclick="back()" />
+
+
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    </form>
+</body>
+</html>

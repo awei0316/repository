@@ -1,0 +1,173 @@
+﻿body
+{
+ 
+}
+
+    
+.btnRepotZi
+{
+    
+    background-color:#e62263;
+    height:30px;
+    width:120px;
+    color:#000;
+    font-weight:bold;
+    border:none;
+    text-align:center;
+     font-size:14px;
+   
+}
+
+
+.RepotZiFormCss
+{
+    width: 100%;
+}
+
+.RepotZiFormCss tr
+{
+  
+}
+
+
+.RepotZiFormCss th
+{
+    text-align: right;
+    height: 35px;
+    width: 155px;
+    color: #000;
+    background-color: #75eff5;
+
+    
+}
+.RepotZiFormCss td
+{
+    text-align: left;
+    height: 25px;
+    padding-left: 5px;
+     
+}
+.RepotZiFormCss input[type='text']
+{
+    height: 30px;
+    width: 240px;
+    border: none;
+    background-color: #fefefc;
+    border: 1px solid #f1f1f1;
+}
+.RepotZiFormCss input[type='password']
+{
+    height: 30px;
+    width: 240px;
+    margin: 1px;
+    border: none;
+    background-color: #fefefc;
+     border: 1px solid #f1f1f1;
+}
+.RepotZiFormCss select
+{
+    height: 35px;
+    width: 240px;
+    border: none;
+    margin: 1px;
+    border: none;
+    background-color: #fefefc;
+     border: 1px solid #f1f1f1;
+}
+
+
+.RepotZiGrid
+{
+    width: 100%;
+    border: none;
+}
+
+.RepotZiGrid th
+{
+    text-align: center;
+    height: 32px;
+    font-size: 14px;
+    font-weight: bold;
+    background-color: #b8b8b8;
+    border: none;
+    min-width: 30px;
+    color: #000;
+    border: 1px solid #fbf8f8;
+}
+.RepotZiGrid td
+{
+    text-align: left;
+    height: 28px;
+    padding-left: 2px;
+    background-color: #fff;
+    border: none;
+    color: #000;
+    border: 1px solid #fbf8f8;
+}
+
+/*操作的位置*/
+.RepotZiGrid .css_xz
+{
+   width:30px;
+}
+
+/*操作的位置*/
+.RepotZiGrid .css_zc
+{
+    text-align: left;
+   
+}
+/*分页样式*/
+.RepotZiGrid table
+{
+    width: 10%;
+}
+.RepotZiGrid table td
+{
+    max-width: 50px;
+    background-color: #dfdfdf;
+    text-align:center;
+    color:red;
+}
+
+.RepotZiGrid table td a
+{
+    
+    color:Black;
+}
+
+
+.btn_RepotZi
+{
+    border: none;
+    background-color: #89e4fb;
+    font-weight: bold;
+    color: Black;
+    height: 32px;
+    width: 120px;
+}
+
+.txlrow
+{
+    height: 1px;
+}
+
+
+
+
+.css_xz
+{
+}
+
+
+.forbiaoti
+{
+    height: 23px;
+    background-color: #9b2911;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+    color: Black;
+    
+    padding-left:10px;
+}

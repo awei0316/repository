@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+       <link href="/static/cssadm/css.css" rel="stylesheet" type="text/css" />
+    <link href="/static/cssadm/StyleSheet.css" rel="stylesheet" type="text/css" />
+    <script src="/static/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/static/layer/layer.js" type="text/javascript"></script>
+    <script src="/static/js/RidfBook.js" type="text/javascript"></script>
+    <script src="/static/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/static/js/popup.js"></script>
+
+    <script language="javascript">
+           function sub(index)
+           {
+
+                a="spggoodListLook?index="+index
+                document.form1.action=a;
+                document.form1.submit();
+           }
+
+
+       </script>
+
+</head>
+<body onload="init()">
+    <form id="form1"  method="post"   name="form1">
+
+
+         <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bordercolor="#fff"
+        class="tableBorder">
+        <tbody>
+            <tr>
+                <td colspan="6" class="td_biaoti">
+                    商品房信息查询
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" align="left" class="txlrow">
+                    <table style="width: 100%;" class="RidfBookFormCss">
+                        <tr>
+                            <th>
+                                区域 ：
+                            </th>
+                            <td height="25" width="*" align="left">
+                                 <input type="text" name="rdfpro" id="rdfpro" value="{{cons.rdfpro}}">
+                            </td>
+                            <th>
+                                小区 ：
+                            </th>
+                            <td height="25" width="*" align="left">
+                                 <input type="text" name="rdfcity" id="rdfcity" value="{{cons.rdfcity}}">
+                            </td>
+
+                        </tr>
+ <tr>
+                           <th>
+                                装修 ：
+                            </th>
+                            <td>
+                                        <select name="rdftnm" id="rdftnm">
+  <option value ="" >--请选择--</option>
+                                          {% if cons.rdftnm=='毛坯' %}
+                                            <option value ="毛坯" selected>毛坯</option>
+                                         {% else %}
+                                          <option value ="毛坯">毛坯</option>
+                                         {% endif %}
+                                              {% if cons.rdftnm=='简单装修' %}
+                                            <option value ="简单装修" selected>简单装修</option>
+                                         {% else %}
+                                          <option value ="简单装修">简单装修</option>
+                                         {% endif %}
+                                        {% if cons.rdftnm=='精装修' %}
+                                            <option value ="精装修" selected>精装修</option>
+                                         {% else %}
+                                          <option value ="精装修">精装修</option>
+                                         {% endif %}
+                                             {% if cons.rdftnm=='豪华装修' %}
+                                            <option value ="豪华装修" selected>豪华装修</option>
+                                         {% else %}
+                                          <option value ="豪华装修">豪华装修</option>
+                                         {% endif %}
+
+
+                                    </select>
+                            </td>
+                             <th>
+                                楼层分布 ：
+                            </th>
+                            <td height="25" width="*" align="left">
+<select name="rdfjnm" id="rdfjnm">
+  <option value ="" >--请选择--</option>
+                                          {% if cons.rdfjnm=='中层' %}
+                                            <option value ="中层" selected>中层</option>
+                                         {% else %}
+                                          <option value ="中层">中层</option>
+                                         {% endif %}
+                                              {% if cons.rdfjnm=='低层' %}
+                                            <option value ="低层" selected>低层</option>
+                                         {% else %}
+                                          <option value ="低层">低层</option>
+                                         {% endif %}
+                                        {% if cons.rdfjnm=='高层' %}
+                                            <option value ="高层" selected>高层</option>
+                                         {% else %}
+                                          <option value ="高层">高层</option>
+                                         {% endif %}
+                                             {% if cons.rdfjnm=='全层' %}
+                                            <option value ="全层" selected>全层</option>
+                                         {% else %}
+                                          <option value ="全层">全层</option>
+                                         {% endif %}
+    {% if cons.rdfjnm=='未知' %}
+                                            <option value ="未知" selected>未知</option>
+                                         {% else %}
+                                          <option value ="未知">未知</option>
+                                         {% endif %}
+    {% if cons.rdfjnm=='地下' %}
+                                            <option value ="地下" selected>地下</option>
+                                         {% else %}
+                                          <option value ="地下">地下</option>
+                                         {% endif %}
+
+                                    </select>
+
+
+
+                            </td>
+                            <th>
+                                物业类型 ：
+                            </th>
+                            <td height="25" width="*" align="left">
+<select name="rdfbwz" id="rdfbwz">
+  <option value ="" >--请选择--</option>
+                                          {% if cons.rdfbwz=='普通住宅' %}
+                                            <option value ="普通住宅" selected>普通住宅</option>
+                                         {% else %}
+                                          <option value ="普通住宅">普通住宅</option>
+                                         {% endif %}
+                                              {% if cons.rdfbwz=='别墅' %}
+                                            <option value ="别墅" selected>别墅</option>
+                                         {% else %}
+                                          <option value ="别墅">别墅</option>
+                                         {% endif %}
+                                        {% if cons.rdfbwz=='公寓' %}
+                                            <option value ="公寓" selected>公寓</option>
+                                         {% else %}
+                                          <option value ="公寓">公寓</option>
+                                         {% endif %}
+                                             {% if cons.rdfbwz=='老公房' %}
+                                            <option value ="老公房" selected>老公房</option>
+                                         {% else %}
+                                          <option value ="老公房">老公房</option>
+                                         {% endif %}
+    {% if cons.rdfbwz=='其他' %}
+                                            <option value ="其他" selected>其他</option>
+                                         {% else %}
+                                          <option value ="其他">其他</option>
+                                         {% endif %}
+    {% if cons.rdfbwz=='新里洋房' %}
+                                            <option value ="新里洋房" selected>新里洋房</option>
+                                         {% else %}
+                                          <option value ="新里洋房">新里洋房</option>
+                                         {% endif %}
+ {% if cons.rdfbwz=='平房' %}
+                                            <option value ="平房" selected>平房</option>
+                                         {% else %}
+                                          <option value ="商住楼">商住楼</option>
+                                         {% endif %} {% if cons.rdfbwz=='商住楼' %}
+                                            <option value ="商住楼" selected>商住楼</option>
+                                         {% else %}
+                                          <option value ="商住楼">商住楼</option>
+                                         {% endif %}
+                                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" align="left" class="txlrow">
+
+                        <input type="hidden" name="index" size="40"
+									value="{{index}}" />
+								<input type="button" value="查询" class="btn_RidfBook"
+									id="btnRidfBookFind" style="width: 100px"
+									onclick="sub({{index}})" />
+
+
+
+
+                </td>
+            </tr>
+            <tr bgcolor="#f9fdf4">
+                <td colspan="6" align="center" class="txlrow">
+                     <br />
+                          <table class="RidfBookGrid" width="100%" style="boder:none;">
+                            <tr>
+
+                                <th>居室数</th>
+                                <th  >总面积</th>
+                                <th>建造年份</th>
+                                 <th>小区均价</th>
+
+                                <th>装修</th>
+                                   <th>楼层分布</th>
+                                   <th>物业类型</th>
+                                  <th>产权性质</th>
+                                   <th>产权年限</th>
+                                   <th>区</th>
+                                  <th>小区</th>
+                                     <th>近地铁</th>
+   <th>价格</th>
+
+
+
+                            </tr>
+                              {% if pages>0 %}
+                                {% for data in data %}
+                            <tr>
+
+                                <td>{{ data.rdfbno }}</td>
+                                <td>{{ data.rdfbsm }}</td>
+                                <td>{{ data.rdfbzz }}</td>
+                                 <td>{{ data.rdfbcbs }}</td>
+                                  <td>{{ data.rdftnm }}</td>
+
+                                <td>{{ data.rdfjnm }}</td>
+
+                                 <td>{{ data.rdfbwz }}</td>
+<td>{{ data.rdfjiage }}</td>
+                                <td>{{ data.rdfbzt }}</td>
+                                <td>{{ data.rdfpro }}</td>
+                                <td>{{ data.rdfcity }}</td>
+                                <td>{{ data.rdfpic }}</td>
+  <td>{{ data.rdftype }}</td>
+
+
+                            </tr>
+                             {% endfor %}
+                             {% else  %}
+                                 <tr>
+                                <td colspan="12" style="text-align: center" > 暂无数据
+                                </td>
+
+                            </tr>
+                             {% endif %}
+                        </table>
+                </td>
+            </tr>
+             <tr>
+                <td colspan="6" style="text-align: center; background-color: #d8dadb;
+                    ">
+
+                    	共
+								 {{pages}}
+								页， 当前第
+								{{index}}
+								页
+
+                          {% if index>=1 and index!=1 %}
+&nbsp; &nbsp;
+                         <span  style="text-decoration:none; color:#000; cursor:pointer;font-weight:bold"   onclick="sub(1)"   style='cursor:pointer; '> 首页</span> &nbsp; &nbsp;
+
+                          <span  style="text-decoration:none; color:#000; cursor:pointer;font-weight:bold"   onclick="sub({{index-1}})"   style='cursor:pointer; '> 上一页</span> &nbsp; &nbsp;
+
+
+
+                          {% endif %}
+                          {% if index>=1 and index!=pages %}
+
+                          <span  style="text-decoration:none; color:#000; font-weight:bold;cursor:pointer;"   onclick="sub({{index+1}})"   style='cursor:pointer; '>  下一页</span> &nbsp; &nbsp;
+
+                         <span  style="text-decoration:none; color:#000; font-weight:bold;cursor:pointer;"   onclick="sub({{pages}})"   style='cursor:pointer; '>  最后一页</span> &nbsp; &nbsp;
+
+
+
+						  {% endif %}
+
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+    </form>
+</body>
+</html>
