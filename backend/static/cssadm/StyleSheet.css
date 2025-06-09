@@ -1,0 +1,147 @@
+﻿body
+{
+    font-size: 12px;
+    color: #000000;
+    font-family: 宋体;
+   background-color: #66ccff;
+}
+
+.td_biaoti
+{
+    height: 23px;
+    background-color: #33cccc;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+    color: Black;
+    padding-left: 10px;
+   
+}
+
+.RidfBookFormCss
+{
+    width: 100%;
+}
+
+.RidfBookFormCss tr
+{
+}
+
+
+.RidfBookFormCss th
+{
+    text-align: right;
+    height: 30px;
+    width: 155px;
+    color: #000;
+    background-color: #fff;
+    font-size: 12px;
+}
+.RidfBookFormCss td
+{
+    text-align: left;
+    height: 25px;
+    padding-left: 5px;
+    font-size: 12px;
+}
+.RidfBookFormCss input[type='text']
+{
+    height: 25px;
+    width: 240px;
+    border: none;
+    background-color: #fefefc;
+    border: 1px solid #d8dadb;
+}
+.RidfBookFormCss input[type='password']
+{
+    height: 25px;
+    width: 240px;
+    margin: 1px;
+    border: none;
+    background-color: #fefefc;
+    border: 1px solid #d8dadb;
+}
+.RidfBookFormCss select
+{
+    height: 30px;
+    width: 244px;
+    border: none;
+    margin: 1px;
+    border: none;
+    background-color: #fefefc;
+    border: 1px solid #d8dadb;
+}
+
+.RidfBookFormCss textarea
+{
+    border: none;
+    margin: 1px;
+    border: none;
+    background-color: #fefefc;
+    border: 1px solid #d8dadb;
+}
+
+.RidfBookGrid
+{
+    width: 100%;
+    border: none;
+}
+
+.RidfBookGrid th
+{
+    text-align: center;
+    height: 40px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: #138f33;
+    border: none;
+    min-width: 80px;
+    color: #000;
+    border: 1px solid #fbf8f8;
+}
+.RidfBookGrid td
+{
+    text-align: center;
+    height: 28px;
+    padding-left: 2px;
+    background-color: #fff;
+    border: none;
+    color: #000;
+    border: 1px solid #fbf8f8;
+    font-size: 12px;
+}
+
+
+
+.btn_RidfBook
+{
+    border: none;
+    background-color: #209cfd;
+    font-weight: bold;
+    color: Black;
+    height: 32px;
+    width: 120px;
+}
+
+.txlrow
+{
+    height: 1px;
+     border: 1px solid #fbf8f8;
+}
+
+
+
+
+.css_xz
+{
+    width: 20px;
+}
+
+.RidfBookDuo
+{
+    border: 1px solid #fbf8f8;
+}
+.mkd
+{
+    text-align: left;
+}

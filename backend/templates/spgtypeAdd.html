@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+       <link href="/static/cssadm/css.css" rel="stylesheet" type="text/css" />
+    <link href="/static/cssadm/StyleSheet.css" rel="stylesheet" type="text/css" />
+    <script src="/static/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/static/layer/layer.js" type="text/javascript"></script>
+    <script src="/static/js/RidfBook.js" type="text/javascript"></script>
+    <script src="/static/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/static/js/popup.js"></script>
+
+    <script language="javascript" type="text/javascript">
+
+        function QRidfBookYanNull() {
+
+
+
+           document.form1.submit();
+        }
+
+        
+    </script>
+
+</head>
+<body>
+    <form id="form1"  method="post"   name="form1" action="spgtypeAddAction">
+
+
+         <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bordercolor="#fff"
+        class="tableBorder">
+        <tbody>
+            <tr>
+                <td colspan="6" class="td_biaoti">
+                    商品房价预测
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" align="left" class="txlrow">
+                    <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" class="RidfBookFormCss">
+                        <tbody>
+                            <tr>
+                                <th>
+                                    居室数：
+                                </th>
+                                <td  >
+                                     <input type="text" name="txta1" id="txta1" value="{{cons.rdfbno}}">
+                                </td>
+ <th>
+                                    总面积：
+                                </th>
+                                <td  >
+                                     <input type="text" name="txta2" id="txta2" value="{{cons.rdfbsm}}">
+                                </td>
+                            </tr>
+
+   <tr>
+                                <th>
+                                    建造年份：
+                                </th>
+                                <td  >
+                                     <input type="text" name="txta3" id="txta3" value="{{cons.rdfbzz}}">
+                                </td>
+ <th>
+                                    小区均价：
+                                </th>
+                                <td  >
+                                     <input type="text" name="txta4" id="txta4" value="{{cons.rdfbcbs}}">
+                                </td>
+                            </tr>
+<tr>
+                                <th>装修：
+                                </th>
+                                <td  >
+
+                                     <select name="txta5" id="txta5">
+  <option value ="" >--请选择--</option>
+                                          {% if cons.a1=='0' %}
+                                            <option value ="0" selected>毛坯</option>
+                                         {% else %}
+                                          <option value ="0">毛坯</option>
+                                         {% endif %}
+                                              {% if cons.a1=='1' %}
+                                            <option value ="1" selected>简单装修</option>
+                                         {% else %}
+                                          <option value ="1">简单装修</option>
+                                         {% endif %}
+                                        {% if cons.a1=='2' %}
+                                            <option value ="2" selected>精装修</option>
+                                         {% else %}
+                                          <option value ="2">精装修</option>
+                                         {% endif %}
+                                             {% if cons.a1=='3' %}
+                                            <option value ="3" selected>豪华装修</option>
+                                         {% else %}
+                                          <option value ="3">豪华装修</option>
+                                         {% endif %}
+
+
+                                    </select>
+                                </td>
+                <th>
+                                    楼层分布：
+                                </th>
+                                <td  >
+                                           <select name="txta6" id="txta6">
+                                    <option value ="" >--请选择--</option>
+                                          {% if cons.a2=='0' %}
+                                            <option value ="0" selected>未知</option>
+                                         {% else %}
+                                          <option value ="0">未知</option>
+                                         {% endif %}
+                                              {% if cons.a2=='1' %}
+                                            <option value ="1" selected>地下</option>
+                                         {% else %}
+                                          <option value ="1">地下</option>
+                                         {% endif %}
+                                        {% if cons.a2=='2' %}
+                                            <option value ="2" selected>低层</option>
+                                         {% else %}
+                                          <option value ="2">低层</option>
+                                         {% endif %}
+                                             {% if cons.a2=='3' %}
+                                            <option value ="3" selected>中层</option>
+                                         {% else %}
+                                          <option value ="3">中层</option>
+                                         {% endif %}
+                                                     {% if cons.a2=='4' %}
+                                            <option value ="4" selected>高层</option>
+                                         {% else %}
+                                          <option value ="4">高层</option>
+                                         {% endif %}
+                                                                     {% if cons.a2=='5' %}
+                                            <option value ="5" selected>全层</option>
+                                         {% else %}
+                                          <option value ="5">全层</option>
+                                         {% endif %}
+
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>物业类型：
+                                </th>
+                                <td  >
+                                      <select name="txta7" id="txta7">
+                                    <option value ="" >--请选择--</option>
+                                          {% if cons.a3=='0' %}
+                                            <option value ="0" selected>其他</option>
+                                         {% else %}
+                                          <option value ="0">其他</option>
+                                         {% endif %}
+                                              {% if cons.a3=='1' %}
+                                            <option value ="1" selected>普通住宅</option>
+                                         {% else %}
+                                          <option value ="1">普通住宅</option>
+                                         {% endif %}
+                                        {% if cons.a3=='2' %}
+                                            <option value ="2" selected>公寓</option>
+                                         {% else %}
+                                          <option value ="2">公寓</option>
+                                         {% endif %}
+                                             {% if cons.a3=='3' %}
+                                            <option value ="3" selected>老公房</option>
+                                         {% else %}
+                                          <option value ="3">老公房</option>
+                                         {% endif %}
+                                                     {% if cons.a3=='4' %}
+                                            <option value ="4" selected>别墅</option>
+                                         {% else %}
+                                          <option value ="4">别墅</option>
+                                         {% endif %}
+                                                                     {% if cons.a3=='5' %}
+                                            <option value ="5" selected>平房</option>
+                                         {% else %}
+                                          <option value ="5">平房</option>
+                                         {% endif %}
+                                                {% if cons.a3=='6' %}
+                                            <option value ="6" selected>商住楼</option>
+                                         {% else %}
+                                          <option value ="6">商住楼</option>
+                                         {% endif %}
+      {% if cons.a3=='7' %}
+                                            <option value ="7" selected>新里洋房</option>
+                                         {% else %}
+                                          <option value ="7">新里洋房</option>
+                                         {% endif %}
+
+                                    </select>
+                                </td>
+                <th>
+                                    产权性质：
+                                </th>
+                                <td  >
+                                     <select name="txta8" id="txta8">
+                                    <option value ="" >--请选择--</option>
+                                          {% if cons.a4=='0' %}
+                                            <option value ="0" selected>其他</option>
+                                         {% else %}
+                                          <option value ="0">其他</option>
+                                         {% endif %}
+                                              {% if cons.a4=='1' %}
+                                            <option value ="1" selected>商品房住宅</option>
+                                         {% else %}
+                                          <option value ="1">商品房住宅</option>
+                                         {% endif %}
+                                        {% if cons.a4=='2' %}
+                                            <option value ="2" selected>商住两用</option>
+                                         {% else %}
+                                          <option value ="2">商住两用</option>
+                                         {% endif %}
+                                             {% if cons.a4=='3' %}
+                                            <option value ="3" selected>动迁配套房</option>
+                                         {% else %}
+                                          <option value ="3">动迁配套房</option>
+                                         {% endif %}
+                                                     {% if cons.a4=='4' %}
+                                            <option value ="4" selected>经济适用房</option>
+                                         {% else %}
+                                          <option value ="4">经济适用房</option>
+                                         {% endif %}
+                                                                     {% if cons.a4=='5' %}
+                                            <option value ="5" selected>公房</option>
+                                         {% else %}
+                                          <option value ="5">公房</option>
+                                         {% endif %}
+                                                {% if cons.a3=='6' %}
+                                            <option value ="6" selected>新里洋房</option>
+                                         {% else %}
+                                          <option value ="6">新里洋房</option>
+                                         {% endif %}
+
+
+                                    </select>
+                                </td>
+                            </tr>
+                               <tr>
+                                <th>产权年限：
+                                </th>
+                                <td  >
+                                       <select name="txta9" id="txta9">
+  <option value ="" >--请选择--</option>
+                                          {% if cons.a5=='0' %}
+                                            <option value ="0" selected>未知</option>
+                                         {% else %}
+                                          <option value ="0">未知</option>
+                                         {% endif %}
+                                              {% if cons.a5=='1' %}
+                                            <option value ="1" selected>40年产权</option>
+                                         {% else %}
+                                          <option value ="1">40年产权</option>
+                                         {% endif %}
+                                        {% if cons.a5=='2' %}
+                                            <option value ="2" selected>50年产权</option>
+                                         {% else %}
+                                          <option value ="2">50年产权</option>
+                                         {% endif %}
+                                             {% if cons.a5=='3' %}
+                                            <option value ="3" selected>70年产权</option>
+                                         {% else %}
+                                          <option value ="3">70年产权</option>
+                                         {% endif %}
+
+
+                                    </select>
+                                </td>
+                <th>
+                                    区：
+                                </th>
+                                <td  >
+                                          <select name="txta10" id="txta10">
+  <option value ="" >--请选择--</option>
+                                          {% if cons.a6=='0' %}
+                                            <option value ="0" selected>其它</option>
+                                         {% else %}
+                                          <option value ="0">其它</option>
+                                         {% endif %}
+                                              {% if cons.a6=='1' %}
+                                            <option value ="1" selected>闵行</option>
+                                         {% else %}
+                                          <option value ="1">闵行</option>
+                                         {% endif %}
+                                        {% if cons.a6=='2' %}
+                                            <option value ="2" selected>浦东</option>
+                                         {% else %}
+                                          <option value ="2">浦东</option>
+                                         {% endif %}
+                                               {% if cons.a6=='3' %}
+    <option value ="3" selected>宝山</option>
+                                         {% else %}
+                                          <option value ="3">宝山</option>
+                                         {% endif %}
+
+                                    </select>
+                                </td>
+                            </tr>
+                                <tr>
+                                <th>近地铁：
+                                </th>
+                                <td  >
+                                      <select name="txta11" id="txta11">
+  <option value ="" >--请选择--</option>
+                                          {% if cons.a7=='0' %}
+                                            <option value ="0" selected>否</option>
+                                         {% else %}
+                                          <option value ="0">否</option>
+                                         {% endif %}
+                                              {% if cons.a7=='1' %}
+                                            <option value ="1" selected>是</option>
+                                         {% else %}
+                                          <option value ="1">是</option>
+                                         {% endif %}
+
+
+                                    </select>
+                                </td>
+
+
+<th>
+                                    商品房价预测结果：
+                                </th>
+                                <td  >
+                                    {{res}}
+                                </td>
+
+                            </tr>
+                            <tr>
+                                <td colspan="6" style="text-align: center">
+                                      <input type="button" value="确定预测" class="btn_RidfBook"
+									id="btnsave"
+									onclick="QRidfBookYanNull()" />
+
+
+
+
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+    </form>
+</body>
+</html>

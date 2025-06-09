@@ -1,0 +1,57 @@
+﻿body
+{
+	background-color: #f9fdf4;
+}
+.btn_RidfBook
+{
+	background-color: #209cfd;
+	height: 30px;
+	width: 150px;
+	color: Black;
+	font-weight: bold;
+	border: none;
+	text-align: center;
+	font-size: 14px;
+	 
+}
+
+.RidfBookFormCss
+{
+	width: 100%;
+	font-size: 14px;
+}
+
+.RidfBookFormCss tr
+{
+}
+
+.RidfBookFormCss td
+{
+	/*border: 1px solid #fbf8f8;*/
+	 
+}
+.RidfBookFormCss input[type='text']
+{
+	height: 30px;
+	width: 240px;
+	border: none;
+	background-color: #fefefc;
+		border: 1px solid #dbe4e9;
+}
+.RidfBookFormCss input[type='password']
+{
+	height: 30px;
+	width: 240px;
+	margin: 1px;
+	border: none;
+	background-color: #fefefc;border: 1px solid #dbe4e9;
+}
+.RidfBookFormCss select
+{
+	height: 34px;
+	width: 243px;
+	border: none;
+	margin: 1px;
+	border: none;
+	background-color: #fefefc;border: 1px solid #dbe4e9;
+}

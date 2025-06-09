@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+       <link href="/static/cssadm/css.css" rel="stylesheet" type="text/css" />
+    <link href="/static/cssadm/StyleSheet.css" rel="stylesheet" type="text/css" />
+    <script src="/static/js/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="/static/layer/layer.js" type="text/javascript"></script>
+    <script src="/static/js/RidfBook.js" type="text/javascript"></script>
+    <script src="/static/My97DatePicker/WdatePicker.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/static/js/popup.js"></script>
+
+    <script language="javascript">
+           function sub(index)
+           {
+
+                a="yanyuanListMy?index="+index
+                document.form1.action=a;
+                document.form1.submit();
+           }
+           function del(index)
+           {
+
+                a="yanyuanDelMy?index="+index
+                document.form1.action=a;
+                document.form1.submit();
+           }
+
+
+       </script>
+
+</head>
+<body>
+    <form id="form1"  method="post"   name="form1">
+
+
+         <table width="100%" border="0" align="center" cellpadding="2" cellspacing="1" bordercolor="#fff"
+        class="tableBorder">
+        <tbody>
+            <tr>
+                <td colspan="6" class="td_biaoti">
+                    我的在线咨询
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" align="left" class="txlrow">
+                    <table style="width: 100%;" class="RidfBookFormCss">
+                        <tr>
+                            <th>
+                                在线咨询标题 ：
+                            </th>
+                            <td height="25" width="*" align="left">
+                                 <input type="text" name="dybt" id="dybt" value="{{cons.dybt}}">
+                            </td>
+                            <th>
+
+                            </th>
+                            <td height="25" width="*" align="left">
+
+                            </td>
+
+                        </tr>
+
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="6" align="left" class="txlrow">
+                    
+                        <input type="hidden" name="index" size="40"
+									value="{{index}}" />
+								<input type="button" value="查询" class="btn_RidfBook"
+									id="btnRidfBookFind" style="width: 100px"
+									onclick="sub({{index}})" />
+
+                        
+
+                     
+                        <div style="display: none">
+                              <input type="hidden" name="txtRidfBookids" size="40" id="txtRidfBookids"
+									 />
+
+                            <input type="button" value="删除" class="btn_RidfBook " onclick="del({{index}})" name="btnRidfBookDel"  id="btnRidfBookDel"/>
+
+
+
+                        </div>
+                     
+                </td>
+            </tr>
+            <tr bgcolor="#f9fdf4">
+                <td colspan="6" align="center" class="txlrow">
+                     <br />
+                          <table class="RidfBookGrid" width="100%" style="boder:none;">
+                            <tr>
+                                   <th>操作</th>
+  <th>在线咨询标题</th>
+                                <th>在线咨询内容</th> <th>咨询时间</th>
+                                   <th>咨询回复</th>
+                                   <th>回复时间</th>
+                                   <th>咨询人账号</th>
+                                <th>咨询人昵称</th>
+
+
+
+
+                            </tr>
+                              {% if pages>0 %}
+                                {% for data in data %}
+                            <tr>
+                                   <td style="width:20%">
+
+                                <span  class='spancss6'  onclick="RidfBookDelAlertMsgOne('{{ data.id }}','删除')"   style='cursor:pointer; '> 删除</span> &nbsp;
+                                &nbsp; &nbsp;
+
+
+
+                                </td>
+
+
+                                <td>{{ data.dybt }}</td>
+                                <td>{{ data.dycon }}</td>
+                                <td>{{ data.addtime }}</td>
+                                <td>{{ data.dyhon }}</td>
+                                <td>{{ data.haddtime }}</td>
+ <td>{{ data.rdfuno }}</td><td>{{ data.rdfuxm }}</td>
+
+
+
+                            </tr>
+                             {% endfor %}
+                             {% else  %}
+                                 <tr>
+                                <td colspan="12" style="text-align: center" > 暂无数据
+                                </td>
+
+                            </tr>
+                             {% endif %}
+                        </table>
+                </td>
+            </tr>
+             <tr>
+                <td colspan="6" style="text-align: center; background-color: #d8dadb;  ">
+
+                    	共
+								 {{pages}}
+								页， 当前第
+								{{index}}
+								页
+
+                          {% if index>=1 and index!=1 %}
+&nbsp; &nbsp;
+                         <span  style="text-decoration:none; color:#000; cursor:pointer;font-weight:bold"   onclick="sub(1)"   style='cursor:pointer; '> 首页</span> &nbsp; &nbsp;
+
+                          <span  style="text-decoration:none; color:#000; cursor:pointer;font-weight:bold"   onclick="sub({{index-1}})"   style='cursor:pointer; '> 上一页</span> &nbsp; &nbsp;
+
+
+
+                          {% endif %}
+                          {% if index>=1 and index!=pages %}
+
+                          <span  style="text-decoration:none; color:#000; font-weight:bold;cursor:pointer;"   onclick="sub({{index+1}})"   style='cursor:pointer; '>  下一页</span> &nbsp; &nbsp;
+
+                         <span  style="text-decoration:none; color:#000; font-weight:bold;cursor:pointer;"   onclick="sub({{pages}})"   style='cursor:pointer; '>  最后一页</span> &nbsp; &nbsp;
+
+
+
+						  {% endif %}
+
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+
+    </form>
+</body>
+</html>

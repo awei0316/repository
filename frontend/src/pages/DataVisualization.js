@@ -18,6 +18,7 @@ import { memo } from 'react';
 import HeatMapGrid from 'react-heatmap-grid';
 import Chart from 'react-apexcharts';
 import { motion } from 'framer-motion';
+import EChartsComponent from '../components/EChartsComponent';
 
 // 模拟数据
 const generateData = () => {
@@ -270,6 +271,89 @@ const DataVisualization = () => {
         };
     }, []);
 
+    // 源代码2中的数据可视化模块
+    const data2 = [
+        { name: '2020', cnt: 1200 },
+        { name: '2021', cnt: 1300 },
+        { name: '2022', cnt: 1100 },
+        { name: '2023', cnt: 1400 },
+    ];
+
+    const option1 = {
+        title: {
+            text: '各关别进口商品总值分析',
+            textStyle: {
+                color: '#000'
+            },
+            borderWidth: 0,
+            borderColor: 'blue',
+            borderRadius: 0,
+            left: 200,
+            top: 0
+        },
+        tooltip: {
+            trigger: 'axis',
+            formatter: "{b} <br/>{a}: {c}"
+        },
+        legend: {
+            orient: 'vertical',
+            x: 'left',
+            textStyle: {
+                color: '#000'
+            },
+            data: data2.map(function (data) {
+                return data.name;
+            })
+        },
+        xAxis: {
+            type: 'category',
+            data: data2.map(function (data) {
+                return data.name;
+            }),
+            axisTick: {
+                alignWithLabel: true
+            },
+            axisLabel: {
+                color: '#000',
+                fontSize: 12
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#ccc'
+                }
+            }
+        },
+        yAxis: {
+            type: 'value',
+            axisLabel: {
+                color: '#000',
+                fontSize: 12
+            },
+            axisLine: {
+                lineStyle: {
+                    color: '#ccc'
+                }
+            },
+            splitLine: {
+                lineStyle: {
+                    color: '#eee'
+                }
+            }
+        },
+        series: [
+            {
+                name: '进口总值',
+                type: 'bar',
+                itemStyle: {
+                    color: '#339999'
+                },
+                data: data2.map(function (data) {
+                    return data.cnt;
+                })
+            }
+        ]
+    };
+
     return (
         <motion.div
             className="container"
@@ -284,277 +368,13 @@ const DataVisualization = () => {
                 borderRadius: '20px',
                 boxShadow: '0 15px 35px rgba(0, 0, 0, 0.1)',
                 fontFamily: 'Inter, sans-serif',
-                backgroundImage: 'linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)',
-                perspective: '1000px'
+                backgroundImage: 'linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)'
             }}
         >
-            <h1 style={{
-                color: '#333',
-                fontSize: `${h1FontSize}px`,
-                fontWeight: '800',
-                marginBottom: '15px',
-                textAlign: 'center',
-                textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                letterSpacing: '1px',
-                transform: 'translateZ(30px)'
-            }}>数据可视化</h1>
-            <p style={{
-                color: '#666',
-                fontSize: `${pFontSize}px`,
-                marginBottom: '30px',
-                textAlign: 'center',
-                lineHeight: '1.5',
-                transform: 'translateZ(20px)'
-            }}>通过图表展示关键贸易指标</p>
-
-            {/* 第一层：仪表盘 */}
-            <div className="dashboard" style={{
-                backgroundColor: 'white',
-                borderRadius: '20px',
-                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
-                padding: '40px',
-                marginBottom: '40px',
-                position: 'relative',
-                overflow: 'hidden',
-                transformStyle: 'preserve-3d',
-                transform: 'translateZ(10px)'
-            }}>
-                <h2 style={{
-                    color: '#333',
-                    fontSize: `${h2FontSize}px`,
-                    fontWeight: '700',
-                    marginBottom: '30px',
-                    textAlign: 'center',
-                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                    letterSpacing: '0.5px',
-                    transform: 'translateZ(20px)'
-                }}>动态仪表盘</h2>
-                <div className="gauge-container" style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    gap: '30px',
-                    flexWrap: 'wrap'
-                }}>
-                    <motion.div
-                        style={{
-                            width: 'calc(50% - 15px)',
-                            minWidth: '250px',
-                            backgroundColor: '#fff',
-                            borderRadius: '20px',
-                            boxShadow: '0 8px 20px rgba(0, 0, 0, 0.06)',
-                            padding: '30px',
-                            textAlign: 'center',
-                            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                            backgroundImage: 'linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)',
-                            position: 'relative',
-                            transformStyle: 'preserve-3d'
-                        }}
-                        whileHover={{ scale: 1.06, boxShadow: '0 12px 30px rgba(0, 0, 0, 0.12)', rotateX: 5, rotateY: -5 }}
-                    >
-                        <h3 style={{
-                            color: '#333',
-                            fontSize: `${h3FontSize}px`,
-                            fontWeight: '600',
-                            marginBottom: '20px',
-                            textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
-                            letterSpacing: '0.3px',
-                            transform: 'translateZ(10px)'
-                        }}>贸易量</h3>
-                        <Chart
-                            options={tradeVolumeOptions}
-                            series={[dashboardData.tradeVolume]}
-                            type="radialBar"
-                            height={250}
-                        />
-                    </motion.div>
-                    <motion.div
-                        style={{
-                            width: 'calc(50% - 15px)',
-                            minWidth: '250px',
-                            backgroundColor: '#fff',
-                            borderRadius: '20px',
-                            boxShadow: '0 8px 20px rgba(0, 0, 0, 0.06)',
-                            padding: '30px',
-                            textAlign: 'center',
-                            transition: 'transform 0.3s ease, box-shadow 0.3s ease',
-                            backgroundImage: 'linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%)',
-                            position: 'relative',
-                            transformStyle: 'preserve-3d'
-                        }}
-                        whileHover={{ scale: 1.06, boxShadow: '0 12px 30px rgba(0, 0, 0, 0.12)', rotateX: 5, rotateY: 5 }}
-                    >
-                        <h3 style={{
-                            color: '#333',
-                            fontSize: `${h3FontSize}px`,
-                            fontWeight: '600',
-                            marginBottom: '20px',
-                            textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
-                            letterSpacing: '0.3px',
-                            transform: 'translateZ(10px)'
-                        }}>汇率</h3>
-                        <Chart
-                            options={exchangeRateOptions}
-                            series={[dashboardData.exchangeRate]}
-                            type="radialBar"
-                            height={250}
-                        />
-                    </motion.div>
-                </div>
-            </div>
-
-            {/* 第二层：股票相关 */}
-            <div className="stock-section" style={{
-                backgroundColor: 'white',
-                borderRadius: '20px',
-                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
-                padding: '40px',
-                marginBottom: '40px',
-                position: 'relative',
-                overflow: 'hidden',
-                transformStyle: 'preserve-3d',
-                transform: 'translateZ(10px)'
-            }}>
-                <h2 style={{
-                    color: '#333',
-                    fontSize: `${h2FontSize}px`,
-                    fontWeight: '700',
-                    marginBottom: '30px',
-                    textAlign: 'center',
-                    textShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-                    letterSpacing: '0.5px',
-                    transform: 'translateZ(20px)'
-                }}>股票信息</h2>
-                <div style={{ 
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    alignItems: 'center', 
-                    gap: '30px' 
-                }}>
-                    <StockLineChart data={dashboardData.stockPrices} />
-                    <div className="stock-suggestions" style={{ width: '100%', maxWidth: '400px' }}>
-                        <h3 style={{
-                            color: '#333',
-                            fontSize: `${h3FontSize}px`,
-                            fontWeight: '600',
-                            marginBottom: '15px',
-                            textAlign: 'center',
-                            textShadow: '0 1px 2px rgba(0, 0, 0, 0.1)',
-                            letterSpacing: '0.3px',
-                            transform: 'translateZ(10px)'
-                        }}>自选股建议</h3>
-                        <ul style={{
-                            listStyleType: 'none',
-                            padding: 0,
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center'
-                        }}>
-                            {dashboardData.stockPrices.map((stock, index) => (
-                                <motion.li
-                                    key={index}
-                                    style={{
-                                        color: '#666',
-                                        fontSize: `${pFontSize}px`,
-                                        marginBottom: '15px',
-                                        width: '100%',
-                                        display: 'flex',
-                                        justifyContent: 'space-between',
-                                        alignItems: 'center',
-                                        borderBottom: '1px solid #eee',
-                                        paddingBottom: '10px',
-                                        transition: 'background-color 0.3s ease, transform 0.3s ease',
-                                        borderRadius: '8px',
-                                        padding: '10px',
-                                        transformStyle: 'preserve-3d'
-                                    }}
-                                    whileHover={{ backgroundColor: '#f5f5f5', transform: 'translateX(10px) translateZ(10px)' }}
-                                >
-                                    <span>{stock.name}</span>
-                                    <span style={{
-                                        color: stock.change === 'up' ? '#6BE675' : '#FF6B6B',
-                                        fontWeight: '600',
-                                        transform: 'translateZ(10px)'
-                                    }}>价格 {stock.price.toFixed(2)}，走势 {stock.change === 'up' ? '上涨' : '下跌'}</span>
-                                </motion.li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            {/* 第三层：切换图表类型和图表 */}
-            <div className="chart-section" style={{
-                backgroundColor: 'white',
-                borderRadius: '20px',
-                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.08)',
-                padding: '40px',
-                position: 'relative',
-                overflow: 'hidden',
-                transformStyle: 'preserve-3d',
-                transform: 'translateZ(10px)'
-            }}>
-                <div style={{
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    gap: '20px',
-                    marginBottom: '40px',
-                    transform: 'translateZ(20px)'
-                }}>
-                    <select
-                        onChange={handleYearChange}
-                        value={selectedYear}
-                        style={{
-                            padding: '15px 20px',
-                            border: 'none',
-                            borderRadius: '12px',
-                            fontSize: `${pFontSize}px`,
-                            width: '100%',
-                            maxWidth: '400px',
-                            backgroundColor: '#fff',
-                            boxShadow: '0 5px 15px rgba(0, 0, 0, 0.08)',
-                            transition: 'box-shadow 0.3s ease',
-                            appearance: 'none',
-                            backgroundImage: 'url("data:image/svg+xml;utf8,<svg fill=\'#666\' height=\'24\' viewBox=\'0 0 24 24\' width=\'24\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M7 10l5 5 5-5z\'/><path d=\'M0 0h24v24H0z\' fill=\'none\'/></svg>")',
-                            backgroundRepeat: 'no-repeat',
-                            backgroundPositionX: '95%',
-                            backgroundPositionY: '50%',
-                            transform: 'translateZ(10px)'
-                        }}
-                        onFocus={(e) => e.target.style.boxShadow = '0 5px 20px rgba(77, 150, 255, 0.3)' }
-                        onBlur={(e) => e.target.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.08)' }
-                    >
-                        <option value="">全部年份</option>
-                        {data.map(item => (
-                            <option key={item.name} value={item.name}>
-                                {item.name}
-                            </option>
-                        ))}
-                    </select>
-                    <motion.button
-                        onClick={handleChartTypeChange}
-                        style={{
-                            padding: '15px 30px',
-                            border: 'none',
-                            borderRadius: '12px',
-                            fontSize: `${pFontSize}px`,
-                            backgroundColor: '#4D96FF',
-                            color: 'white',
-                            cursor: 'pointer',
-                            boxShadow: '0 5px 15px rgba(77, 150, 255, 0.3)',
-                            transition: 'background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease',
-                            transform: 'translateZ(10px)'
-                        }}
-                        whileHover={{ backgroundColor: '#3A7BD5', boxShadow: '0 5px 20px rgba(77, 150, 255, 0.5)', scale: 1.05 }}
-                    >
-                        切换图表类型
-                    </motion.button>
-                </div>
-                {renderChart()}
-            </div>
+            {renderChart()}
+            <EChartsComponent option={option1} />
         </motion.div>
     );
 };
 
 export default DataVisualization;
-    
